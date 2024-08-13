@@ -28,13 +28,13 @@ jobs:
       run: |
         sudo apt-get update
         sudo apt-get install -y libsdl2-dev
-
+        
     - name: Install SDL2 dependencies on macOS
       if: matrix.os == 'macos-latest'
       run: |
         brew install sdl2
-
-    - name: Install SDL2 dependencies manually
+        
+    - name: Install SDL2 dependencies on Windows
       run: |
         wget https://www.libsdl.org/release/SDL2-2.26.0-win64-x64.zip
         unzip SDL2-2.26.0-win64-x64.zip -d C:/libs/SDL2
@@ -49,7 +49,6 @@ jobs:
       run: |
         cd build
         ctest -V
-
     - name: If fail kakao talk to me
       if: failure()
       # if: always()

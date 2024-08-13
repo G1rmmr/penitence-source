@@ -38,7 +38,7 @@ jobs:
       if: matrix.os == 'windows-latest'
       run: |
         curl -L -o SDL2-2.26.0-win64-x64.zip https://www.libsdl.org/release/SDL2-2.26.0-win64-x64.zip
-        Expand-Archive -Path "SDL2-2.26.0-win64-x64.zip" -DestinationPath "C:/libs/SDL2"
+        powershell -Command "Expand-Archive -Path 'SDL2-2.26.0-win64-x64.zip' -DestinationPath 'C:/libs/SDL2' -Force"
       
     - name: Configure CMake
       run: cmake -S . -B build

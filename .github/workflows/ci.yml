@@ -23,13 +23,18 @@ jobs:
       with:
         cmake-version: '3.21.1'
 
-    - name: Set up SDL dependencies (Linux & macOS)
-      if: matrix.os != 'windows-latest'
+    - name: Install SDL2 dependencies on Ubuntu
+      if: matrix.os == 'ubuntu-latest'
       run: |
         sudo apt-get update
         sudo apt-get install -y libsdl2-dev
 
-    - name: Set up SDL dependencies (Windows)
+    - name: Install SDL2 dependencies on macOS
+      if: matrix.os == 'macos-latest'
+      run: |
+        brew install sdl2
+
+    - name: Install SDL2 dependencies on Windows
       if: matrix.os == 'windows-latest'
       run: |
         choco install sdl2

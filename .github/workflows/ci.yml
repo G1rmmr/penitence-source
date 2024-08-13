@@ -37,8 +37,9 @@ jobs:
     - name: Install SDL2 dependencies on Windows
       if: matrix.os == 'windows-latest'
       run: |
-        choco install sdl2
-
+        choco install mingw
+        choco install sdl2 --version 2.26.0
+      
     - name: Configure CMake
       run: cmake -S . -B build
 

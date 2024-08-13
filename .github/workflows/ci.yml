@@ -34,11 +34,10 @@ jobs:
       run: |
         brew install sdl2
 
-    - name: Install SDL2 dependencies on Windows
-      if: matrix.os == 'windows-latest'
+    - name: Install SDL2 dependencies manually
       run: |
-        choco install mingw
-        choco install sdl2 --version 2.26.0
+        wget https://www.libsdl.org/release/SDL2-2.26.0-win64-x64.zip
+        unzip SDL2-2.26.0-win64-x64.zip -d C:/libs/SDL2
       
     - name: Configure CMake
       run: cmake -S . -B build

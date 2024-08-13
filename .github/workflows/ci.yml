@@ -21,7 +21,7 @@ jobs:
     - name: Set up CMake
       uses: jwlawson/actions-setup-cmake@v1
       with:
-        cmake-version: '3.21.1'
+        cmake-version: '3.11.1'
 
     - name: Install SDL2 dependencies on Ubuntu
       if: matrix.os == 'ubuntu-latest'

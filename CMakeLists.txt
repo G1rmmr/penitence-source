@@ -5,8 +5,7 @@ project(ThePenitence VERSION 0.1)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-set(SDL2_DIR "C:/libs/SDL2")
-
+list(APPEND CMAKE_PREFIX_PATH C:/libs/SDL2)
 find_package(SDL2 REQUIRED)
 
 set(SOURCES

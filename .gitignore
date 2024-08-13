@@ -1,0 +1,42 @@
+# 빌드 디렉토리 및 컴파일된 파일
+/build/
+/bin/
+/obj/
+/out/
+/Debug/
+/Release/
+*.o
+*.obj
+*.so
+*.a
+*.lib
+*.dll
+*.exe
+*.pdb
+*.ilk
+
+# 임시 파일
+*.tmp
+*.log
+*.lock
+*.pid
+*.gz
+
+# IDE 및 편집기 설정 파일
+.vscode/
+*.code-workspace
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.DS_Store
+
+# CMake 생성 파일
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+CMakeLists.txt.user
+
+# Makefile 생성 파일
+Makefile
+Makefile.in

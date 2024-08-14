@@ -37,6 +37,7 @@ jobs:
     - name: Install SDL2 dependencies on Windows
       if: matrix.os == 'windows-latest'
       run: |
+        git clone https://github.com/microsoft/vcpkg.git
         cd vcpkg
         .\bootstrap-vcpkg.bat
         .\vcpkg install sdl2

@@ -43,7 +43,7 @@ jobs:
         .\vcpkg install sdl2
         
     - name: Configure CMake
-      run: cmake -S . -B build -DCMAKE_PREFIX_PATH="C:/libs/SDL2"
+      run: cmake -S . -B build -DCMAKE_PREFIX_PATH=C:/libs/SDL2
 
     - name: Build with CMake
       run: cmake --build build --config Release

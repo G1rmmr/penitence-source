@@ -37,9 +37,13 @@ jobs:
     - name: Install SDL2 dependencies on Windows
       if: matrix.os == 'windows-latest'
       run: |
-        curl -L -o SDL2-2.26.0-win64-x64.zip https://www.libsdl.org/release/SDL2-2.26.0-win64-x64.zip
-        powershell -Command "Expand-Archive -Path 'SDL2-2.26.0-win64-x64.zip' -DestinationPath 'C:/libs/SDL2' -Force"
-      
+        mkdir C:\vcpkg
+        cd C:\vcpkg
+        git clone https://github.com/microsoft/vcpkg.git
+        cd vcpkg
+        .\bootstrap-vcpkg.bat
+        .\vcpkg install sdl2
+        
     - name: Configure CMake
       run: cmake -S . -B build -DCMAKE_PREFIX_PATH=C:/libs/SDL2
 

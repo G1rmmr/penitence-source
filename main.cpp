@@ -1,29 +1,38 @@
 #include <SDL2/SDL.h>
-#include <iostream>
+#include <cstdio>
+
+const int SCREEN_WIDTH = 800;
+const int SCREEN_HEIGHT = 600;
 
 int main(int argc, char* argv[])
 {
-	// 
-    if (SDL_Init(SDL_INIT_VIDEO) != 0)
+    if (SDL_Init(SDL_INIT_VIDEO) < 0)
 	{
-        std::cerr << "SDL_Init Error: " << SDL_GetError() << std::endl;
+        fprintf(stderr, "SDL_Init Error: %s\n", SDL_GetError());
         return 1;
     }
 
-    SDL_Window* window = SDL_CreateWindow("SDL2 Window",
-                                          SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
-                                          800, 600, SDL_WINDOW_SHOWN);
-    if (window == nullptr)
+    SDL_Window* window = SDL_CreateWindow(
+        "SDL2 Window",
+        SDL_WINDOWPOS_CENTERED,
+        SDL_WINDOWPOS_CENTERED,
+        SCREEN_WIDTH,
+        SCREEN_HEIGHT,
+        SDL_WINDOW_SHOWN);
+
+    if (!window)
 	{
-        std::cerr << "SDL_CreateWindow Error: " << SDL_GetError() << std::endl;
+        fprintf(stderr, "SDL_CreateWindow Error: %s\n", SDL_GetError());
+
         SDL_Quit();
         return 1;
     }
 
     SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
-    if (renderer == nullptr)
+    if (!renderer)
 	{
-        std::cerr << "SDL_CreateRenderer Error: " << SDL_GetError() << std::endl;
+        fprintf(stderr, "SDL_CreateRenderer Error: %s\n", SDL_GetError());
+        
         SDL_DestroyWindow(window);
         SDL_Quit();
         return 1;

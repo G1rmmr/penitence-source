@@ -52,7 +52,12 @@ int main(int argc, char* argv[])
         SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
         SDL_RenderClear(renderer);
 
-        SDL_Rect* fill_rect = new SDL_Rect{ 200, 150, 400, 300 };
+        SDL_Rect* fill_rect = new SDL_Rect();
+        fill_rect->x = 200;
+        fill_rect->y = 150;
+        fill_rect->w = 400;
+        fill_rect->h = 300;
+
         SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
         SDL_RenderFillRect(renderer, fill_rect);
 

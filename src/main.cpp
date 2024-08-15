@@ -1,4 +1,4 @@
-#include <SDL2/SDL.h>
+#include "../SDL2/include/SDL.h"
 #include <cstdio>
 
 const int SCREEN_WIDTH = 800;
@@ -52,7 +52,9 @@ int main(int argc, char* argv[])
         SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
         SDL_RenderClear(renderer);
 
-        // Rendering code goes here
+        SDL_Rect* fill_rect = new SDL_Rect{ 200, 150, 400, 300 };
+        SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+        SDL_RenderFillRect(renderer, fill_rect);
 
         SDL_RenderPresent(renderer);
     }

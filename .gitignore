@@ -1,5 +1,4 @@
 # 빌드 디렉토리 및 컴파일된 파일
-/build/
 /bin/
 /obj/
 /out/
@@ -9,10 +8,6 @@
 *.obj
 *.so
 *.a
-*.lib
-*.dll
-*.exe
-*.pdb
 *.ilk
 
 # 임시 파일

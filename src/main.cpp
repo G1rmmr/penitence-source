@@ -1,7 +1,6 @@
 #include "../SDL2/include/SDL.h"
 
 #include "Entity.h"
-#include "MovementComponents.h"
 #include "MovementSystem.h"
 
 #include <cstdio>
@@ -49,24 +48,25 @@ int main(int argc, char* argv[])
     }
 
     // Set player
-    Entity player(1);
+    Entity* player = new Entity(1);
 
     const int player_vel = 20;
     const int player_width = 200;
     const int player_height = 300;
 
-    Position p_pos;
-    p_pos.x = 200.0f;
-    p_pos.y = 150.0f;
-    
-    Velocity p_vel;
-    p_vel.dx = 0.0f;
-    p_vel.dy = 0.0f;
+    Position* pos = new Position();
+    pos->x = 200.0f;
+    pos->y = 150.0f;
 
-    player.AddComponent(std::make_shared<Position>(p_pos));
-    player.AddComponent(std::make_shared<Velocity>(p_vel));
+    player->AddComponent(std::make_shared<Position>(*pos));
 
-    MovementSystem* movement;
+    Velocity* vel = new Velocity();
+    vel->dx = 0.0f;
+    vel->dy = 0.0f;
+
+    player->AddComponent(std::make_shared<Velocity>(*vel));
+
+    MovementSystem* movement = new MovementSystem();
 
     // Set Game State
     bool is_running = true;
@@ -76,11 +76,11 @@ int main(int argc, char* argv[])
 	{
         while (SDL_PollEvent(event))
 		{
-            if(event->type == SDL_QUIT)is_running = false;
+            if(event->type == SDL_QUIT) is_running = false;
 
             if(event->type == SDL_KEYDOWN || event->type == SDL_KEYUP)
             {
-                auto vel = player.GetComponent<Velocity>();
+                auto vel = player->GetComponent<Velocity>();
 
                 switch (event->key.keysym.sym)
                 {
@@ -111,7 +111,7 @@ int main(int argc, char* argv[])
         SDL_SetRenderDrawColor(renderer, 0x00, 0x00, 0x00, 0xFF);
         SDL_RenderClear(renderer);
 
-        auto pos = player.GetComponent<Position>();
+        auto pos = player->GetComponent<Position>();
 
         SDL_Rect* fill_rect = new SDL_Rect();
         fill_rect->x = static_cast<int>(pos->x);

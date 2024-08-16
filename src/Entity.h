@@ -28,7 +28,7 @@ namespace GAlpha
         }
 
     private:
-        std::unordered_map<std::type_index, std::shared_ptr<void>> components;
+        std::unordered_map<std::type_index, std::shared_ptr<void> > components;
         int id;
 
     };

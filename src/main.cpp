@@ -55,22 +55,30 @@ int main(int argc, char* argv[])
     const int player_width = 200;
     const int player_height = 300;
 
-    player.AddComponent(std::make_shared<Position>(Position{200, 150}));
-    player.AddComponent(std::make_shared<Velocity>(Velocity{0, 0}));
+    Position p_pos;
+    p_pos.x = 200.0f;
+    p_pos.y = 150.0f;
+    
+    Velocity p_vel;
+    p_vel.dx = 0.0f;
+    p_vel.dy = 0.0f;
+
+    player.AddComponent(std::make_shared<Position>(p_pos));
+    player.AddComponent(std::make_shared<Velocity>(p_vel));
 
     MovementSystem* movement;
 
     // Set Game State
     bool is_running = true;
-    SDL_Event* event;
+    SDL_Event* event = new SDL_Event();
 
     while (is_running)
 	{
         while (SDL_PollEvent(event))
 		{
-            if (event->type == SDL_QUIT) is_running = false;
+            if(event->type == SDL_QUIT)is_running = false;
 
-            else if(event->type == SDL_KEYDOWN || event->type == SDL_KEYUP)
+            if(event->type == SDL_KEYDOWN || event->type == SDL_KEYUP)
             {
                 auto vel = player.GetComponent<Velocity>();
 

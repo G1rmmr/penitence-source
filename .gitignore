@@ -9,6 +9,7 @@
 *.so
 *.a
 *.ilk
+*.exe
 
 # 임시 파일
 *.tmp
@@ -35,3 +36,4 @@ CMakeLists.txt.user
 # Makefile 생성 파일
 Makefile
 Makefile.in
+main

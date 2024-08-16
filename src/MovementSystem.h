@@ -1,8 +1,11 @@
 #pragma once
 
 #include "../SDL2/include/SDL.h"
+
 #include "Entity.h"
-#include "MovementComponents.h"
+
+#include "Position.h"
+#include "Velocity.h"
 
 #include <iostream>
 
@@ -11,10 +14,10 @@ namespace GAlpha
     class MovementSystem
     {
     public:
-        void Update(Entity& entity, float delta_time)
+        void Update(Entity* entity, float delta_time)
         {
-            auto pos = entity.GetComponent<Position>();
-            auto vel = entity.GetComponent<Velocity>();
+            auto pos = entity->GetComponent<Position>();
+            auto vel = entity->GetComponent<Velocity>();
 
             if(pos && vel)
             {

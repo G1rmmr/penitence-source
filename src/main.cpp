@@ -1,7 +1,10 @@
 #include "../SDL2/include/SDL.h"
 
+#include "Game.h"
+
 #include "Entity.h"
 #include "MovementSystem.h"
+#include "SDL2/SDL_video.h"
 
 #include <cstdio>
 
@@ -53,6 +56,24 @@ int main(int argc, char* argv[])
         fprintf(stderr, "SDL_Init Error: %s\n", SDL_GetError());
         return 1;
     }
+
+    /*
+    Game* game = new Game();
+
+    game->Init(
+        "ThePenitence",
+        SDL_WINDOWPOS_CENTERED,
+        SDL_WINDOWPOS_CENTERED,
+        SCREEN_WIDTH, SCREEN_HEIGHT, false);
+
+    while(game->IsRunning())
+    {
+        game->HandleEvents();
+        game->Update();
+        game->Render();
+    }
+    game->Clean();
+    */
 
     SDL_Window* window = SDL_CreateWindow(
         "SDL2 Window",
@@ -112,7 +133,7 @@ int main(int argc, char* argv[])
 
     player->AddComponent(std::make_shared<Velocity>(*vel));
 
-    // Add collsion component 
+    // Add collsion component
     MovementSystem* movement = new MovementSystem();
 
     // Set Game State

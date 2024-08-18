@@ -2,6 +2,9 @@
 
 using namespace GAlpha;
 
+
+SDL_Texture* player_text;
+
 Game::Game()
 {
 
@@ -28,12 +31,14 @@ void Game::Init(const char *title, int x, int y, int w, int h, bool is_full)
 		{
 			SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
 			printf("Renderer created!\n");
-
 		}
 
 		is_running = true;
 	}
-	else is_running = false;
+	
+	SDL_Surface* temp_surf = IMG_Load("../assets/player_temp.png");
+	player_text = SDL_CreateTextureFromSurface(renderer, temp_surf);
+	SDL_FreeSurface(temp_surf);
 }
 
 void Game::HandleEvents()
@@ -60,7 +65,7 @@ void Game::Render()
 {
 	SDL_RenderClear(renderer);
 
-	// Render what you want
+	SDL_RenderCopy(renderer, player_text, nullptr, nullptr);
 
 	SDL_RenderPresent(renderer);
 }

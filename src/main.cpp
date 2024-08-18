@@ -1,6 +1,7 @@
 #include "../SDL2/include/SDL.h"
 
 #include "Game.h"
+#include "TextureManager.h"
 
 #include "Entity.h"
 #include "MovementSystem.h"
@@ -20,6 +21,7 @@ const int LEVEL_HEIGHT = 1200;
 
 // Set FPS
 const int FPS = 60;
+const int FRAME_DELAY = 1000 / FPS;
 const float DELTA_TIME = 0.016f;
 
 // Temporary Func
@@ -51,8 +53,10 @@ void UpdateCamera(SDL_Rect& camera, SDL_Rect* player)
 
 int main(int argc, char* argv[])
 {
-    Game* game = new Game();
+    Uint32 frame_start = 0;
+    int frame_time = 0;
 
+    Game* game = new Game();
     game->Init(
         "ThePenitence",
         SDL_WINDOWPOS_CENTERED,
@@ -61,9 +65,14 @@ int main(int argc, char* argv[])
 
     while(game->IsRunning())
     {
+        frame_start = SDL_GetTicks();
+
         game->HandleEvents();
         game->Update();
         game->Render();
+
+        frame_time = SDL_GetTicks() - frame_start;
+        if(FRAME_DELAY > frame_time) SDL_Delay(FRAME_DELAY - frame_time);
     }
     game->Clean();
     /*

@@ -1,9 +1,12 @@
 #include "Game.h"
+#include "TextureManager.h"
 
 using namespace GAlpha;
 
+SDL_Texture* player_tex;
+SDL_Rect* player_rect, dest_rect;
 
-SDL_Texture* player_text;
+int count = 0;
 
 Game::Game()
 {
@@ -19,31 +22,40 @@ void Game::Init(const char *title, int x, int y, int w, int h, bool is_full)
 {
 	int full_screen_flag = is_full ? SDL_WINDOW_FULLSCREEN : 0;
 
-	if(!SDL_Init(SDL_INIT_EVERYTHING))
+	if(SDL_Init(SDL_INIT_EVERYTHING))
 	{
-		printf("System Initialized!\n");
-
-		window = SDL_CreateWindow(title, x, y, w, h, full_screen_flag);
-		if(window) printf("Window created!\n");
-
-		renderer = SDL_CreateRenderer(window, -1, 0);
-		if(renderer)
-		{
-			SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
-			printf("Renderer created!\n");
-		}
-
-		is_running = true;
+		printf("System was not initialized!\n");
+		return;
 	}
+
+
+	window = SDL_CreateWindow(title, x, y, w, h, full_screen_flag);
+	if(!window)
+	{
+		printf("Window was not created!\n");
+		return;
+	}
+
+	renderer = SDL_CreateRenderer(window, -1, 0);
+	if(!renderer)
+	{
+		printf("Renderer was not created!\n");
+		return;
+	}
+
+	SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
 	
-	SDL_Surface* temp_surf = IMG_Load("../assets/player_temp.png");
-	player_text = SDL_CreateTextureFromSurface(renderer, temp_surf);
-	SDL_FreeSurface(temp_surf);
+	player_tex = TextureManager::LoadTexture(
+		"../assets/player_temp", renderer);
+		
+	if(!player_tex) return;
+
+	is_running = true;
 }
 
 void Game::HandleEvents()
 {
-	SDL_Event* event;
+	SDL_Event* event = new SDL_Event();
 	SDL_PollEvent(event);
 
 	switch(event->type)
@@ -58,14 +70,16 @@ void Game::HandleEvents()
 
 void Game::Update()
 {
-
+	dest_rect.h = 32;
+	dest_rect.w = 32;
+	dest_rect.x = ++count;
 }
 
 void Game::Render()
 {
 	SDL_RenderClear(renderer);
 
-	SDL_RenderCopy(renderer, player_text, nullptr, nullptr);
+	SDL_RenderCopy(renderer, player_tex, nullptr, &dest_rect);
 
 	SDL_RenderPresent(renderer);
 }

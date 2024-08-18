@@ -1,12 +1,11 @@
 #include "Game.h"
 #include "TextureManager.h"
+#include "GameObject.h"
 
 using namespace GAlpha;
 
-SDL_Texture* player_tex;
-SDL_Rect* player_rect, dest_rect;
-
-int count = 0;
+GameObject* player;
+GameObject* enemy;
 
 Game::Game()
 {
@@ -28,7 +27,6 @@ void Game::Init(const char *title, int x, int y, int w, int h, bool is_full)
 		return;
 	}
 
-
 	window = SDL_CreateWindow(title, x, y, w, h, full_screen_flag);
 	if(!window)
 	{
@@ -44,11 +42,9 @@ void Game::Init(const char *title, int x, int y, int w, int h, bool is_full)
 	}
 
 	SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
-	
-	player_tex = TextureManager::LoadTexture(
-		"../assets/player_temp", renderer);
-		
-	if(!player_tex) return;
+
+	player = new GameObject("../assets/player_temp.png", renderer, 0, 0);
+	enemy = new GameObject("../assets/enemy_temp.png", renderer, 200, 200);
 
 	is_running = true;
 }
@@ -70,16 +66,16 @@ void Game::HandleEvents()
 
 void Game::Update()
 {
-	dest_rect.h = 32;
-	dest_rect.w = 32;
-	dest_rect.x = ++count;
+	player->Update();
+	enemy->Update();
 }
 
 void Game::Render()
 {
 	SDL_RenderClear(renderer);
 
-	SDL_RenderCopy(renderer, player_tex, nullptr, &dest_rect);
+	player->Render();
+	enemy->Render();
 
 	SDL_RenderPresent(renderer);
 }

@@ -2,10 +2,9 @@
 
 using namespace GAlpha;
 
-SDL_Texture* TextureManager::LoadTexture(
-    const char* file_name, SDL_Renderer* renderer)
+SDL_Texture* TextureManager::LoadTexture(const char* file_name, SDL_Renderer* renderer)
 {
-    SDL_Surface* temp_surf = IMG_Load("../assets/player_temp.png");
+    SDL_Surface* temp_surf = IMG_Load(file_name);
 	if(!temp_surf)
 	{
 		printf("Surface was not loaded!\n");

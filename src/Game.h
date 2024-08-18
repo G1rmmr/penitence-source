@@ -13,10 +13,9 @@ namespace GAlpha
 		Game();
 		~Game();
 
-		void Init(const char* title, int x, int y, int w, int h,
-			bool is_full);
-
+		void Init(const char* title, int x, int y, int w, int h, bool is_full);
 		void HandleEvents();
+
 		void Update();
 		void Render();
 		void Clean();
@@ -26,6 +25,7 @@ namespace GAlpha
 	private:
 		SDL_Window* window;
 		SDL_Renderer* renderer;
+		
 		bool is_running;
 	};
 }

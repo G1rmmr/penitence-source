@@ -7,7 +7,6 @@ namespace GAlpha
     class TextureManager
     {
     public:
-        static SDL_Texture* LoadTexture(
-            const char* file_name, SDL_Renderer* renderer);
+        static SDL_Texture* LoadTexture(const char* file_name, SDL_Renderer* renderer);
     };
 }

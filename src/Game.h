@@ -22,9 +22,10 @@ namespace GAlpha
 
 		bool IsRunning() const {return is_running;}
 
+		static SDL_Renderer* renderer;
+
 	private:
 		SDL_Window* window;
-		SDL_Renderer* renderer;
 		
 		bool is_running;
 	};

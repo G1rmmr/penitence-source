@@ -1,11 +1,16 @@
 #include "Game.h"
 #include "TextureManager.h"
 #include "GameObject.h"
+#include "TileMap.h"
 
 using namespace GAlpha;
 
 GameObject* player;
 GameObject* enemy;
+
+TileMap* map;
+
+SDL_Renderer* Game::renderer = nullptr;
 
 Game::Game()
 {
@@ -43,8 +48,10 @@ void Game::Init(const char *title, int x, int y, int w, int h, bool is_full)
 
 	SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
 
-	player = new GameObject("../assets/player_temp.png", renderer, 0, 0);
-	enemy = new GameObject("../assets/enemy_temp.png", renderer, 200, 200);
+	player = new GameObject("../assets/player_temp.png", 0, 0);
+	enemy = new GameObject("../assets/enemy_temp.png", 200, 200);
+
+	map = new TileMap();
 
 	is_running = true;
 }
@@ -76,6 +83,8 @@ void Game::Render()
 
 	player->Render();
 	enemy->Render();
+
+	map->DrawMap();
 
 	SDL_RenderPresent(renderer);
 }

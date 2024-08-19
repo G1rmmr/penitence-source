@@ -9,7 +9,7 @@ namespace GAlpha
     class GameObject
     {
     public:
-        GameObject(const char* tex_sheet, SDL_Renderer* renderer, int x, int y);
+        GameObject(const char* tex_sheet, int x, int y);
         ~GameObject();
 
         void Update();

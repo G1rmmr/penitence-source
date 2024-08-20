@@ -3,7 +3,10 @@
 
 using namespace GAlpha;
 
-int LV[20][25] = {
+const int MAP_WIDTH = 25;
+const int MAP_HEIGHT = 20;
+
+int LV[MAP_HEIGHT][MAP_WIDTH] = {
 	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 	{0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -33,13 +36,21 @@ TileMap::TileMap()
 
 	LoadMap(LV);
 
+	src = new SDL_Rect();
+
 	src->x = 0;
 	src->y = 0;
 	src->w = 150;
 	src->h = 150;
 
+	printf("DEBUG\n");
+
+	dest = new SDL_Rect();
+
 	dest->x = 0;
 	dest->y = 0;
+	dest->w = 150;
+	dest->h = 150;
 }
 
 TileMap::~TileMap()
@@ -47,10 +58,10 @@ TileMap::~TileMap()
 
 }
 
-void TileMap::LoadMap(int lv[20][25])
-{
-	for(int i = 0; i < 20; ++i)
-		for(int j = 0; j < 25; ++j)
+void TileMap::LoadMap(int lv[MAP_HEIGHT][MAP_WIDTH])
+{	
+	for(int i = 0; i < MAP_HEIGHT; ++i)
+		for(int j = 0; j < MAP_WIDTH; ++j)
 			map[i][j] = lv[i][j];
 }
 
@@ -58,14 +69,14 @@ void TileMap::DrawMap()
 {
 	int type = 0;
 
-	for(int i = 0; i < 20; ++i)
+	for(int i = 0; i < MAP_HEIGHT; ++i)
 	{
-		for(int j = 0; j < 25; ++j)
+		for(int j = 0; j < MAP_WIDTH; ++j)
 		{
 			type = map[i][j];
 
-			dest->x = i * 150;
-			dest->y = j * 150;
+			dest->x = i * 200;
+			dest->y = j * 200;
 
 			switch(type)
 			{

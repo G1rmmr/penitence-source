@@ -52,6 +52,11 @@ void Game::Init(const char *title, int x, int y, int w, int h, bool is_full)
 	enemy = new GameObject("../assets/enemy_temp.png", 200, 200);
 
 	map = new TileMap();
+	if(!map)
+	{
+		printf("Map was not loaded!\n");
+		return;
+	}
 
 	is_running = true;
 }

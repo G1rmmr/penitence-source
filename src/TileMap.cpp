@@ -5,6 +5,7 @@ using namespace GAlpha;
 
 const int MAP_WIDTH = 25;
 const int MAP_HEIGHT = 20;
+const int IMG_SIZE = 150;
 
 int LV[MAP_HEIGHT][MAP_WIDTH] = {
 	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -40,17 +41,15 @@ TileMap::TileMap()
 
 	src->x = 0;
 	src->y = 0;
-	src->w = 150;
-	src->h = 150;
-
-	printf("DEBUG\n");
+	src->w = IMG_SIZE;
+	src->h = IMG_SIZE;
 
 	dest = new SDL_Rect();
 
 	dest->x = 0;
 	dest->y = 0;
-	dest->w = 150;
-	dest->h = 150;
+	dest->w = IMG_SIZE;
+	dest->h = IMG_SIZE;
 }
 
 TileMap::~TileMap()
@@ -75,8 +74,8 @@ void TileMap::DrawMap()
 		{
 			type = map[i][j];
 
-			dest->x = i * 200;
-			dest->y = j * 200;
+			dest->x = i * IMG_SIZE;
+			dest->y = j * IMG_SIZE;
 
 			switch(type)
 			{

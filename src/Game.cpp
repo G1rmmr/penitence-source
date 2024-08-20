@@ -58,10 +58,10 @@ void Game::Init(const char *title, int x, int y, int w, int h, bool is_full)
 
 void Game::HandleEvents()
 {
-	SDL_Event* event = new SDL_Event();
-	SDL_PollEvent(event);
+	SDL_Event event;
+	SDL_PollEvent(&event);
 
-	switch(event->type)
+	switch(event.type)
 	{
 	case SDL_QUIT:
 		is_running = false;

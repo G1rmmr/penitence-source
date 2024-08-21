@@ -3,6 +3,9 @@
 #include "GameObject.h"
 #include "TileMap.h"
 
+#include "ECS.h"
+#include "Component.h"
+
 using namespace GAlpha;
 
 GameObject* player;
@@ -11,6 +14,9 @@ GameObject* enemy;
 TileMap* map;
 
 SDL_Renderer* Game::renderer = nullptr;
+
+Manager* manager;
+auto& new_player(manager->AddEntity());
 
 Game::Game()
 {
@@ -58,6 +64,8 @@ void Game::Init(const char *title, int x, int y, int w, int h, bool is_full)
 		return;
 	}
 
+	new_player.AddComponent<Position>();
+
 	is_running = true;
 }
 
@@ -80,6 +88,10 @@ void Game::Update()
 {
 	player->Update();
 	enemy->Update();
+	manager->Update();
+
+	auto pos = new_player.GetComponent<Position>();
+	printf("%d %d\n", pos.X(), pos.Y());
 }
 
 void Game::Render()

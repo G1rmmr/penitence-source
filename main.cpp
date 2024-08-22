@@ -1,4 +1,4 @@
-#include "../SDL2/include/SDL.h"
+#include <SDL.h>
 
 #include "Game.h"
 #include "TextureManager.h"
@@ -8,6 +8,8 @@
 using namespace GAlpha;
 
 // Screen size
+
+/*
 const int SCREEN_WIDTH = 800;
 const int SCREEN_HEIGHT = 600;
 
@@ -21,12 +23,18 @@ int main(int argc, char* argv[])
     int frame_time = 0;
 
     Game* game = new Game();
-    game->Init("ThePenitence", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, false);
+    game->Init(
+        "ThePenitence",
+        SDL_WINDOWPOS_CENTERED,
+        SDL_WINDOWPOS_CENTERED,
+        SCREEN_WIDTH,
+        SCREEN_HEIGHT,
+        false);
 
     while(game->IsRunning())
     {
         frame_start = SDL_GetTicks();
-        
+
         game->HandleEvents();
         game->Update();
         game->Render();
@@ -35,5 +43,12 @@ int main(int argc, char* argv[])
         if(FRAME_DELAY > frame_time) SDL_Delay(FRAME_DELAY - frame_time);
     }
     game->Clean();
+    return 0;
+}
+*/
+
+int main()
+{
+    printf("It's done mother fuckin CMake!\n");
     return 0;
 }

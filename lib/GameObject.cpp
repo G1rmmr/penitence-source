@@ -6,9 +6,14 @@ using namespace GAlpha;
 const int PNG_SIZE = 150;
 
 GameObject::GameObject(const char* tex_sheet, int x, int y) :
-    obj_tex(), obj_renderer(Game::renderer), src_rect(nullptr), dest_rect(nullptr), pos(std::make_pair(x, y))
+    obj_tex(),
+    obj_renderer(),
+    src_rect(nullptr),
+    dest_rect(nullptr),
+    pos(std::make_pair(x, y))
 {
     obj_tex = TextureManager::LoadTexture(tex_sheet);
+    obj_renderer = Game::renderer;
 
     src_rect = new SDL_Rect();
     src_rect->x = 0;

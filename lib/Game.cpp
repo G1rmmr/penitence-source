@@ -98,10 +98,10 @@ void Game::Render()
 {
 	SDL_RenderClear(renderer);
 
+	map->DrawMap();
+	
 	player->Render();
 	enemy->Render();
-
-	map->DrawMap();
 
 	SDL_RenderPresent(renderer);
 }

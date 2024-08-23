@@ -15,7 +15,7 @@ TileMap* map;
 
 SDL_Renderer* Game::renderer = nullptr;
 
-Manager* manager;
+Manager* manager = new Manager();
 auto& new_player(manager->AddEntity());
 
 Game::Game()

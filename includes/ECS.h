@@ -53,8 +53,8 @@ namespace GAlpha
 	public:
 		void Update()
 		{
-			for(auto& comp : *components) comp->Update();
-			for(auto& comp : *components) comp->Draw();
+			for(auto& comp : components) comp->Update();
+			for(auto& comp : components) comp->Draw();
 		}
 
 		void Draw() {}
@@ -65,7 +65,7 @@ namespace GAlpha
 		template <typename T>
 		bool HasComponent() const
 		{
-			return (*components_bit_set)[GetComponentTypeID<T>];
+			return components_bit_set[GetComponentTypeID<T>];
 		}
 
 		template <typename T, typename... TArgs>
@@ -75,12 +75,12 @@ namespace GAlpha
 			component->entity = this;
 
 			std::unique_ptr<Component> component_ptr{component};
-			components->emplace_back(std::move(component_ptr));
+			components.emplace_back(std::move(component_ptr));
 
 			ComponentID id = GetComponentTypeID<T>(); 
 
-			(*components_arr)[id] = component;
-			(*components_bit_set)[id] = true;
+			components_arr[id] = component;
+			components_bit_set[id] = true;
 
 			component->Init();
 
@@ -90,14 +90,14 @@ namespace GAlpha
 		template<typename T>
 		T& GetComponent() const
 		{
-			auto ptr((*components_arr)[GetComponentTypeID<T>()]);
+			auto ptr(components_arr[GetComponentTypeID<T>()]);
 			return *static_cast<T*>(ptr);
 		}
 
 	private:
-		std::vector<std::unique_ptr<Component>>* components;
-		ComponentArr* components_arr;
-		ComponentBitSet* components_bit_set;
+		std::vector<std::unique_ptr<Component>> components;
+		ComponentArr components_arr;
+		ComponentBitSet components_bit_set;
 		bool activated = true;
 	};
 
@@ -106,22 +106,22 @@ namespace GAlpha
 	public:
 		void Update()
 		{
-			for(auto& entity : *entities) entity->Update();
+			for(auto& entity : entities) entity->Update();
 		}
 
 		void Draw()
 		{
-			for(auto& entity : *entities) entity->Draw();
+			for(auto& entity : entities) entity->Draw();
 		}
 
 		void Refresh()
 		{
-			entities->erase(std::remove_if(entities->begin(), entities->end(),
+			entities.erase(std::remove_if(entities.begin(), entities.end(),
 				[](const std::unique_ptr<Entity>& entity)
 				{
 					return !entity->IsActivated();
 				}),
-				entities->end());
+				entities.end());
 		}
 
 		Entity& AddEntity()
@@ -129,11 +129,11 @@ namespace GAlpha
 			Entity* entity = new Entity();
 			std::unique_ptr<Entity> enitiy_ptr{entity};
 
-			entities->emplace_back(std::move(enitiy_ptr));
+			entities.emplace_back(std::move(enitiy_ptr));
 			return *entity;
 		}
 
 	private:
-		std::vector<std::unique_ptr<Entity>>* entities;
+		std::vector<std::unique_ptr<Entity>> entities;
 	};
 }

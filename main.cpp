@@ -1,15 +1,17 @@
+// External lib
 #include <SDL.h>
 
+// Internal lib
+#include <cstdio>
+
+// GAlpha
 #include "Game.h"
 #include "TextureManager.h"
-
-#include <cstdio>
 
 using namespace GAlpha;
 
 // Screen size
 
-/*
 const int SCREEN_WIDTH = 800;
 const int SCREEN_HEIGHT = 600;
 
@@ -43,12 +45,6 @@ int main(int argc, char* argv[])
         if(FRAME_DELAY > frame_time) SDL_Delay(FRAME_DELAY - frame_time);
     }
     game->Clean();
-    return 0;
-}
-*/
 
-int main()
-{
-    printf("It's done mother fuckin CMake!\n");
     return 0;
 }

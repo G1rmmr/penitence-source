@@ -3,19 +3,26 @@ file(GLOB_RECURSE
     CONFIGURE_DEPENDS
     ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp)
 
+# GAlpha
 add_library(GAlpha STATIC ${SRC_FILES})
 
-include_directories(${SDL2_INCLUDE_DIRS})
-include_directories(${SDL2_IMAGE_INCLUDE_DIRS})
+# Set SDL2
+find_package(SDL2 2.26.12 REQUIRED)
+find_package(SDL2_image 2.6.3 REQUIRED)
 
+# Include dir
 target_include_directories(GAlpha PUBLIC
     ${CMAKE_SOURCE_DIR}/includes
-	${SDL2_SOURCE_DIR}/include
-    ${SDL2_IMAGE_SOURCE_DIR}/include)
+    ${SDL2_INCLUDE_DIRS}
+    ${SDL2_IMAGE_INCLUDE_DIRS}
+)
 
-target_link_libraries(GAlpha PRIVATE
+# Link libs
+target_link_libraries(GAlpha PUBLIC
     SDL2::SDL2main
     SDL2::SDL2
-    SDL2_image::SDL2_image)
+    SDL2_image::SDL2_image
+)
 
+# Compile opt
 target_compile_options(GAlpha PRIVATE -Wall -Werror)

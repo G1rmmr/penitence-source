@@ -20,7 +20,7 @@ namespace GAlpha
         SDL_Renderer* obj_renderer;
 
         SDL_Rect* src_rect;
-        SDL_Rect* dest_rect;
+        SDL_Rect* dst_rect;
 
         std::pair<int, int> pos;
     };

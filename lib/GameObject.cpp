@@ -9,7 +9,7 @@ GameObject::GameObject(const char* tex_sheet, int x, int y) :
     obj_tex(),
     obj_renderer(),
     src_rect(nullptr),
-    dest_rect(nullptr),
+    dst_rect(nullptr),
     pos(std::make_pair(x, y))
 {
     obj_tex = TextureManager::LoadTexture(tex_sheet);
@@ -21,11 +21,11 @@ GameObject::GameObject(const char* tex_sheet, int x, int y) :
     src_rect->w = PNG_SIZE;
     src_rect->h = PNG_SIZE;
 
-    dest_rect = new SDL_Rect();
-    dest_rect->x = 0;
-    dest_rect->y = 0;
-    dest_rect->w = 0;
-    dest_rect->h = 0;
+    dst_rect = new SDL_Rect();
+    dst_rect->x = 0;
+    dst_rect->y = 0;
+    dst_rect->w = 0;
+    dst_rect->h = 0;
 }
 
 GameObject::~GameObject()
@@ -38,13 +38,13 @@ void GameObject::Update()
     ++pos.first;
     ++pos.second;
 
-    dest_rect->x = pos.first;
-    dest_rect->y = pos.second;
-    dest_rect->w = src_rect->w * 2;
-    dest_rect->h = src_rect->h * 2;
+    dst_rect->x = pos.first;
+    dst_rect->y = pos.second;
+    dst_rect->w = src_rect->w * 2;
+    dst_rect->h = src_rect->h * 2;
 }
 
 void GameObject::Render()
 {
-    SDL_RenderCopy(Game::renderer, obj_tex, src_rect, dest_rect);
+    SDL_RenderCopy(Game::renderer, obj_tex, src_rect, dst_rect);
 }

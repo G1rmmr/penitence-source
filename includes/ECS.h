@@ -54,10 +54,12 @@ namespace GAlpha
 		void Update()
 		{
 			for(auto& comp : components) comp->Update();
-			for(auto& comp : components) comp->Draw();
 		}
 
-		void Draw() {}
+		void Draw()
+		{
+			for(auto& comp : components) comp->Draw();
+		}
 		
 		bool IsActivated() const {return activated;}
 		void Destroy() {activated = false;}
@@ -104,22 +106,22 @@ namespace GAlpha
 	public:
 		void Update()
 		{
-			for(auto& entity : *entities) entity->Update();
+			for(auto& entity : entities) entity->Update();
 		}
 
 		void Draw()
 		{
-			for(auto& entity : *entities) entity->Draw();
+			for(auto& entity : entities) entity->Draw();
 		}
 
 		void Refresh()
 		{
-			entities->erase(std::remove_if(entities->begin(), entities->end(),
+			entities.erase(std::remove_if(entities.begin(), entities.end(),
 				[](const std::unique_ptr<Entity>& entity)
 				{
 					return !entity->IsActivated();
 				}),
-				entities->end());
+				entities.end());
 		}
 
 		Entity& AddEntity()
@@ -127,12 +129,11 @@ namespace GAlpha
 			Entity* entity = new Entity();
 			std::unique_ptr<Entity> enitiy_ptr{entity};
 
-			entities->emplace_back(std::move(enitiy_ptr));
+			entities.emplace_back(std::move(enitiy_ptr));
 			return *entity;
 		}
 
 	private:
-		std::vector<std::unique_ptr<Entity>>* entities
-			= new std::vector<std::unique_ptr<Entity>>();
+		std::vector<std::unique_ptr<Entity>> entities;
 	};
 }

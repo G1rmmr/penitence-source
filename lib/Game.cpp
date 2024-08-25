@@ -1,22 +1,17 @@
 #include "Game.h"
 #include "TextureManager.h"
-#include "GameObject.h"
 #include "TileMap.h"
 
-#include "ECS.h"
-#include "Component.h"
+#include "Components.h"
 
 using namespace GAlpha;
-
-GameObject* player;
-GameObject* enemy;
 
 TileMap* map;
 
 SDL_Renderer* Game::renderer = nullptr;
 
-Manager* manager = new Manager();
-auto& new_player(manager->AddEntity());
+Manager manager;
+auto& player = manager.AddEntity();
 
 Game::Game()
 {
@@ -54,9 +49,6 @@ void Game::Init(const char *title, int x, int y, int w, int h, bool is_full)
 
 	SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
 
-	player = new GameObject("../assets/player_temp.png", 0, 0);
-	enemy = new GameObject("../assets/enemy_temp.png", 200, 200);
-
 	map = new TileMap();
 	if(!map)
 	{
@@ -64,7 +56,8 @@ void Game::Init(const char *title, int x, int y, int w, int h, bool is_full)
 		return;
 	}
 
-	new_player.AddComponent<Position>();
+	player.AddComponent<Transform>();
+	player.AddComponent<Sprite>("../assets/player_temp/png");
 
 	is_running = true;
 }
@@ -86,12 +79,11 @@ void Game::HandleEvents()
 
 void Game::Update()
 {
-	player->Update();
-	enemy->Update();
-	manager->Update();
+	manager.Refresh();
+	manager.Update();
 
-	auto pos = new_player.GetComponent<Position>();
-	printf("%d %d\n", pos.X(), pos.Y());
+	if(player.GetComponent<Transform>().pos.x > 100)
+		player.GetComponent<Sprite>().(".../assets/player_temp.png");
 }
 
 void Game::Render()
@@ -99,9 +91,8 @@ void Game::Render()
 	SDL_RenderClear(renderer);
 
 	map->DrawMap();
-	
-	player->Render();
-	enemy->Render();
+
+	manager.Draw();
 
 	SDL_RenderPresent(renderer);
 }

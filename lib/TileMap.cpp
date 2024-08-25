@@ -48,8 +48,8 @@ TileMap::TileMap()
 
 	dest->x = 0;
 	dest->y = 0;
-	dest->w = IMG_SIZE;
-	dest->h = IMG_SIZE;
+	dest->w = IMG_SIZE / 10;
+	dest->h = IMG_SIZE / 10;
 }
 
 TileMap::~TileMap()
@@ -74,8 +74,8 @@ void TileMap::DrawMap()
 		{
 			type = map[i][j];
 
-			dest->x = i * IMG_SIZE;
-			dest->y = j * IMG_SIZE;
+			dest->x = i * (IMG_SIZE / 10);
+			dest->y = j * (IMG_SIZE / 10);
 
 			switch(type)
 			{

@@ -54,7 +54,7 @@ TileMap::TileMap()
 
 TileMap::~TileMap()
 {
-
+	SDL_DestroyTexture(elem1);
 }
 
 void TileMap::LoadMap(int lv[MAP_HEIGHT][MAP_WIDTH])

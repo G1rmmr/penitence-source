@@ -67,7 +67,7 @@ namespace GAlpha
 		template <typename T>
 		bool HasComponent() const
 		{
-			return components_bit_set[GetComponentTypeID<T>];
+			return components_bit_set[GetComponentTypeID<T>()];
 		}
 
 		template <typename T, typename... TArgs>

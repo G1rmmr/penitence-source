@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Components.h"
-#include "Vector2D.h"
+#include "../Vector2D.h"
 
 namespace GAlpha
 {
@@ -11,7 +11,11 @@ namespace GAlpha
         Vector2D pos;
         Vector2D vel;
 
-        const float speed = 3.0f;
+        const float SPEED = 3.0f;
+
+        float width = 150.0f;
+        float height = 150.0f;
+        float scale = 1.0f;
 
         Transform() : pos(0.0f, 0.0f)
         {
@@ -21,6 +25,19 @@ namespace GAlpha
         Transform(float x, float y) : pos(x, y) 
         {
 
+        }
+
+        Transform(int scale)
+        : pos(0.0f, 0.0f), width(0.0f), height(0.0f), scale(scale)
+        {
+            
+        }
+
+        Transform(float x, float y, float w, float h, float scale)
+        : pos(x, y), width(w), height(h), scale(scale)
+        {
+            pos.x = x;
+            pos.y = y;
         }
 
         void SetPos(float x, float y)
@@ -37,8 +54,8 @@ namespace GAlpha
 
         void Update() override
         {
-            pos.x += vel.x * speed;
-            pos.y += vel.y * speed;
+            pos.x += vel.x * SPEED;
+            pos.y += vel.y * SPEED;
         }
     };
 }

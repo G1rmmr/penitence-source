@@ -1,7 +1,9 @@
+#include "ecs/Components.h"
+
 #include "Game.h"
 #include "TextureManager.h"
 #include "TileMap.h"
-#include "Components.h"
+#include "Collision.h"
 
 using namespace GAlpha;
 
@@ -11,7 +13,9 @@ SDL_Renderer* Game::renderer = nullptr;
 SDL_Event Game::event;
 
 Manager manager;
+
 auto& player(manager.AddEntity());
+auto& wall(manager.AddEntity());
 
 Game::Game()
 {
@@ -56,9 +60,14 @@ void Game::Init(const char *title, int x, int y, int w, int h, bool is_full)
 		return;
 	}
 
-	player.AddComponent<Transform>();
+	player.AddComponent<Transform>(2);
 	player.AddComponent<Sprite>("../assets/player_temp.png");
 	player.AddComponent<KeyboardController>();
+	player.AddComponent<Collider>("player");
+
+	wall.AddComponent<Transform>(300.0f, 300.0f, 20.0f, 300.0f, 1.0f);
+	wall.AddComponent<Sprite>("../assets/enemy_temp.png");
+	wall.AddComponent<Collider>("wall");
 
 	is_running = true;
 }
@@ -81,6 +90,11 @@ void Game::Update()
 {
 	manager.Refresh();
 	manager.Update();
+
+	if(Collision::BothAABBCollide(
+		*player.GetComponent<Collider>().collider,
+		*wall.GetComponent<Collider>().collider))
+		printf("Collided!\n");
 }
 
 void Game::Render()

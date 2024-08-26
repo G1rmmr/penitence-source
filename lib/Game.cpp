@@ -9,6 +9,7 @@ using namespace GAlpha;
 TileMap* map;
 
 SDL_Renderer* Game::renderer = nullptr;
+SDL_Event Game::event;
 
 Manager manager;
 auto& player = manager.AddEntity();
@@ -58,6 +59,7 @@ void Game::Init(const char *title, int x, int y, int w, int h, bool is_full)
 
 	player.AddComponent<Transform>();
 	player.AddComponent<Sprite>("../assets/player_temp/png");
+	player.AddComponent<KeyboardController>();
 
 	is_running = true;
 }
@@ -81,13 +83,6 @@ void Game::Update()
 {
 	manager.Refresh();
 	manager.Update();
-
-	player.GetComponent<Transform>().pos.Add(
-		Vector2D(5.0f, 0.0f));
-
-	if(player.GetComponent<Transform>().pos.x > 100)
-		player.GetComponent<Sprite>().SetTexture(
-			".../assets/player_temp.png");
 }
 
 void Game::Render()

@@ -23,6 +23,7 @@ namespace GAlpha
 		bool IsRunning() const {return is_running;}
 
 		static SDL_Renderer* renderer;
+		static SDL_Event event;
 
 	private:
 		SDL_Window* window;

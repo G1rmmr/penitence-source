@@ -10,6 +10,9 @@ namespace GAlpha
     {
     public:
         Vector2D pos;
+        Vector2D vel;
+
+        const float speed = 3.0f;
 
         Transform() : pos(0.0f, 0.0f)
         {
@@ -29,13 +32,14 @@ namespace GAlpha
         
         void Init() override
         {
+            vel = Vector2D(0.0f, 0.0f);
             pos = Vector2D(0.0f, 0.0f);
         }
 
         void Update() override
         {
-            pos.x++;
-            pos.y++;
+            pos.x += vel.x * speed;
+            pos.y += vel.y * speed;
         }
     };
 }

@@ -116,21 +116,21 @@ namespace GAlpha
 
 		void Refresh()
 		{
-			entities.erase(std::remove_if(entities.begin(), entities.end(),
-				[](const std::unique_ptr<Entity>& entity)
+			entities.erase(std::remove_if(std::begin(entities), std::end(entities),
+				[](const std::unique_ptr<Entity> &entity)
 				{
 					return !entity->IsActivated();
 				}),
-				entities.end());
+				std::end(entities));
 		}
 
 		Entity& AddEntity()
 		{
-			Entity* entity = new Entity();
-			std::unique_ptr<Entity> enitiy_ptr{entity};
+			Entity* ent = new Entity();
+			std::unique_ptr<Entity> enitiy_ptr{ent};
 
 			entities.emplace_back(std::move(enitiy_ptr));
-			return *entity;
+			return *ent;
 		}
 
 	private:

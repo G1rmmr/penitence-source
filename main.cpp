@@ -24,8 +24,6 @@ int main(int argc, char* argv[])
     Uint32 frame_start = 0;
     int frame_time = 0;
 
-    printf("Hello!\n");
-
     Game* game = new Game();
     game->Init(
         "ThePenitence",

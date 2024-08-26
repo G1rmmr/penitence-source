@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Components.h"
-#include "TextureManager.h"
 #include "Vector2D.h"
 
 namespace GAlpha

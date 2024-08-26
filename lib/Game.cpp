@@ -1,7 +1,6 @@
 #include "Game.h"
 #include "TextureManager.h"
 #include "TileMap.h"
-
 #include "Components.h"
 
 using namespace GAlpha;
@@ -12,7 +11,7 @@ SDL_Renderer* Game::renderer = nullptr;
 SDL_Event Game::event;
 
 Manager manager;
-auto& player = manager.AddEntity();
+auto& player(manager.AddEntity());
 
 Game::Game()
 {
@@ -58,7 +57,7 @@ void Game::Init(const char *title, int x, int y, int w, int h, bool is_full)
 	}
 
 	player.AddComponent<Transform>();
-	player.AddComponent<Sprite>("../assets/player_temp/png");
+	player.AddComponent<Sprite>("../assets/player_temp.png");
 	player.AddComponent<KeyboardController>();
 
 	is_running = true;
@@ -66,8 +65,7 @@ void Game::Init(const char *title, int x, int y, int w, int h, bool is_full)
 
 void Game::HandleEvents()
 {
-	SDL_Event event;
-	SDL_PollEvent(&event);
+	SDL_PollEvent(&Game::event);
 
 	switch(event.type)
 	{

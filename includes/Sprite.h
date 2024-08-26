@@ -3,7 +3,6 @@
 #include <SDL.h>
 
 #include "Components.h"
-
 namespace GAlpha
 {
     class Sprite : public Component
@@ -13,7 +12,7 @@ namespace GAlpha
 
         Sprite(const char* path)
         {
-            tex = TextureManager::LoadTexture(path);
+            SetTexture(path);
         }
 
         void SetTexture(const char* path)
@@ -34,16 +33,14 @@ namespace GAlpha
             dst = new SDL_Rect();
             dst->x = 0;
             dst->y = 0;
-            dst->w = 0;
-            dst->h = 0;
+            dst->w = 150;
+            dst->h = 150;
         }
 
         void Update() override
         {
             dst->x = static_cast<int>(trans->pos.x);
             dst->y = static_cast<int>(trans->pos.y);
-            dst->w = static_cast<int>(src->w * 2);
-            dst->h = static_cast<int>(src->h * 2);
         }
 
         void Draw() override

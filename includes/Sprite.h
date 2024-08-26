@@ -16,6 +16,11 @@ namespace GAlpha
             tex = TextureManager::LoadTexture(path);
         }
 
+        void SetTexture(const char* path)
+        {
+            tex = TextureManager::LoadTexture(path);
+        }
+
         void Init() override
         {
             trans = &entity->GetComponent<Transform>();

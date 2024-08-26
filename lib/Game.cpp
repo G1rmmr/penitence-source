@@ -82,8 +82,12 @@ void Game::Update()
 	manager.Refresh();
 	manager.Update();
 
+	player.GetComponent<Transform>().pos.Add(
+		Vector2D(5.0f, 0.0f));
+
 	if(player.GetComponent<Transform>().pos.x > 100)
-		player.GetComponent<Sprite>().(".../assets/player_temp.png");
+		player.GetComponent<Sprite>().SetTexture(
+			".../assets/player_temp.png");
 }
 
 void Game::Render()

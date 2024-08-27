@@ -4,7 +4,9 @@
 #include <SDL_image.h>
 
 #include <cstdio>
+#include <vector>
 
+class Collider;
 namespace GAlpha
 {
 	class Game
@@ -22,8 +24,11 @@ namespace GAlpha
 
 		bool IsRunning() const {return is_running;}
 
+		static std::vector<Collider*> colliders;
 		static SDL_Renderer* renderer;
 		static SDL_Event event;
+
+		static void AddTile(int id, int x, int y);
 
 	private:
 		SDL_Window* window;

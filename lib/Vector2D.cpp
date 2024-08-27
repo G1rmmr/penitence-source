@@ -80,3 +80,16 @@ Vector2D& Vector2D::operator/=(const Vector2D &other)
     return this->Divide(other);
 }
 
+Vector2D& Vector2D::operator*(const float elem)
+{
+    this->x * elem;
+    this->y * elem;
+    return *this;
+}
+
+Vector2D& Vector2D::Zero()
+{
+    this->x = 0.0f;
+    this->y = 0.0f;
+    return *this;
+}

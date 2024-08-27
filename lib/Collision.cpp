@@ -1,3 +1,4 @@
+#include "ecs/Collider.h"
 #include "Collision.h"
 
 using namespace GAlpha;
@@ -10,4 +11,9 @@ bool Collision::BothAABBCollide(const SDL_Rect& left, const SDL_Rect& right)
     if(right.y + right.h < left.y) return false;
 
     return true;
+}
+
+bool Collision::BothAABBCollide(const Collider& left, const Collider& right)
+{
+    return BothAABBCollide(*left.collider, *right.collider);
 }

@@ -48,8 +48,8 @@ namespace GAlpha
         
         void Init() override
         {
-            vel = Vector2D(0.0f, 0.0f);
-            pos = Vector2D(0.0f, 0.0f);
+            vel.Zero();
+            pos.Zero();
         }
 
         void Update() override

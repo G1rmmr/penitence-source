@@ -9,6 +9,7 @@ using namespace GAlpha;
 
 TileMap* map;
 
+auto Game::colliders;
 SDL_Renderer* Game::renderer = nullptr;
 SDL_Event Game::event;
 
@@ -91,10 +92,8 @@ void Game::Update()
 	manager.Refresh();
 	manager.Update();
 
-	if(Collision::BothAABBCollide(
-		*player.GetComponent<Collider>().collider,
-		*wall.GetComponent<Collider>().collider))
-		printf("Collided!\n");
+	for(auto collid : colliders)
+		Collision::BothAABBCollide(player.GetComponent<Collider>(), *collid);
 }
 
 void Game::Render()
@@ -115,4 +114,10 @@ void Game::Clean()
 	SDL_Quit();
 
 	printf("Game Cleaned!\n");
+}
+
+void Game::AddTile(int id, int x, int y)
+{
+	auto& tile(manager.AddEntity());
+	tile.AddComponent<Tile>(x, y, 150, 150, id);
 }

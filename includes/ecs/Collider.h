@@ -27,6 +27,8 @@ namespace GAlpha
                 entity->AddComponent<Transform>();
 
             transf = &entity->GetComponent<Transform>();
+
+            Game::colliders.push_back(this);
         }
 
         void Update() override

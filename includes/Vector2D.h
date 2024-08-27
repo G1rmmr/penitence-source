@@ -25,5 +25,8 @@ namespace GAlpha
         Vector2D& operator-=(const Vector2D& other);
         Vector2D& operator*=(const Vector2D& other);
         Vector2D& operator/=(const Vector2D& other);
+
+        Vector2D& operator*(const float elem);
+        Vector2D& Zero();
     };
 }

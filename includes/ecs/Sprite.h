@@ -29,13 +29,13 @@ namespace GAlpha
 
         void Init() override
         {
-            trans = &entity->GetComponent<Transform>();
+            transf = &entity->GetComponent<Transform>();
 
             src = new SDL_Rect();
             src->x = 0;
             src->y = 0;
-            src->w = trans->width;
-            src->h = trans->height;
+            src->w = transf->width;
+            src->h = transf->height;
 
             dst = new SDL_Rect();
             dst->x = 0;
@@ -46,10 +46,10 @@ namespace GAlpha
 
         void Update() override
         {
-            dst->x = static_cast<int>(trans->pos.x);
-            dst->y = static_cast<int>(trans->pos.y);
-            dst->w = trans->width * trans->scale;
-            dst->h = trans->height * trans->scale;
+            dst->x = static_cast<int>(transf->pos.x);
+            dst->y = static_cast<int>(transf->pos.y);
+            dst->w = transf->width * transf->scale;
+            dst->h = transf->height * transf->scale;
         }
 
         void Draw() override
@@ -62,6 +62,6 @@ namespace GAlpha
         SDL_Rect* src;
         SDL_Rect* dst;
 
-        Transform* trans;
+        Transform* transf;
     };
 }

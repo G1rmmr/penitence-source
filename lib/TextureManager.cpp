@@ -2,16 +2,18 @@
 
 using namespace GAlpha;
 
-SDL_Texture* TextureManager::LoadTexture(const char* file_name)
+SDL_Texture* TextureManager::LoadTexture(const char* file)
 {
-    SDL_Surface* temp_surf = IMG_Load(file_name);
+    SDL_Surface* temp_surf = IMG_Load(file);
 	if(!temp_surf)
 	{
 		printf("Surface was not loaded!\n");
 		return nullptr;
 	}
 
-	SDL_Texture* tex = SDL_CreateTextureFromSurface(Game::renderer, temp_surf);
+	SDL_Texture* tex = SDL_CreateTextureFromSurface(
+		Game::renderer, temp_surf);
+		
 	SDL_FreeSurface(temp_surf);
 	if(!tex)
 	{
@@ -22,7 +24,7 @@ SDL_Texture* TextureManager::LoadTexture(const char* file_name)
     return tex;
 }
 
-void TextureManager::Draw(SDL_Texture* tex, SDL_Rect* src, SDL_Rect* dest)
+void TextureManager::Draw(SDL_Texture* tex, SDL_Rect* src, SDL_Rect* dst)
 {
-	SDL_RenderCopy(Game::renderer, tex, src, dest);
+	SDL_RenderCopy(Game::renderer, tex, src, dst);
 }

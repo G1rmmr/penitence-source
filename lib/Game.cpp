@@ -1,22 +1,23 @@
-#include "ecs/Components.h"
-
 #include "Game.h"
+
+#include "ecs/Components.h"
 #include "TextureManager.h"
-#include "TileMap.h"
+#include "Map.h"
+#include "Vector2D.h"
 #include "Collision.h"
 
 using namespace GAlpha;
 
-TileMap* map;
+Map* map;
+Manager* manager;
 
-auto Game::colliders;
+std::vector<Collider*> Game::colliders;
+
 SDL_Renderer* Game::renderer = nullptr;
 SDL_Event Game::event;
 
-Manager manager;
-
-auto& player(manager.AddEntity());
-auto& wall(manager.AddEntity());
+auto& player(manager->AddEntity());
+auto& wall(manager->AddEntity());
 
 Game::Game()
 {
@@ -54,7 +55,7 @@ void Game::Init(const char *title, int x, int y, int w, int h, bool is_full)
 
 	SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
 
-	map = new TileMap();
+	map = new Map();
 	if(!map)
 	{
 		printf("Map was not loaded!\n");
@@ -89,8 +90,8 @@ void Game::HandleEvents()
 
 void Game::Update()
 {
-	manager.Refresh();
-	manager.Update();
+	manager->Refresh();
+	manager->Update();
 
 	for(auto collid : colliders)
 		Collision::BothAABBCollide(player.GetComponent<Collider>(), *collid);
@@ -102,7 +103,7 @@ void Game::Render()
 
 	map->DrawMap();
 
-	manager.Draw();
+	manager->Draw();
 
 	SDL_RenderPresent(renderer);
 }
@@ -118,6 +119,6 @@ void Game::Clean()
 
 void Game::AddTile(int id, int x, int y)
 {
-	auto& tile(manager.AddEntity());
+	auto& tile(manager->AddEntity());
 	tile.AddComponent<Tile>(x, y, 150, 150, id);
 }

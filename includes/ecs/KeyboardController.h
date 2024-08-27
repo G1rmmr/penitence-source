@@ -10,11 +10,11 @@ namespace GAlpha
     class KeyboardController : public Component
     {
     public:
-        Transform* transform;
+        Transform* transf;
 
         void Init() override
         {
-            transform = &entity->GetComponent<Transform>();
+            transf = &entity->GetComponent<Transform>();
         }
 
         void Update() override
@@ -24,19 +24,19 @@ namespace GAlpha
                 switch(Game::event.key.keysym.sym)
                 {
                 case SDLK_w:
-                    transform->vel.y--;
+                    transf->vel.y--;
                     break;
 
                 case SDLK_a:
-                    transform->vel.x--;
+                    transf->vel.x--;
                     break;
 
                 case SDLK_s:
-                    transform->vel.y++;
+                    transf->vel.y++;
                     break;
 
                 case SDLK_d:
-                    transform->vel.x++;
+                    transf->vel.x++;
                     break;
 
                 default: break;
@@ -48,23 +48,22 @@ namespace GAlpha
                 switch (Game::event.key.keysym.sym)
                 {
                 case SDLK_w:
-                    transform->vel.y = 0.0f;
+                    transf->vel.y = 0.0f;
                     break;
 
                 case SDLK_a:
-                    transform->vel.x = 0.0f;
+                    transf->vel.x = 0.0f;
                     break;
 
                 case SDLK_s:
-                    transform->vel.y = 0.0f;
+                    transf->vel.y = 0.0f;
                     break;
 
                 case SDLK_d:
-                    transform->vel.x = 0.0f;
+                    transf->vel.x = 0.0f;
                     break;
 
-                default:
-                    break;
+                default: break;
                 }
             }
         }

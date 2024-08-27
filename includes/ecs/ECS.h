@@ -11,6 +11,7 @@ namespace GAlpha
 {
 	// Pre define for component class
 	class Entity;
+	class Manager;
 	
 	// Super class of component
 	class Component
@@ -27,16 +28,19 @@ namespace GAlpha
 
 	// Type definitions
 	constexpr std::size_t MAX_COMPONENTS = 32;
+	constexpr std::size_t MAX_GROUPS = 32;
 	
 	using ComponentArr = std::array<Component*, MAX_COMPONENTS>;
 	using ComponentBitSet = std::bitset<MAX_COMPONENTS>;
+	using GroupBitSet = std::bitset<MAX_GROUPS>;
 
 	using ComponentID = std::size_t;
+	using Group = std::size_t;
 
 	// Type id will increases when component added.
-	inline ComponentID GetComponentTypeID()
+	inline ComponentID GetNewComponentTypeID()
 	{
-		static ComponentID last_id = 0;
+		static ComponentID last_id = 0u;
 		return last_id++;
 	}
 
@@ -51,6 +55,11 @@ namespace GAlpha
 	class Entity
 	{
 	public:
+		Entity(Manager& manager) : manager(manager)
+		{
+
+		}
+
 		void Update()
 		{
 			for(auto& comp : components) comp->Update();
@@ -63,6 +72,15 @@ namespace GAlpha
 		
 		bool IsActivated() const {return activated;}
 		void Destroy() {activated = false;}
+
+		bool HasGroup(Group group) {return group_bit_set[group];}
+
+		void AddGroup(Group group);
+		
+		void DelGroup(Group group)
+		{
+			group_bit_set[group] = false;
+		}
 
 		template <typename T>
 		bool HasComponent() const
@@ -96,8 +114,13 @@ namespace GAlpha
 
 	private:
 		std::vector<std::unique_ptr<Component>> components;
+
 		ComponentArr components_arr;
 		ComponentBitSet components_bit_set;
+		GroupBitSet group_bit_set;
+
+		Manager& manager;
+
 		bool activated = true;
 	};
 
@@ -116,7 +139,21 @@ namespace GAlpha
 
 		void Refresh()
 		{
-			entities.erase(std::remove_if(std::begin(entities), std::end(entities),
+			for(auto i(0u); i < MAX_GROUPS; ++i)
+			{
+				auto& vec(grouped_entities[i]);
+
+				vec.erase(std::remove_if(
+					std::begin(vec), std::end(vec),
+					[i](Entity* entity)
+					{
+						return !entity->IsActivated() || !entity->HasGroup(i);
+					}),
+					std::end(vec));
+			}
+
+			entities.erase(std::remove_if(
+				std::begin(entities), std::end(entities),
 				[](const std::unique_ptr<Entity> &entity)
 				{
 					return !entity->IsActivated();
@@ -124,9 +161,19 @@ namespace GAlpha
 				std::end(entities));
 		}
 
+		void AddToGroup(Entity* entity, Group group)
+		{
+			grouped_entities[group].emplace_back(entity);
+		}
+
+		std::vector<Entity*>& GetGroup(Group group)
+		{
+			return grouped_entities[group];
+		}
+
 		Entity& AddEntity()
 		{
-			Entity* ent = new Entity();
+			Entity* ent = new Entity(*this);
 			std::unique_ptr<Entity> enitiy_ptr{ent};
 
 			entities.emplace_back(std::move(enitiy_ptr));
@@ -135,5 +182,6 @@ namespace GAlpha
 
 	private:
 		std::vector<std::unique_ptr<Entity>> entities;
+		std::array<std::vector<Entity*>, MAX_GROUPS> grouped_entities;
 	};
 }

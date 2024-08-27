@@ -19,6 +19,14 @@ SDL_Event Game::event;
 auto& player(manager->AddEntity());
 auto& wall(manager->AddEntity());
 
+enum GroupLabels : std::size_t
+{
+	GROUP_MAP,
+	GROUP_PLAYERS,
+	GROUP_ENEMIES,
+	GROUP_COLLIDERS
+};
+
 Game::Game()
 {
 
@@ -66,10 +74,12 @@ void Game::Init(const char *title, int x, int y, int w, int h, bool is_full)
 	player.AddComponent<Sprite>("../assets/player_temp.png");
 	player.AddComponent<KeyboardController>();
 	player.AddComponent<Collider>("player");
+	player.AddGroup(GROUP_PLAYERS);
 
 	wall.AddComponent<Transform>(300.0f, 300.0f, 20.0f, 300.0f, 1.0f);
 	wall.AddComponent<Sprite>("../assets/enemy_temp.png");
 	wall.AddComponent<Collider>("wall");
+	wall.AddGroup(GROUP_MAP);
 
 	is_running = true;
 }
@@ -101,7 +111,7 @@ void Game::Render()
 {
 	SDL_RenderClear(renderer);
 
-	map->DrawMap();
+	map->Draw();
 
 	manager->Draw();
 
@@ -121,4 +131,5 @@ void Game::AddTile(int id, int x, int y)
 {
 	auto& tile(manager->AddEntity());
 	tile.AddComponent<Tile>(x, y, 150, 150, id);
+	tile.AddGroup(GROUP_MAP);
 }

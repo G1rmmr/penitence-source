@@ -28,7 +28,7 @@ namespace GAlpha
 		static SDL_Renderer* renderer;
 		static SDL_Event event;
 
-		static void AddTile(int id, int x, int y);
+		static void AddTile(int src_x, int src_y, int x, int y);
 
 	private:
 		SDL_Window* window;

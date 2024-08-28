@@ -11,53 +11,32 @@ namespace GAlpha
     class Tile : public Component
     {
     public:
-        SDL_Rect* tile;
-
-        Transform* transf;
-        Sprite* sprite;
-
-        char* path;
-        int id;
+        SDL_Texture* tex;
+        SDL_Rect* src;
+        SDL_Rect* dst;
 
         Tile() = default;
 
-        Tile(int x, int y, int w, int h, int id)
+        ~Tile()
         {
-            tile = new SDL_Rect();
-            tile->x = x;
-            tile->y = y;
-            tile->w = w;
-            tile->h = h;
-            this->id = id;
-
-            switch(id)
-            {
-            case 0:
-                path = "../../assets/player_temp.png";
-                break;
-
-            case 1:
-                path = "../../assets/enemy_temp.png";
-                break;
-
-            default: break;
-            }
+            SDL_DestroyTexture(tex);
         }
 
-        void Init() override
+        Tile(const char* path, int src_x, int src_y, int x, int y)
         {
-            entity->AddComponent<Transform>(
-                static_cast<float>(tile->x),
-                static_cast<float>(tile->y),
-                static_cast<float>(tile->w),
-                static_cast<float>(tile->h),
-                1.0f
-            );
+            tex = TextureManager::Load(path);
 
-            transf = &entity->GetComponent<Transform>();
+            src = new SDL_Rect();
+            src->x = src_x;
+            src->y = src_y;
+            src->w = 32;
+            src->h = 32;
 
-            entity->AddComponent<Sprite>(path);
-            sprite = &entity->GetComponent<Sprite>();
+            dst = new SDL_Rect();
+            dst->x = x;
+            dst->y = y;
+            dst->w = 32;
+            dst->h = 32;
         }
     };
 }

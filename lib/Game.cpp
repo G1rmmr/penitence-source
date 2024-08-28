@@ -127,7 +127,7 @@ void Game::Clean()
 	printf("Game Cleaned!\n");
 }
 
-void Game::AddTile(int id, int x, int y)
+void Game::AddTile(int src_x, int src_y, int x, int y)
 {
 	auto& tile(manager->AddEntity());
 	tile.AddComponent<Tile>(x, y, 150, 150, id);

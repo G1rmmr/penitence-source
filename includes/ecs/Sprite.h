@@ -68,8 +68,8 @@ namespace GAlpha
 
             src->y = anim_index * transf->height;
 
-            dst->x = static_cast<int>(transf->pos.x);
-            dst->y = static_cast<int>(transf->pos.y);
+            dst->x = static_cast<int>(transf->pos.x) - Game::camera->x;
+            dst->y = static_cast<int>(transf->pos.y) - Game::camera->y;
             dst->w = transf->width * transf->scale;
             dst->h = transf->height * transf->scale;
         }

@@ -15,6 +15,8 @@ namespace GAlpha
         SDL_Rect* src;
         SDL_Rect* dst;
 
+        Vector2D pos;
+
         Tile() = default;
 
         ~Tile()
@@ -25,6 +27,9 @@ namespace GAlpha
         Tile(const char* path, int src_x, int src_y, int x, int y)
         {
             tex = TextureManager::Load(path);
+
+            pos.x = x;
+            pos.y = y;
 
             src = new SDL_Rect();
             src->x = src_x;
@@ -37,6 +42,17 @@ namespace GAlpha
             dst->y = y;
             dst->w = 32;
             dst->h = 32;
+        }
+
+        void Update() override
+        {
+            dst->x = pos.x - Game::camera->x;
+            dst->y = pos.y - Game::camera->y;
+        }
+
+        void Draw() override
+        {
+            TextureManager::Draw(tex, src, dst, SDL_FLIP_NONE);
         }
     };
 }

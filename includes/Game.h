@@ -22,17 +22,18 @@ namespace GAlpha
 		void Render();
 		void Clean();
 
-		bool IsRunning() const {return is_running;}
+		bool IsRunning() const {return Game::is_running;}
 
 		static std::vector<Collider*> colliders;
 		static SDL_Renderer* renderer;
 		static SDL_Event event;
 
+		static SDL_Rect* camera;
+		static bool is_running;
+
 		static void AddTile(int src_x, int src_y, int x, int y);
 
 	private:
 		SDL_Window* window;
-		
-		bool is_running;
 	};
 }

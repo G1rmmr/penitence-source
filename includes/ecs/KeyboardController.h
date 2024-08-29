@@ -46,6 +46,10 @@ namespace GAlpha
                     sprite->Play("WALK");
                     break;
 
+                case SDLK_ESCAPE:
+                    Game::is_running = false;
+                    break;
+
                 default: break;
                 }
             }

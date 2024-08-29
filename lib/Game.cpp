@@ -16,8 +16,14 @@ std::vector<Collider*> Game::colliders;
 SDL_Renderer* Game::renderer = nullptr;
 SDL_Event Game::event;
 
+SDL_Rect* Game::camera = new SDL_Rect(0, 0, 800, 640);
+
 auto& player(manager->AddEntity());
 auto& wall(manager->AddEntity());
+
+const char* map_path = "";
+
+bool Game::is_running = false;
 
 enum GroupLabels : std::size_t
 {
@@ -70,6 +76,8 @@ void Game::Init(const char *title, int x, int y, int w, int h, bool is_full)
 		return;
 	}
 
+	Map::Load("", 25, 20);
+
 	player.AddComponent<Transform>(2);
 	player.AddComponent<Sprite>("../assets/player_temp.png");
 	player.AddComponent<KeyboardController>();
@@ -103,8 +111,14 @@ void Game::Update()
 	manager->Refresh();
 	manager->Update();
 
-	for(auto collid : colliders)
-		Collision::BothAABBCollide(player.GetComponent<Collider>(), *collid);
+	camera->x = player.GetComponent<Transform>().pos.x - 400;
+	camera->y = player.GetComponent<Transform>().pos.y - 320;
+
+	camera->x = camera->x < 0 ? 0 : camera->x;
+	camera->x = camera->x > camera->w ? camera->w : camera->x;
+
+	camera->y = camera->y < 0 ? 0 : camera->y;
+	camera->y = camera->y > camera->h ? camera->h : camera->y;
 }
 
 void Game::Render()
@@ -130,6 +144,6 @@ void Game::Clean()
 void Game::AddTile(int src_x, int src_y, int x, int y)
 {
 	auto& tile(manager->AddEntity());
-	tile.AddComponent<Tile>(x, y, 150, 150, id);
+	tile.AddComponent<Tile>(src_x, src_y, x, y, map_path);
 	tile.AddGroup(GROUP_MAP);
 }

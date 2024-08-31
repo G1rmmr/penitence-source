@@ -13,8 +13,8 @@ namespace GAlpha
 
         const float SPEED = 3.0f;
 
-        float width = 150.0f;
-        float height = 150.0f;
+        float width = 128.0f;
+        float height = 128.0f;
         float scale = 1.0f;
 
         Transform() : pos(0.0f, 0.0f)

@@ -82,8 +82,8 @@ Vector2D& Vector2D::operator/=(const Vector2D &other)
 
 Vector2D& Vector2D::operator*(const float elem)
 {
-    this->x * elem;
-    this->y * elem;
+    this->x *= elem;
+    this->y *= elem;
     return *this;
 }
 

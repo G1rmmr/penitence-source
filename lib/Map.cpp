@@ -34,7 +34,7 @@ void Map::Load(const char* path, int size_x, int size_y)
 			file.get(tile);
 			src_x = atoi(&tile) * 32;
 
-			Game::AddTile(src_x, src_y, x * 32, y * 32);
+			Game::AddTile(src_x, src_y, size_x * 32, size_y * 32);
 			file.ignore();
 		}
 	}

@@ -30,5 +30,5 @@ void TextureManager::Draw(
 	SDL_Rect* dst,
 	SDL_RendererFlip flip)
 {
-	SDL_RenderCopyEx(Game::renderer, tex, src, dst, NULL, nullptr, flip);
+	SDL_RenderCopyEx(Game::renderer, tex, src, dst, 0.0, nullptr, flip);
 }

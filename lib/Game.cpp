@@ -4,24 +4,29 @@
 #include "TextureManager.h"
 #include "Map.h"
 #include "Vector2D.h"
-#include "Collision.h"
+// #include "Collision.h"
 
 using namespace GAlpha;
 
-Map* map;
-Manager* manager;
+// Screen size
 
-std::vector<Collider*> Game::colliders;
+int Game::SCREEN_WIDTH = 1920;
+int Game::SCREEN_HEIGHT = 1080;
+
+// Set FPS
+int Game::FPS = 24;
+int Game::FRAME_DELAY = 1000 / FPS;
+
+Map* map;
+Manager manager;
 
 SDL_Renderer* Game::renderer = nullptr;
 SDL_Event Game::event;
 
-SDL_Rect* Game::camera = new SDL_Rect(0, 0, 800, 640);
+SDL_Rect* Game::camera = new SDL_Rect{
+	0, 0, Game::SCREEN_WIDTH, Game::SCREEN_HEIGHT};
 
-auto& player(manager->AddEntity());
-auto& wall(manager->AddEntity());
-
-const char* map_path = "";
+auto& player(manager.AddEntity());
 
 bool Game::is_running = false;
 
@@ -76,18 +81,9 @@ void Game::Init(const char *title, int x, int y, int w, int h, bool is_full)
 		return;
 	}
 
-	Map::Load("", 25, 20);
-
 	player.AddComponent<Transform>(2);
-	player.AddComponent<Sprite>("../assets/player_temp.png");
+	player.AddComponent<Sprite>("../assets/player_anim.PNG", true);
 	player.AddComponent<KeyboardController>();
-	player.AddComponent<Collider>("player");
-	player.AddGroup(GROUP_PLAYERS);
-
-	wall.AddComponent<Transform>(300.0f, 300.0f, 20.0f, 300.0f, 1.0f);
-	wall.AddComponent<Sprite>("../assets/enemy_temp.png");
-	wall.AddComponent<Collider>("wall");
-	wall.AddGroup(GROUP_MAP);
 
 	is_running = true;
 }
@@ -108,11 +104,14 @@ void Game::HandleEvents()
 
 void Game::Update()
 {
-	manager->Refresh();
-	manager->Update();
+	manager.Refresh();
+	manager.Update();
 
-	camera->x = player.GetComponent<Transform>().pos.x - 400;
-	camera->y = player.GetComponent<Transform>().pos.y - 320;
+	camera->x = player.GetComponent<Transform>().pos.x
+		- Game::SCREEN_WIDTH * 0.5f;
+
+	camera->y = player.GetComponent<Transform>().pos.y
+		- Game::SCREEN_HEIGHT * 0.5f;
 
 	camera->x = camera->x < 0 ? 0 : camera->x;
 	camera->x = camera->x > camera->w ? camera->w : camera->x;
@@ -125,9 +124,7 @@ void Game::Render()
 {
 	SDL_RenderClear(renderer);
 
-	map->Draw();
-
-	manager->Draw();
+	manager.Draw();
 
 	SDL_RenderPresent(renderer);
 }
@@ -143,7 +140,7 @@ void Game::Clean()
 
 void Game::AddTile(int src_x, int src_y, int x, int y)
 {
-	auto& tile(manager->AddEntity());
-	tile.AddComponent<Tile>(src_x, src_y, x, y, map_path);
-	tile.AddGroup(GROUP_MAP);
+	// auto& tile(manager->AddEntity());
+	// tile.AddComponent<Tile>(src_x, src_y, x, y, map_path);
+	// tile.AddGroup(GROUP_MAP);
 }

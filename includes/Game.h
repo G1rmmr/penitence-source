@@ -33,6 +33,15 @@ namespace GAlpha
 
 		static void AddTile(int src_x, int src_y, int x, int y);
 
+		// Screen size
+
+		static int SCREEN_WIDTH;
+		static int SCREEN_HEIGHT;
+
+		// Set FPS
+		static int FPS;
+		static int FRAME_DELAY;
+
 	private:
 		SDL_Window* window;
 	};

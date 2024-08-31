@@ -26,8 +26,11 @@ namespace GAlpha
             Animation idle = Animation(0, 3, 100);
             anims["IDLE"] = idle;
 
-            Animation walk = Animation(1, 3, 100);
-            anims["WALK"] = walk;
+            Animation move = Animation(1, 6, 100);
+            anims["MOVE"] = move;
+
+            Animation jump = Animation(2, 6, 100);
+            anims["JUMP"] = jump;
 
             Play("IDLE");
             SetTexture(path);

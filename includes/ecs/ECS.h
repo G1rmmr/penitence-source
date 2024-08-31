@@ -47,7 +47,7 @@ namespace GAlpha
 	template <typename T>
 	inline ComponentID GetComponentTypeID() noexcept
 	{
-		static ComponentID type_id = GetComponentTypeID();
+		static ComponentID type_id = GetNewComponentTypeID();
 		return type_id;
 	}
 

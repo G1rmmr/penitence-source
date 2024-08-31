@@ -18,7 +18,7 @@ namespace GAlpha
 
         Collider(const std::string& tag) : tag(tag)
         {
-            collider = new SDL_Rect();
+            
         }
 
         void Init() override
@@ -28,7 +28,7 @@ namespace GAlpha
 
             transf = &entity->GetComponent<Transform>();
 
-            Game::colliders.emplace_back(this);
+            // Game::colliders.emplace_back(this);
         }
 
         void Update() override

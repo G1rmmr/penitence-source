@@ -10,15 +10,6 @@
 
 using namespace GAlpha;
 
-// Screen size
-
-const int SCREEN_WIDTH = 800;
-const int SCREEN_HEIGHT = 600;
-
-// Set FPS
-const int FPS = 60;
-const int FRAME_DELAY = 1000 / FPS;
-
 int main(int argc, char* argv[])
 {
     Uint32 frame_start = 0;
@@ -29,8 +20,8 @@ int main(int argc, char* argv[])
         "ThePenitence",
         SDL_WINDOWPOS_CENTERED,
         SDL_WINDOWPOS_CENTERED,
-        SCREEN_WIDTH,
-        SCREEN_HEIGHT,
+        Game::SCREEN_WIDTH,
+        Game::SCREEN_HEIGHT,
         false);
 
     while(game->IsRunning())
@@ -42,7 +33,9 @@ int main(int argc, char* argv[])
         game->Render();
 
         frame_time = SDL_GetTicks() - frame_start;
-        if(FRAME_DELAY > frame_time) SDL_Delay(FRAME_DELAY - frame_time);
+        
+        if(Game::FRAME_DELAY > frame_time)
+            SDL_Delay(Game::FRAME_DELAY - frame_time);
     }
     game->Clean();
 

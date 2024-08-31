@@ -43,7 +43,11 @@ namespace GAlpha
 
                 case SDLK_d:
                     transf->vel.x++;
-                    sprite->Play("WALK");
+                    sprite->Play("MOVE");
+                    break;
+
+                case SDLK_SPACE:
+                    sprite->Play("JUMP");
                     break;
 
                 case SDLK_ESCAPE:

@@ -24,7 +24,13 @@ namespace GAlpha
             SDL_DestroyTexture(tex);
         }
 
-        Tile(const char* path, int src_x, int src_y, int x, int y)
+        Tile(const char* path,
+            int tile_size,
+            int tile_scale,
+            int src_x,
+            int src_y,
+            int x,
+            int y)
         {
             tex = TextureManager::Load(path);
 

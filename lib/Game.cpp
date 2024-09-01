@@ -4,7 +4,7 @@
 #include "TextureManager.h"
 #include "Map.h"
 #include "Vector2D.h"
-// #include "Collision.h"
+#include "Collision.h"
 
 using namespace GAlpha;
 
@@ -23,10 +23,15 @@ Manager manager;
 SDL_Renderer* Game::renderer = nullptr;
 SDL_Event Game::event;
 
+std::vector<Collider*> Game::colliders;
+
 SDL_Rect* Game::camera = new SDL_Rect{
 	0, 0, Game::SCREEN_WIDTH, Game::SCREEN_HEIGHT};
 
 auto& player(manager.AddEntity());
+auto& wall(manager.AddEntity());
+
+const char* map_path = "";
 
 bool Game::is_running = false;
 
@@ -120,6 +125,8 @@ void Game::Update()
 	camera->y = camera->y > camera->h ? camera->h : camera->y;
 }
 
+
+
 void Game::Render()
 {
 	SDL_RenderClear(renderer);
@@ -140,7 +147,7 @@ void Game::Clean()
 
 void Game::AddTile(int src_x, int src_y, int x, int y)
 {
-	// auto& tile(manager->AddEntity());
-	// tile.AddComponent<Tile>(src_x, src_y, x, y, map_path);
-	// tile.AddGroup(GROUP_MAP);
+	auto& tile(manager.AddEntity());
+	tile.AddComponent<Tile>(src_x, src_y, x, y, map_path);
+	tile.AddGroup(GROUP_MAP);
 }

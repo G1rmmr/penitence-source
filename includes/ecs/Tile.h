@@ -24,7 +24,7 @@ namespace GAlpha
             SDL_DestroyTexture(tex);
         }
 
-        Tile(const char* path,
+        Tile(const std::string& id,
             int tile_size,
             int tile_scale,
             int src_x,
@@ -32,7 +32,7 @@ namespace GAlpha
             int x,
             int y)
         {
-            tex = TextureManager::Load(path);
+            tex = Game::assets->GetTexture(id);
 
             pos.x = x;
             pos.y = y;
@@ -40,14 +40,14 @@ namespace GAlpha
             src = new SDL_Rect();
             src->x = src_x;
             src->y = src_y;
-            src->w = 32;
-            src->h = 32;
+            src->w = tile_size;
+            src->h = tile_size;
 
             dst = new SDL_Rect();
             dst->x = x;
             dst->y = y;
-            dst->w = 32;
-            dst->h = 32;
+            dst->w = tile_size * tile_scale;
+            dst->h = tile_size * tile_scale;
         }
 
         void Update() override

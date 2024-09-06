@@ -6,7 +6,9 @@
 #include "Animation.h"
 
 #include "../TextureManager.h"
-#include "../Map.h"
+#include "../AssetManager.h"
+
+#include <unordered_map>
 
 namespace GAlpha
 {
@@ -19,7 +21,12 @@ namespace GAlpha
 
         Sprite() = default;
 
-        Sprite(const char* path, bool is_anim)
+        Sprite(const std::string& id)
+        {
+            SetTexture(id);
+        }
+
+        Sprite(const std::string& id, bool is_anim)
         {
             this->is_anim = is_anim;
 
@@ -33,17 +40,17 @@ namespace GAlpha
             anims["JUMP"] = jump;
 
             Play("IDLE");
-            SetTexture(path);
+            SetTexture(id);
         }
 
         ~Sprite()
         {
-            SDL_DestroyTexture(tex);
+
         }
 
-        void SetTexture(const char* path)
+        void SetTexture(const std::string& id)
         {
-            tex = TextureManager::Load(path);
+            tex = Game::assets->GetTexture(id);
         }
 
         void Init() override

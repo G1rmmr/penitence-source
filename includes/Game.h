@@ -6,7 +6,9 @@
 #include <cstdio>
 #include <vector>
 
+class AssetManager;
 class Collider;
+
 namespace GAlpha
 {
 	class Game
@@ -24,14 +26,13 @@ namespace GAlpha
 
 		bool IsRunning() const {return Game::is_running;}
 
-		static std::vector<Collider*> colliders;
 		static SDL_Renderer* renderer;
 		static SDL_Event event;
 
 		static SDL_Rect* camera;
-		static bool is_running;
 
-		static void AddTile(int src_x, int src_y, int x, int y);
+		static AssetManager* assets;
+		static bool is_running;
 
 		// Screen size
 
@@ -41,6 +42,14 @@ namespace GAlpha
 		// Set FPS
 		static int FPS;
 		static int FRAME_DELAY;
+
+		enum GroupLabels : std::size_t
+		{
+			GROUP_MAP,
+			GROUP_PLAYERS,
+			GROUP_COLLIDERS,
+			GROUP_PROJECTILES
+		};
 
 	private:
 		SDL_Window* window;

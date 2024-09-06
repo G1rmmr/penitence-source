@@ -1,10 +1,12 @@
 #include "Game.h"
 
-#include "ecs/Components.h"
 #include "TextureManager.h"
 #include "Map.h"
 #include "Vector2D.h"
 #include "Collision.h"
+#include "AssetManager.h"
+
+#include "ecs/Components.h"
 
 using namespace GAlpha;
 
@@ -19,29 +21,17 @@ int Game::FRAME_DELAY = 1000 / FPS;
 
 Map* map;
 Manager manager;
+AssetManager* Game::assets = new AssetManager(&manager);
 
 SDL_Renderer* Game::renderer = nullptr;
 SDL_Event Game::event;
-
-std::vector<Collider*> Game::colliders;
 
 SDL_Rect* Game::camera = new SDL_Rect{
 	0, 0, Game::SCREEN_WIDTH, Game::SCREEN_HEIGHT};
 
 auto& player(manager.AddEntity());
-auto& wall(manager.AddEntity());
-
-const char* map_path = "";
 
 bool Game::is_running = false;
-
-enum GroupLabels : std::size_t
-{
-	GROUP_MAP,
-	GROUP_PLAYERS,
-	GROUP_ENEMIES,
-	GROUP_COLLIDERS
-};
 
 Game::Game()
 {
@@ -79,19 +69,33 @@ void Game::Init(const char *title, int x, int y, int w, int h, bool is_full)
 
 	SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
 
-	map = new Map();
+	map = new Map("", 3, 32);
 	if(!map)
 	{
 		printf("Map was not loaded!\n");
 		return;
 	}
+	assets->AddTexture("Terrain", "");
+	assets->AddTexture("Player", "../assets/player_anim.PNG");
+	assets->AddTexture("proj", "");
+
+	map->Load("Terrain", 25, 20);
 
 	player.AddComponent<Transform>(2);
-	player.AddComponent<Sprite>("../assets/player_anim.PNG", true);
+	player.AddComponent<Sprite>("Player", true);
 	player.AddComponent<KeyboardController>();
+	player.AddComponent<Collider>("Player");
+	player.AddGroup(GROUP_PLAYERS);
+
+	assets->CreateProj(Vector2D(600, 600), Vector2D(2, 0), 200, 2, "Proj");
 
 	is_running = true;
 }
+
+auto& tiles(manager.GetGroup(Game::GROUP_MAP));
+auto& players(manager.GetGroup(Game::GROUP_PLAYERS));
+auto& colliders(manager.GetGroup(Game::GROUP_COLLIDERS));
+auto& projs(manager.GetGroup(Game::GROUP_PROJECTILES));
 
 void Game::HandleEvents()
 {
@@ -109,8 +113,29 @@ void Game::HandleEvents()
 
 void Game::Update()
 {
+	SDL_Rect* player_coll = player.GetComponent<Collider>().collider;
+	Vector2D player_pos = player.GetComponent<Transform>().pos;
+
 	manager.Refresh();
 	manager.Update();
+
+	for(auto& elem : colliders)
+	{
+		SDL_Rect* elem_coll = elem->GetComponent<Collider>().collider;
+
+		if(Collision::BothAABBCollide(elem_coll, player_coll))
+		{
+			player.GetComponent<Transform>().pos = player_pos;
+		}
+	}
+
+	for(auto& proj : projs)
+	{
+		if(Collision::BothAABBCollide(
+			player.GetComponent<Collider>().collider,
+			proj->GetComponent<Collider>().collider))
+			proj->Destroy();
+	}
 
 	camera->x = player.GetComponent<Transform>().pos.x
 		- Game::SCREEN_WIDTH * 0.5f;
@@ -125,13 +150,29 @@ void Game::Update()
 	camera->y = camera->y > camera->h ? camera->h : camera->y;
 }
 
-
-
 void Game::Render()
 {
 	SDL_RenderClear(renderer);
 
-	manager.Draw();
+	for(auto& tile : tiles)
+	{
+		tile->Draw();
+	}
+
+	for(auto& coll : colliders)
+	{
+		coll->Draw();
+	}
+
+	for(auto& player : players)
+	{
+		player->Draw();
+	}
+
+	for(auto& proj : projs)
+	{
+		proj->Draw();
+	}
 
 	SDL_RenderPresent(renderer);
 }
@@ -143,11 +184,4 @@ void Game::Clean()
 	SDL_Quit();
 
 	printf("Game Cleaned!\n");
-}
-
-void Game::AddTile(int src_x, int src_y, int x, int y)
-{
-	auto& tile(manager.AddEntity());
-	tile.AddComponent<Tile>(src_x, src_y, x, y, map_path);
-	tile.AddGroup(GROUP_MAP);
 }

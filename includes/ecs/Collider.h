@@ -26,6 +26,14 @@ namespace GAlpha
             
         }
 
+        Collider(const std::string &tag, int x, int y, int size) : tag(tag) 
+        {
+            collider->x = x;
+            collider->y = y;
+            collider->w = size;
+            collider->h = size;
+        }
+
         void Init() override
         {
             if(!entity->HasComponent<Transform>())
@@ -45,8 +53,6 @@ namespace GAlpha
             dst->y = collider->y;
             dst->w = collider->w;
             dst->h = collider->h;
-
-            Game::colliders.emplace_back(this);
         }
 
         void Update() override

@@ -3,61 +3,48 @@
 #include <SDL.h>
 
 #include "ECS.h"
-#include "Transform.h"
 #include "Sprite.h"
+#include "Transform.h"
 
 namespace GAlpha
 {
-    class Tile : public Component
+class Tile : public Component
+{
+  public:
+    SDL_Texture *tex;
+    SDL_Rect src;
+    SDL_Rect dst;
+
+    Vector2D pos;
+
+    Tile() = default;
+
+    ~Tile()
     {
-    public:
-        SDL_Texture* tex;
-        SDL_Rect* src;
-        SDL_Rect* dst;
+        SDL_DestroyTexture(tex);
+    }
 
-        Vector2D pos;
+    Tile(const std::string &id, int tile_size, int tile_scale, int src_x, int src_y, int x, int y)
+    {
+        tex = Game::assets.GetTexture(id);
 
-        Tile() = default;
+        pos.x = x;
+        pos.y = y;
 
-        ~Tile()
-        {
-            SDL_DestroyTexture(tex);
+        src = SDL_Rect(src_x, src_y, tile_size, tile_size);
 
-            delete src;
-            delete dst;
-        }
+        dst = SDL_Rect(x, y, tile_size * tile_scale, tile_size * tile_scale);
+    }
 
-        Tile(const std::string& id,
-            int tile_size, int tile_scale,
-            int src_x, int src_y, int x, int y)
-        {
-            tex = Game::assets->GetTexture(id);
+    void Update() override
+    {
+        dst.x = pos.x - Game::camera.x;
+        dst.y = pos.y - Game::camera.y;
+    }
 
-            pos.x = x;
-            pos.y = y;
-
-            src = new SDL_Rect();
-            src->x = src_x;
-            src->y = src_y;
-            src->w = tile_size;
-            src->h = tile_size;
-
-            dst = new SDL_Rect();
-            dst->x = x;
-            dst->y = y;
-            dst->w = tile_size * tile_scale;
-            dst->h = tile_size * tile_scale;
-        }
-
-        void Update() override
-        {
-            dst->x = pos.x - Game::camera->x;
-            dst->y = pos.y - Game::camera->y;
-        }
-
-        void Draw() override
-        {
-            TextureManager::Draw(tex, src, dst, SDL_FLIP_NONE);
-        }
-    };
-}
+    void Draw() override
+    {
+        TextureManager::Draw(tex, &src, &dst, SDL_FLIP_NONE);
+    }
+};
+} // namespace GAlpha

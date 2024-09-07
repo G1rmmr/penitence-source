@@ -10,75 +10,67 @@
 
 namespace GAlpha
 {
-    class Collider : public Component
+class Collider : public Component
+{
+  public:
+    SDL_Rect collider;
+    SDL_Rect src;
+    SDL_Rect dst;
+
+    SDL_Texture *tex;
+
+    std::string tag;
+
+    Transform *transf;
+
+    Collider(const std::string &tag) : tag(tag)
     {
-    public:
-        SDL_Rect* collider;
+    }
 
-        SDL_Rect* src;
-        SDL_Rect* dst;
+    Collider(const std::string &tag, int x, int y, int size) : tag(tag)
+    {
+        collider.x = x;
+        collider.y = y;
+        collider.w = size;
+        collider.h = size;
+    }
 
-        SDL_Texture* tex;
+    ~Collider()
+    {
+        SDL_DestroyTexture(tex);
+        delete transf;
+    }
 
-        std::string tag;
+    void Init() override
+    {
+        if (!entity->HasComponent<Transform>())
+            entity->AddComponent<Transform>();
 
-        Transform* transf;
+        transf = &entity->GetComponent<Transform>();
 
-        Collider(const std::string& tag) : tag(tag)
+        tex = TextureManager::Load("../assets/player_anim.PNG");
+
+        src = SDL_Rect(0, 0, 32, 32);
+        dst = SDL_Rect(collider.x, collider.y, collider.w, collider.h);
+    }
+
+    void Update() override
+    {
+        if (tag != "terrain")
         {
-            
+            collider.x = static_cast<int>(transf->pos.x);
+            collider.y = static_cast<int>(transf->pos.y);
+            collider.w = transf->width * transf->scale;
+            collider.h = transf->height * transf->scale;
         }
 
-        Collider(const std::string &tag, int x, int y, int size) : tag(tag) 
-        {
-            collider->x = x;
-            collider->y = y;
-            collider->w = size;
-            collider->h = size;
-        }
+        dst.x = collider.x - Game::camera.x;
+        dst.y = collider.y - Game::camera.y;
+    }
 
-        void Init() override
-        {
-            collider = new SDL_Rect();
-            
-            if(!entity->HasComponent<Transform>())
-                entity->AddComponent<Transform>();
-
-            transf = &entity->GetComponent<Transform>();
-
-            tex = TextureManager::Load("../assets/player_anim.PNG");
-            
-            src = new SDL_Rect();
-            src->x = 0;
-            src->y = 0;
-            src->w = 32;
-            src->h = 32;
-
-            dst = new SDL_Rect();
-            dst->x = collider->x;
-            dst->y = collider->y;
-            dst->w = collider->w;
-            dst->h = collider->h;
-        }
-
-        void Update() override
-        {
-            if(tag != "terrain")
-            {
-                collider->x = static_cast<int>(transf->pos.x);
-                collider->y = static_cast<int>(transf->pos.y);
-                collider->w = transf->width * transf->scale;
-                collider->h = transf->height * transf->scale;
-            }
-            
-
-            dst->x = collider->x - Game::camera->x;
-            dst->y = collider->y - Game::camera->y; 
-        }
-
-        void Draw() override
-        {
-            TextureManager::Draw(tex, src, dst, SDL_FLIP_NONE);
-        }
-    };
-}
+    void Draw() override
+    {
+        TextureManager::Draw(tex, src, dst, SDL_FLIP_NONE);
+    }
+};
+} // namespace GAlpha

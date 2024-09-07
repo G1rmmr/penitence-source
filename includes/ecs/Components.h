@@ -1,9 +1,9 @@
 #pragma once
 
-#include "ECS.h"
-#include "Transform.h"
-#include "Sprite.h"
-#include "KeyboardController.h"
 #include "Collider.h"
-#include "Tile.h"
+#include "ECS.h"
+#include "KeyboardController.h"
 #include "Projectile.h"
+#include "Sprite.h"
+#include "Tile.h"
+#include "Transform.h"

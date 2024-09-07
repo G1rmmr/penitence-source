@@ -1,7 +1,7 @@
 #pragma once
 
-#include <unordered_map>
 #include <string>
+#include <unordered_map>
 
 #include "ecs/ECS.h"
 
@@ -10,21 +10,20 @@
 
 namespace GAlpha
 {
-    class AssetManager
-    {
-    public:
-        AssetManager(Manager* manager);
-        ~AssetManager();
+class AssetManager
+{
+  public:
+    AssetManager(const Manager &manager);
+    ~AssetManager();
 
-        void CreateProj(const std::string& id, Vector2D pos, Vector2D vel,
-            int range, int speed);
+    void CreateProj(const std::string &id, Vector2D pos, Vector2D vel, int range, int speed);
 
-        // Texture management
-        void AddTexture(const std::string& id, const char* path);
-        SDL_Texture* GetTexture(const std::string& id);
+    // Texture management
+    void AddTexture(const std::string &id, const char *path);
+    SDL_Texture *GetTexture(const std::string &id);
 
-    private:
-        std::unordered_map<std::string, SDL_Texture*> textures;
-        Manager* manager;
-    };
-}
+  private:
+    std::unordered_map<std::string, SDL_Texture *> textures;
+    Manager manager;
+};
+} // namespace GAlpha

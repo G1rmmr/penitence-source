@@ -5,8 +5,8 @@ using namespace GAlpha;
 
 const int IMG_SIZE = 150;
 
-GameObject::GameObject(const char* path, int x, int y) :
-    tex(), renderer(), src(nullptr), dst(nullptr), pos(std::make_pair(x, y))
+GameObject::GameObject(const char *path, int x, int y)
+    : tex(), renderer(), src(nullptr), dst(nullptr), pos(std::make_pair(x, y))
 {
     tex = TextureManager::Load(path);
     renderer = Game::renderer;

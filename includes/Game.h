@@ -1,33 +1,21 @@
 #pragma once
 
-#include <SDL.h>
-#include <SDL_image.h>
-
 #include <cstdio>
 #include <vector>
 
-class AssetManager;
-class Collider;
+#include <SDL.h>
+#include <SDL_image.h>
 
 namespace GAlpha
 {
+	class AssetManager;
+	class Collider;
+
 	class Game
 	{
 	public:
-		Game();
-		~Game();
-
-		void Init(const char* title, int x, int y, int w, int h, bool is_full);
-		void HandleEvents();
-
-		void Update();
-		void Render();
-		void Clean();
-
-		bool IsRunning() const {return Game::is_running;}
-
 		static SDL_Renderer* renderer;
-		static SDL_Event event;
+		static SDL_Event* event;
 
 		static SDL_Rect* camera;
 
@@ -50,6 +38,20 @@ namespace GAlpha
 			GROUP_COLLIDERS,
 			GROUP_PROJECTILES
 		};
+
+		Game();
+		~Game();
+
+		void Init(const char* title,
+			int x, int y, int w, int h, bool is_full);
+
+		void HandleEvents();
+
+		void Update();
+		void Render();
+		void Clean();
+
+		inline bool IsRunning() const {return Game::is_running;}
 
 	private:
 		SDL_Window* window;

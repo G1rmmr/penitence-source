@@ -3,6 +3,7 @@
 #include <SDL.h>
 
 class Collider;
+
 namespace GAlpha
 {
     class Collision

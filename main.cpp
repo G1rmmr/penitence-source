@@ -1,10 +1,7 @@
-// External lib
-#include <SDL.h>
-
-// Internal lib
 #include <cstdio>
 
-// GAlpha
+#include <SDL.h>
+
 #include "Game.h"
 #include "TextureManager.h"
 

@@ -1,4 +1,4 @@
-#include "ECS.h"
+#include "ecs/ECS.h"
 
 using namespace GAlpha;
 

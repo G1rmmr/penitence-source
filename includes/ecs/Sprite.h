@@ -1,5 +1,7 @@
 #pragma once
 
+#include <unordered_map>
+
 #include <SDL.h>
 
 #include "Components.h"
@@ -8,14 +10,12 @@
 #include "../TextureManager.h"
 #include "../AssetManager.h"
 
-#include <unordered_map>
-
 namespace GAlpha
 {
     class Sprite : public Component
     {
     public:
-        std::unordered_map<const char*, Animation> anims;
+        std::unordered_map<const char*, Animation*>* anims;
         SDL_RendererFlip sprite_flip = SDL_FLIP_NONE;
         int anim_index = 0;
 
@@ -30,14 +30,14 @@ namespace GAlpha
         {
             this->is_anim = is_anim;
 
-            Animation idle = Animation(0, 3, 100);
-            anims["IDLE"] = idle;
+            Animation* idle = new Animation(0, 3, 100);
+            anims->emplace("IDLE", idle);
 
-            Animation move = Animation(1, 6, 100);
-            anims["MOVE"] = move;
+            Animation* move = new Animation(1, 6, 100);
+            anims->emplace("MOVE", move);
 
-            Animation jump = Animation(2, 6, 100);
-            anims["JUMP"] = jump;
+            Animation* jump = new Animation(2, 6, 100);
+            anims->emplace("JUMP", jump);
 
             Play("IDLE");
             SetTexture(id);
@@ -45,12 +45,11 @@ namespace GAlpha
 
         ~Sprite()
         {
+            SDL_DestroyTexture(tex);
 
-        }
-
-        void SetTexture(const std::string& id)
-        {
-            tex = Game::assets->GetTexture(id);
+            delete transf;
+            delete src;
+            delete dst;
         }
 
         void Init() override
@@ -89,13 +88,18 @@ namespace GAlpha
             TextureManager::Draw(tex, src, dst, sprite_flip);
         }
 
+        inline void SetTexture(const std::string& id)
+        {
+            tex = Game::assets->GetTexture(id);
+        }
+
         void Play(const char* anim_name)
         {
-            auto anim = anims[anim_name];
+            auto anim = anims->at(anim_name);
 
-            frames = anim.frames;
-            anim_index = anim.index;
-            speed = anim.speed;
+            frames = anim->frames;
+            anim_index = anim->index;
+            speed = anim->speed;
         }
 
     private:
@@ -109,6 +113,5 @@ namespace GAlpha
         int speed = 100;
 
         bool is_anim = false;
-
     };
 }

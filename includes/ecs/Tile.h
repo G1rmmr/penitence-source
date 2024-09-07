@@ -22,15 +22,14 @@ namespace GAlpha
         ~Tile()
         {
             SDL_DestroyTexture(tex);
+
+            delete src;
+            delete dst;
         }
 
         Tile(const std::string& id,
-            int tile_size,
-            int tile_scale,
-            int src_x,
-            int src_y,
-            int x,
-            int y)
+            int tile_size, int tile_scale,
+            int src_x, int src_y, int x, int y)
         {
             tex = Game::assets->GetTexture(id);
 

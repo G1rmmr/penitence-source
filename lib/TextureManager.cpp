@@ -4,17 +4,16 @@ using namespace GAlpha;
 
 SDL_Texture* TextureManager::Load(const char* path)
 {
-	SDL_Surface *temp_surf = IMG_Load(path);
-	if(!temp_surf)
+	SDL_Surface* surf = IMG_Load(path);
+	if(!surf)
 	{
 		printf("Surface was not loaded!\n");
 		return nullptr;
 	}
 
-	SDL_Texture* tex = SDL_CreateTextureFromSurface(
-		Game::renderer, temp_surf);
-		
-	SDL_FreeSurface(temp_surf);
+	SDL_Texture* tex = SDL_CreateTextureFromSurface(Game::renderer, surf);
+	SDL_FreeSurface(surf);
+	
 	if(!tex)
 	{
 		printf("Player texture was not created!\n");

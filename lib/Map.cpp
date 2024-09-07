@@ -1,20 +1,17 @@
-#include "Map.h"
-#include "Game.h"
+#include <fstream>
 
 #include "ecs/ECS.h"
 #include "ecs/Components.h"
 
-#include <fstream>
+#include "Map.h"
+#include "Game.h"
 
 using namespace GAlpha;
 
-extern Manager manager;
+extern Manager* manager;
 
-Map::Map(const std::string& tex_id, int map_scale, int tile_size)
-	: tex_id(tex_id),
-	map_scale(map_scale),
-	tile_size(tile_size),
-	scaled_size(map_scale * tile_size)
+Map::Map(const std::string& id, int scale, int tile_size)
+: id(id), scale(scale), tile_size(tile_size), scaled_size(scale * tile_size)
 {
 
 }
@@ -57,11 +54,11 @@ void Map::Load(const char* path, int size_x, int size_y)
 
 			if(tile == '1')
 			{
-				auto& tile_coll(manager.AddEntity());
-				tile_coll.AddComponent<Collider>("terrain",
+				auto& coll(manager->AddEntity());
+				coll.AddComponent<Collider>("terrain",
 					j * scaled_size, i * scaled_size, scaled_size);
 				
-				tile_coll.AddGroup(Game::GROUP_COLLIDERS);
+				coll.AddGroup(Game::GROUP_COLLIDERS);
 			}
 			file.ignore();
 		}
@@ -71,7 +68,7 @@ void Map::Load(const char* path, int size_x, int size_y)
 
 void Map::AddTile(int src_x, int src_y, int x, int y)
 {
-	auto &tile(manager.AddEntity());
-	tile.AddComponent<Tile>(src_x, src_y, x, y, tile_size, map_scale, tex_id);
+	auto &tile(manager->AddEntity());
+	tile.AddComponent<Tile>(id, tile_size, scale, src_x, src_y, x, y);
 	tile.AddGroup(Game::GROUP_MAP);
 }

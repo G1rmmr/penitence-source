@@ -9,11 +9,9 @@
 
 namespace GAlpha
 {
-	// Pre define for component class
 	class Entity;
 	class Manager;
 	
-	// Super class of component
 	class Component
 	{
 	public:
@@ -26,18 +24,8 @@ namespace GAlpha
 		virtual ~Component() {}
 	};
 
-	// Type definitions
-	constexpr std::size_t MAX_COMPONENTS = 32;
-	constexpr std::size_t MAX_GROUPS = 32;
-	
-	using ComponentArr = std::array<Component*, MAX_COMPONENTS>;
-	using ComponentBitSet = std::bitset<MAX_COMPONENTS>;
-	using GroupBitSet = std::bitset<MAX_GROUPS>;
-
 	using ComponentID = std::size_t;
-	using Group = std::size_t;
 
-	// Type id will increases when component added.
 	inline ComponentID GetNewComponentTypeID()
 	{
 		static ComponentID last_id = 0u;
@@ -51,7 +39,16 @@ namespace GAlpha
 		return type_id;
 	}
 
-	// Simple Entity class
+	constexpr std::size_t MAX_COMPONENTS = 32;
+	
+	using ComponentArr = std::array<Component*, MAX_COMPONENTS>;
+	using ComponentBitSet = std::bitset<MAX_COMPONENTS>;
+
+	constexpr std::size_t MAX_GROUPS = 32;
+
+	using GroupBitSet = std::bitset<MAX_GROUPS>;
+	using Group = std::size_t;
+	
 	class Entity
 	{
 	public:
@@ -70,20 +67,12 @@ namespace GAlpha
 			for(auto& comp : components) comp->Draw();
 		}
 		
-		bool IsActivated() const {return activated;}
-		void Destroy() {activated = false;}
+		inline bool IsActivated() const {return activated;}
 
-		bool HasGroup(Group group) {return group_bit_set[group];}
-
-		void AddGroup(Group group);
-		
-		void DelGroup(Group group)
-		{
-			group_bit_set[group] = false;
-		}
+		inline void Destroy() {activated = false;}
 
 		template <typename T>
-		bool HasComponent() const
+		inline bool HasComponent() const
 		{
 			return components_bit_set[GetComponentTypeID<T>()];
 		}
@@ -106,10 +95,19 @@ namespace GAlpha
 		}
 
 		template<typename T>
-		T& GetComponent() const
+		inline T& GetComponent() const
 		{
 			auto ptr(components_arr[GetComponentTypeID<T>()]);
 			return *static_cast<T*>(ptr);
+		}
+
+		inline bool HasGroup(Group group) { return group_bit_set[group]; }
+
+		void AddGroup(Group group);
+
+		inline void DelGroup(Group group)
+		{
+			group_bit_set.reset(group);
 		}
 
 	private:
@@ -154,21 +152,11 @@ namespace GAlpha
 
 			entities.erase(std::remove_if(
 				std::begin(entities), std::end(entities),
-				[](const std::unique_ptr<Entity> &entity)
+				[](const std::unique_ptr<Entity>& entity)
 				{
 					return !entity->IsActivated();
 				}),
 				std::end(entities));
-		}
-
-		void AddToGroup(Entity* entity, Group group)
-		{
-			grouped_entities[group].emplace_back(entity);
-		}
-
-		std::vector<Entity*>& GetGroup(Group group)
-		{
-			return grouped_entities[group];
 		}
 
 		Entity& AddEntity()
@@ -178,6 +166,16 @@ namespace GAlpha
 
 			entities.emplace_back(std::move(enitiy_ptr));
 			return *ent;
+		}
+
+		inline void AddToGroup(Entity* entity, Group group)
+		{
+			grouped_entities[group].emplace_back(entity);
+		}
+
+		inline std::vector<Entity*>& GetGroup(Group group)
+		{
+			return grouped_entities[group];
 		}
 
 	private:

@@ -1,10 +1,11 @@
 #pragma once
 
-#include <SDL.h>
-
 #include <string>
 
+#include <SDL.h>
+
 #include "Components.h"
+
 #include "../TextureManager.h"
 
 namespace GAlpha
@@ -13,11 +14,13 @@ namespace GAlpha
     {
     public:
         SDL_Rect* collider;
-        std::string tag;
 
-        SDL_Texture* tex;
         SDL_Rect* src;
         SDL_Rect* dst;
+
+        SDL_Texture* tex;
+
+        std::string tag;
 
         Transform* transf;
 

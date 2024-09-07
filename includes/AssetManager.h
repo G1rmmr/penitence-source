@@ -3,10 +3,10 @@
 #include <unordered_map>
 #include <string>
 
+#include "ecs/ECS.h"
+
 #include "TextureManager.h"
 #include "Vector2D.h"
-
-#include "ecs/ECS.h"
 
 namespace GAlpha
 {
@@ -16,12 +16,8 @@ namespace GAlpha
         AssetManager(Manager* manager);
         ~AssetManager();
 
-        void CreateProj(
-            Vector2D pos,
-            Vector2D vel,
-            int range,
-            int speed,
-            const std::string& id);
+        void CreateProj(const std::string& id, Vector2D pos, Vector2D vel,
+            int range, int speed);
 
         // Texture management
         void AddTexture(const std::string& id, const char* path);

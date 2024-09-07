@@ -10,13 +10,16 @@ namespace GAlpha
     class Projectile : public Component
     {
     public:
-        Projectile(int range, int speed, Vector2D vel)
-        : range(range), speed(speed), vel(vel)
+        Projectile(Vector2D vel, int range, int speed)
+        : vel(vel), range(range), speed(speed)
         {
 
         }
 
-        ~Projectile();
+        ~Projectile()
+        {
+            
+        }
 
         void Init() override
         {

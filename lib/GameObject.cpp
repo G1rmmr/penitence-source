@@ -3,34 +3,34 @@
 
 using namespace GAlpha;
 
-const int PNG_SIZE = 150;
+const int IMG_SIZE = 150;
 
-GameObject::GameObject(const char* tex_sheet, int x, int y) :
-    obj_tex(),
-    obj_renderer(),
-    src_rect(nullptr),
-    dst_rect(nullptr),
-    pos(std::make_pair(x, y))
+GameObject::GameObject(const char* path, int x, int y) :
+    tex(), renderer(), src(nullptr), dst(nullptr), pos(std::make_pair(x, y))
 {
-    obj_tex = TextureManager::Load(tex_sheet);
-    obj_renderer = Game::renderer;
+    tex = TextureManager::Load(path);
+    renderer = Game::renderer;
 
-    src_rect = new SDL_Rect();
-    src_rect->x = 0;
-    src_rect->y = 0;
-    src_rect->w = PNG_SIZE;
-    src_rect->h = PNG_SIZE;
+    src = new SDL_Rect();
+    src->x = 0;
+    src->y = 0;
+    src->w = IMG_SIZE;
+    src->h = IMG_SIZE;
 
-    dst_rect = new SDL_Rect();
-    dst_rect->x = 0;
-    dst_rect->y = 0;
-    dst_rect->w = 0;
-    dst_rect->h = 0;
+    dst = new SDL_Rect();
+    dst->x = 0;
+    dst->y = 0;
+    dst->w = 0;
+    dst->h = 0;
 }
 
 GameObject::~GameObject()
 {
+    SDL_DestroyTexture(tex);
+    SDL_DestroyRenderer(renderer);
 
+    delete src;
+    delete dst;
 }
 
 void GameObject::Update()
@@ -38,13 +38,13 @@ void GameObject::Update()
     ++pos.first;
     ++pos.second;
 
-    dst_rect->x = pos.first;
-    dst_rect->y = pos.second;
-    dst_rect->w = src_rect->w * 2;
-    dst_rect->h = src_rect->h * 2;
+    dst->x = pos.first;
+    dst->y = pos.second;
+    dst->w = src->w * 2;
+    dst->h = src->h * 2;
 }
 
 void GameObject::Render()
 {
-    SDL_RenderCopy(Game::renderer, obj_tex, src_rect, dst_rect);
+    SDL_RenderCopy(Game::renderer, tex, src, dst);
 }

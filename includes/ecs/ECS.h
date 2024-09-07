@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cstdio>
+#include <cstdlib>
 #include <vector>
 #include <memory>
 #include <algorithm>
@@ -162,9 +163,9 @@ namespace GAlpha
 		Entity& AddEntity()
 		{
 			Entity* ent = new Entity(*this);
-			std::unique_ptr<Entity> enitiy_ptr{ent};
+			std::unique_ptr<Entity> entitiy_ptr{ent};
 
-			entities.emplace_back(std::move(enitiy_ptr));
+			entities.emplace_back(std::move(entitiy_ptr));
 			return *ent;
 		}
 

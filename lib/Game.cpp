@@ -19,7 +19,7 @@ int Game::FPS = 24;
 int Game::FRAME_DELAY = 1000 / FPS;
 
 Map* map;
-Manager* manager;
+Manager* manager = new Manager();
 AssetManager* Game::assets = new AssetManager(manager);
 
 SDL_Renderer* Game::renderer = nullptr;
@@ -48,9 +48,11 @@ Game::~Game()
 
 void Game::Init(const char *title, int x, int y, int w, int h, bool is_full)
 {
+	printf("DEBUG\n");
+
 	int full_screen_flag = is_full ? SDL_WINDOW_FULLSCREEN : 0;
 
-	if(!SDL_Init(SDL_INIT_EVERYTHING))
+	if(SDL_Init(SDL_INIT_EVERYTHING))
 	{
 		printf("System was not initialized!\n");
 		return;
@@ -72,6 +74,7 @@ void Game::Init(const char *title, int x, int y, int w, int h, bool is_full)
 
 	SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
 
+	/*
 	map = new Map("", 3, 32);
 	if(!map)
 	{
@@ -79,10 +82,15 @@ void Game::Init(const char *title, int x, int y, int w, int h, bool is_full)
 		return;
 	}
 	assets->AddTexture("Terrain", "");
+	*/
+
 	assets->AddTexture("Player", "../assets/player_anim.PNG");
+
+	/*
 	assets->AddTexture("proj", "");
 
 	map->Load("Terrain", 25, 20);
+	*/
 
 	player.AddComponent<Transform>(2);
 	player.AddComponent<Sprite>("Player", true);
@@ -90,7 +98,7 @@ void Game::Init(const char *title, int x, int y, int w, int h, bool is_full)
 	player.AddComponent<Collider>("Player");
 	player.AddGroup(GROUP_PLAYERS);
 
-	assets->CreateProj("Proj", Vector2D(600, 600), Vector2D(2, 0), 200, 2);
+	// assets->CreateProj("Proj", Vector2D(600, 600), Vector2D(2, 0), 200, 2);
 
 	is_running = true;
 }

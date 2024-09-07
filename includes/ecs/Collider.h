@@ -39,12 +39,14 @@ namespace GAlpha
 
         void Init() override
         {
+            collider = new SDL_Rect();
+            
             if(!entity->HasComponent<Transform>())
                 entity->AddComponent<Transform>();
 
             transf = &entity->GetComponent<Transform>();
 
-            tex = TextureManager::Load("");
+            tex = TextureManager::Load("../assets/player_anim.PNG");
             
             src = new SDL_Rect();
             src->x = 0;
@@ -52,6 +54,7 @@ namespace GAlpha
             src->w = 32;
             src->h = 32;
 
+            dst = new SDL_Rect();
             dst->x = collider->x;
             dst->y = collider->y;
             dst->w = collider->w;

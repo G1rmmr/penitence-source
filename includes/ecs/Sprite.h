@@ -15,7 +15,7 @@ namespace GAlpha
     class Sprite : public Component
     {
     public:
-        std::unordered_map<const char*, Animation*>* anims;
+        std::unordered_map<const char*, Animation*> anims;
         SDL_RendererFlip sprite_flip = SDL_FLIP_NONE;
         int anim_index = 0;
 
@@ -31,13 +31,13 @@ namespace GAlpha
             this->is_anim = is_anim;
 
             Animation* idle = new Animation(0, 3, 100);
-            anims->emplace("IDLE", idle);
+            anims.emplace("IDLE", idle);
 
             Animation* move = new Animation(1, 6, 100);
-            anims->emplace("MOVE", move);
+            anims.emplace("MOVE", move);
 
             Animation* jump = new Animation(2, 6, 100);
-            anims->emplace("JUMP", jump);
+            anims.emplace("JUMP", jump);
 
             Play("IDLE");
             SetTexture(id);
@@ -95,7 +95,7 @@ namespace GAlpha
 
         void Play(const char* anim_name)
         {
-            auto anim = anims->at(anim_name);
+            auto anim = anims[anim_name];
 
             frames = anim->frames;
             anim_index = anim->index;

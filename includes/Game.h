@@ -15,9 +15,9 @@ class Game
 {
   public:
     static SDL_Renderer *renderer;
-    static SDL_Event event;
+    static SDL_Event *event;
 
-    static SDL_Rect camera;
+    static SDL_Rect *camera;
 
     static AssetManager assets;
     static bool is_running;

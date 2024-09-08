@@ -23,9 +23,9 @@ Manager manager;
 AssetManager Game::assets(&manager);
 
 SDL_Renderer *Game::renderer = nullptr;
-SDL_Event Game::event;
+SDL_Event *Game::event = nullptr;
 
-SDL_Rect Game::camera{0, 0, Game::SCREEN_WIDTH, Game::SCREEN_HEIGHT};
+SDL_Rect *Game::camera{0, 0, Game::SCREEN_WIDTH, Game::SCREEN_HEIGHT};
 
 auto &player(manager.AddEntity());
 

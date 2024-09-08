@@ -13,9 +13,9 @@ namespace GAlpha
 class Collider : public Component
 {
   public:
-    SDL_Rect collider;
-    SDL_Rect src;
-    SDL_Rect dst;
+    SDL_Rect *collider;
+    SDL_Rect *src;
+    SDL_Rect *dst;
 
     SDL_Texture *tex;
 
@@ -29,10 +29,10 @@ class Collider : public Component
 
     Collider(const std::string &tag, int x, int y, int size) : tag(tag)
     {
-        collider.x = x;
-        collider.y = y;
-        collider.w = size;
-        collider.h = size;
+        collider->x = x;
+        collider->y = y;
+        collider->w = size;
+        collider->h = size;
     }
 
     ~Collider()
@@ -50,7 +50,7 @@ class Collider : public Component
 
         tex = TextureManager::Load("../assets/player_anim.PNG");
 
-        src = SDL_Rect(0, 0, 32, 32);
+        src = new SDL_Rect(0, 0, 32, 32);
         dst = SDL_Rect(collider.x, collider.y, collider.w, collider.h);
     }
 

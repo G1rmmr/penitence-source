@@ -53,21 +53,30 @@ class Sprite : public Component
     {
         transf = &entity->GetComponent<Transform>();
 
-        src = SDL_Rect(0, 0, transf->width, transf->height);
-        dst = SDL_Rect();
+        src = new SDL_Rect();
+        src->x = 0;
+        src->y = 0;
+        src->w = transf->width;
+        src->h = transf->height;
+
+        dst = new SDL_Rect();
+        dst->x = 0;
+        dst->y = 0;
+        dst->w = 0;
+        dst->h = 0;
     }
 
     void Update() override
     {
         if (is_anim)
-            src.x = src.w * static_cast<int>((SDL_GetTicks() / speed) % frames);
+            src->x = src->w * static_cast<int>((SDL_GetTicks() / speed) % frames);
 
-        src.y = anim_index * transf->height;
+        src->y = anim_index * transf->height;
 
-        dst.x = static_cast<int>(transf->pos.x) - Game::camera.x;
-        dst.y = static_cast<int>(transf->pos.y) - Game::camera.y;
-        dst.w = transf->width * transf->scale;
-        dst.h = transf->height * transf->scale;
+        dst->x = static_cast<int>(transf->pos.x) - Game::camera->x;
+        dst->y = static_cast<int>(transf->pos.y) - Game::camera->y;
+        dst->w = transf->width * transf->scale;
+        dst->h = transf->height * transf->scale;
     }
 
     void Draw() override
@@ -91,8 +100,8 @@ class Sprite : public Component
 
   private:
     SDL_Texture *tex;
-    SDL_Rect src;
-    SDL_Rect dst;
+    SDL_Rect *src;
+    SDL_Rect *dst;
 
     Transform *transf;
 

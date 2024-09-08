@@ -12,8 +12,8 @@ class Tile : public Component
 {
   public:
     SDL_Texture *tex;
-    SDL_Rect src;
-    SDL_Rect dst;
+    SDL_Rect *src;
+    SDL_Rect *dst;
 
     Vector2D pos;
 
@@ -31,20 +31,28 @@ class Tile : public Component
         pos.x = x;
         pos.y = y;
 
-        src = SDL_Rect(src_x, src_y, tile_size, tile_size);
+        src = new SDL_Rect();
+        src->x = src_x;
+        src->y = src_y;
+        src->w = tile_size;
+        src->h = tile_size;
 
-        dst = SDL_Rect(x, y, tile_size * tile_scale, tile_size * tile_scale);
+        dst = new SDL_Rect();
+        dst->x = x;
+        dst->y = y;
+        dst->w = tile_size * tile_scale;
+        dst->h = tile_size * tile_scale;
     }
 
     void Update() override
     {
-        dst.x = pos.x - Game::camera.x;
-        dst.y = pos.y - Game::camera.y;
+        dst->x = pos.x - Game::camera->x;
+        dst->y = pos.y - Game::camera->y;
     }
 
     void Draw() override
     {
-        TextureManager::Draw(tex, &src, &dst, SDL_FLIP_NONE);
+        TextureManager::Draw(tex, src, dst, SDL_FLIP_NONE);
     }
 };
 } // namespace GAlpha

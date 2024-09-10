@@ -13,7 +13,7 @@ namespace GAlpha
 class AssetManager
 {
   public:
-    AssetManager(const Manager &manager);
+    AssetManager(Manager &manager);
     ~AssetManager();
 
     void CreateProj(const std::string &id, Vector2D pos, Vector2D vel, int range, int speed);
@@ -24,6 +24,6 @@ class AssetManager
 
   private:
     std::unordered_map<std::string, SDL_Texture *> textures;
-    Manager manager;
+    Manager& manager;
 };
 } // namespace GAlpha

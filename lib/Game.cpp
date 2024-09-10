@@ -18,14 +18,13 @@ int Game::SCREEN_HEIGHT = 1080;
 int Game::FPS = 24;
 int Game::FRAME_DELAY = 1000 / FPS;
 
-Map map;
+Map* map = new Map("terrain", 0, 0);
 Manager manager;
-AssetManager Game::assets(&manager);
+AssetManager Game::assets(manager);
 
-SDL_Renderer *Game::renderer = nullptr;
-SDL_Event *Game::event = nullptr;
-
-SDL_Rect *Game::camera{0, 0, Game::SCREEN_WIDTH, Game::SCREEN_HEIGHT};
+SDL_Renderer *Game::renderer;
+SDL_Event *Game::event;
+SDL_Rect *Game::camera = new SDL_Rect();
 
 auto &player(manager.AddEntity());
 
@@ -57,12 +56,19 @@ void Game::Init(const char *title, int x, int y, int w, int h, bool is_full)
         return;
     }
 
+    Game::event = new SDL_Event();
+
     renderer = SDL_CreateRenderer(window, -1, 0);
     if (!renderer)
     {
         printf("Renderer was not created!\n");
         return;
     }
+
+    Game::camera->x = 0;
+    Game::camera->y = 0;
+    Game::camera->w = Game::SCREEN_WIDTH;
+    Game::camera->h = Game::SCREEN_HEIGHT;
 
     SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
 
@@ -84,9 +90,9 @@ auto &projs(manager.GetGroup(Game::GROUP_PROJECTILES));
 
 void Game::HandleEvents()
 {
-    SDL_PollEvent(&Game::event);
+    SDL_PollEvent(Game::event);
 
-    switch (Game::event.type)
+    switch (Game::event->type)
     {
     case SDL_QUIT:
         is_running = false;
@@ -122,14 +128,14 @@ void Game::Update()
             proj->Destroy();
     }
 
-    camera.x = player.GetComponent<Transform>().pos.x - Game::SCREEN_WIDTH * 0.5f;
-    camera.y = player.GetComponent<Transform>().pos.y - Game::SCREEN_HEIGHT * 0.5f;
+    camera->x = player.GetComponent<Transform>().pos.x - Game::SCREEN_WIDTH * 0.5f;
+    camera->y = player.GetComponent<Transform>().pos.y - Game::SCREEN_HEIGHT * 0.5f;
 
-    camera.x = camera.x < 0 ? 0 : camera.x;
-    camera.x = camera.x > camera.w ? camera.w : camera.x;
+    camera->x = camera->x < 0 ? 0 : camera->x;
+    camera->x = camera->x > camera->w ? camera->w : camera->x;
 
-    camera.y = camera.y < 0 ? 0 : camera.y;
-    camera.y = camera.y > camera.h ? camera.h : camera.y;
+    camera->y = camera->y < 0 ? 0 : camera->y;
+    camera->y = camera->y > camera->h ? camera->h : camera->y;
 }
 
 void Game::Render()

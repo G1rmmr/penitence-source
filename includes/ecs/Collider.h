@@ -50,22 +50,31 @@ class Collider : public Component
 
         tex = TextureManager::Load("../assets/player_anim.PNG");
 
-        src = new SDL_Rect(0, 0, 32, 32);
-        dst = SDL_Rect(collider.x, collider.y, collider.w, collider.h);
+        src = new SDL_Rect();
+        src->x = 0;
+        src->y = 0;
+        src->w = 32;
+        src->h = 32;
+
+        dst = new SDL_Rect();
+        dst->x = collider->x;
+        dst->y = collider->y;
+        dst->w = collider->w;
+        dst->h = collider->h;
     }
 
     void Update() override
     {
         if (tag != "terrain")
         {
-            collider.x = static_cast<int>(transf->pos.x);
-            collider.y = static_cast<int>(transf->pos.y);
-            collider.w = transf->width * transf->scale;
-            collider.h = transf->height * transf->scale;
+            collider->x = static_cast<int>(transf->pos.x);
+            collider->y = static_cast<int>(transf->pos.y);
+            collider->w = transf->width * transf->scale;
+            collider->h = transf->height * transf->scale;
         }
 
-        dst.x = collider.x - Game::camera.x;
-        dst.y = collider.y - Game::camera.y;
+        dst->x = collider->x - Game::camera->x;
+        dst->y = collider->y - Game::camera->y;
     }
 
     void Draw() override

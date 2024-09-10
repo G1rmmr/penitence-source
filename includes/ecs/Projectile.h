@@ -32,16 +32,16 @@ class Projectile : public Component
         if (distance > range)
             entity->Destroy();
 
-        if (transf->pos.x < Game::camera.x)
+        if (transf->pos.x < Game::camera->x)
             entity->Destroy();
 
-        if (transf->pos.x > Game::camera.x + Game::camera.w)
+        if (transf->pos.x > Game::camera->x + Game::camera->w)
             entity->Destroy();
 
-        if (transf->pos.y < Game::camera.y)
+        if (transf->pos.y < Game::camera->y)
             entity->Destroy();
 
-        if (transf->pos.y > Game::camera.y + Game::camera.h)
+        if (transf->pos.y > Game::camera->y + Game::camera->h)
             entity->Destroy();
     }
 

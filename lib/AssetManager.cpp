@@ -4,7 +4,7 @@
 
 using namespace GAlpha;
 
-AssetManager::AssetManager(Manager manager) : manager(manager)
+AssetManager::AssetManager(Manager& manager) : manager(manager)
 {
 }
 

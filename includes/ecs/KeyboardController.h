@@ -13,6 +13,12 @@ class KeyboardController : public Component
     Transform *transf;
     Sprite *sprite;
 
+    KeyboardController()
+    {
+        transf = new Transform();
+        sprite = new Sprite();
+    }
+
     ~KeyboardController()
     {
         delete transf;

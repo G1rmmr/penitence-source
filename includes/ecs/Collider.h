@@ -25,6 +25,11 @@ class Collider : public Component
 
     Collider(const std::string &tag) : tag(tag)
     {
+        collider = new SDL_Rect();
+        collider->x = 0;
+        collider->y = 0;
+        collider->w = 0;
+        collider->h = 0;
     }
 
     Collider(const std::string &tag, int x, int y, int size) : tag(tag)

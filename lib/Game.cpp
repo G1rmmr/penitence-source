@@ -11,8 +11,8 @@
 using namespace GAlpha;
 
 // Screen size
-int Game::SCREEN_WIDTH = 1920;
-int Game::SCREEN_HEIGHT = 1080;
+int Game::SCREEN_WIDTH = 640;
+int Game::SCREEN_HEIGHT = 480;
 
 // Set FPS
 int Game::FPS = 24;
@@ -23,7 +23,7 @@ Manager manager;
 AssetManager Game::assets(manager);
 
 SDL_Renderer *Game::renderer;
-SDL_Event *Game::event;
+SDL_Event* Game::event = new SDL_Event();
 SDL_Rect *Game::camera = new SDL_Rect();
 
 auto &player(manager.AddEntity());
@@ -56,8 +56,6 @@ void Game::Init(const char *title, int x, int y, int w, int h, bool is_full)
         return;
     }
 
-    Game::event = new SDL_Event();
-
     renderer = SDL_CreateRenderer(window, -1, 0);
     if (!renderer)
     {
@@ -75,10 +73,11 @@ void Game::Init(const char *title, int x, int y, int w, int h, bool is_full)
     assets.AddTexture("Player", "../assets/player_anim.PNG");
 
     player.AddComponent<Transform>(2);
-    player.AddComponent<Sprite>("Player", true);
+    player.AddComponent<Sprite>("Player");
     player.AddComponent<KeyboardController>();
-    player.AddComponent<Collider>("Player");
     player.AddGroup(GROUP_PLAYERS);
+
+    printf("DEBUG\n");
 
     is_running = true;
 }
@@ -162,6 +161,8 @@ void Game::Clean()
     SDL_DestroyWindow(window);
     SDL_DestroyRenderer(renderer);
     SDL_Quit();
+
+    delete Game::event;
 
     printf("Game Cleaned!\n");
 }

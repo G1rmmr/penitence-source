@@ -26,10 +26,8 @@ class Sprite : public Component
         SetTexture(id);
     }
 
-    Sprite(const std::string &id, bool is_anim)
+    Sprite(const std::string &id, bool is_anim) : is_anim(is_anim)
     {
-        this->is_anim = is_anim;
-
         Animation *idle = new Animation(0, 3, 100);
         anims.emplace("IDLE", idle);
 

@@ -10,10 +10,10 @@ namespace GAlpha
 {
 class Tile : public Component
 {
-  public:
-    SDL_Texture *tex;
-    SDL_Rect *src;
-    SDL_Rect *dst;
+public:
+    SDL_Texture* tex;
+    SDL_Rect* src;
+    SDL_Rect* dst;
 
     Vector2D pos;
 
@@ -24,7 +24,9 @@ class Tile : public Component
         SDL_DestroyTexture(tex);
     }
 
-    Tile(const std::string &id, int tile_size, int tile_scale, int src_x, int src_y, int x, int y)
+    Tile(const std::string& id, 
+        int tile_size, int tile_scale, 
+        int src_x, int src_y, int x, int y)
     {
         tex = Game::assets.GetTexture(id);
 

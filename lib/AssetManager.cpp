@@ -14,7 +14,8 @@ AssetManager::~AssetManager()
         SDL_DestroyTexture(tex);
 }
 
-void AssetManager::CreateProj(const std::string &id, Vector2D pos, Vector2D vel, int range, int speed)
+void AssetManager::CreateProj(
+    const std::string &id, Vector2D pos, Vector2D vel, int range, int speed)
 {
     auto &proj(manager.AddEntity());
     proj.AddComponent<Transform>(pos.x, pos.y, 32, 32, 1);

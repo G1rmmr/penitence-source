@@ -68,18 +68,20 @@ void Game::Init(const char *title, int x, int y, int w, int h, bool is_full)
     Game::camera->w = Game::SCREEN_WIDTH;
     Game::camera->h = Game::SCREEN_HEIGHT;
 
-    SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
+    SDL_SetRenderDrawColor(renderer, 0x00, 0x00, 0x00, 0x00);
 
     assets.AddTexture("Player", "../assets/player_anim.PNG");
 
+    if(assets.Check()) printf("ANG?\n");
+
     player.AddComponent<Transform>(2);
-    player.AddComponent<Sprite>("Player");
+    player.AddComponent<Sprite>("Player", true);
     player.AddComponent<KeyboardController>();
+    player.AddComponent<Collider>("Player");
     player.AddGroup(GROUP_PLAYERS);
 
-    printf("DEBUG\n");
-
     is_running = true;
+    printf("GAME IS READY\n");
 }
 
 auto &tiles(manager.GetGroup(Game::GROUP_MAP));
@@ -90,6 +92,8 @@ auto &projs(manager.GetGroup(Game::GROUP_PROJECTILES));
 void Game::HandleEvents()
 {
     SDL_PollEvent(Game::event);
+
+    if(!Game::event) printf("Event doesn't polled!\n");
 
     switch (Game::event->type)
     {
@@ -104,7 +108,7 @@ void Game::HandleEvents()
 
 void Game::Update()
 {
-    SDL_Rect *player_coll = player.GetComponent<Collider>().collider;
+    SDL_Rect* player_coll = player.GetComponent<Collider>().collider;
     Vector2D player_pos = player.GetComponent<Transform>().pos;
 
     manager.Refresh();
@@ -122,13 +126,17 @@ void Game::Update()
 
     for (auto &proj : projs)
     {
-        if (Collision::BothAABBCollide(player.GetComponent<Collider>().collider,
-                                       proj->GetComponent<Collider>().collider))
+        if (Collision::BothAABBCollide(
+            player.GetComponent<Collider>().collider,
+            proj->GetComponent<Collider>().collider))
             proj->Destroy();
     }
 
-    camera->x = player.GetComponent<Transform>().pos.x - Game::SCREEN_WIDTH * 0.5f;
-    camera->y = player.GetComponent<Transform>().pos.y - Game::SCREEN_HEIGHT * 0.5f;
+    camera->x = player.GetComponent<Transform>().pos.x
+        - Game::SCREEN_WIDTH * 0.5f;
+
+    camera->y = player.GetComponent<Transform>().pos.y
+        - Game::SCREEN_HEIGHT * 0.5f;
 
     camera->x = camera->x < 0 ? 0 : camera->x;
     camera->x = camera->x > camera->w ? camera->w : camera->x;
@@ -141,17 +149,10 @@ void Game::Render()
 {
     SDL_RenderClear(renderer);
 
-    for (auto &tile : tiles)
-        tile->Draw();
-
-    for (auto &coll : colliders)
-        coll->Draw();
-
-    for (auto &player : players)
-        player->Draw();
-
-    for (auto &proj : projs)
-        proj->Draw();
+    // for (auto &tile : tiles) tile->Draw();
+    // for (auto &coll : colliders) coll->Draw();
+    for (auto &player : players) player->Draw();
+    // for (auto &proj : projs) proj->Draw();
 
     SDL_RenderPresent(renderer);
 }

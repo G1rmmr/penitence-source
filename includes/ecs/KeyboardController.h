@@ -9,9 +9,9 @@ namespace GAlpha
 {
 class KeyboardController : public Component
 {
-  public:
-    Transform *transf;
-    Sprite *sprite;
+public:
+    Transform* transf;
+    Sprite* sprite;
 
     KeyboardController()
     {

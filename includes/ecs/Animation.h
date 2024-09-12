@@ -4,7 +4,7 @@ namespace GAlpha
 {
 class Animation
 {
-  public:
+public:
     int index;
     int frames;
     int speed;
@@ -13,7 +13,8 @@ class Animation
     {
     }
 
-    Animation(int index, int frames, int speed) : index(index), frames(frames), speed(speed)
+    Animation(int index, int frames, int speed)
+    : index(index), frames(frames), speed(speed)
     {
     }
 };

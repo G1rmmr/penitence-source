@@ -1,6 +1,7 @@
 #pragma once
 
 #include <unordered_map>
+#include <cstdio>
 
 #include <SDL.h>
 
@@ -14,8 +15,8 @@ namespace GAlpha
 {
 class Sprite : public Component
 {
-  public:
-    std::unordered_map<const char *, Animation *> anims;
+public:
+    std::unordered_map<const char*, Animation*> anims;
     SDL_RendererFlip sprite_flip = SDL_FLIP_NONE;
     int anim_index = 0;
 
@@ -28,13 +29,13 @@ class Sprite : public Component
 
     Sprite(const std::string &id, bool is_anim) : is_anim(is_anim)
     {
-        Animation *idle = new Animation(0, 3, 100);
+        Animation* idle = new Animation(0, 3, 100);
         anims.emplace("IDLE", idle);
 
-        Animation *move = new Animation(1, 6, 100);
+        Animation* move = new Animation(1, 6, 100);
         anims.emplace("MOVE", move);
 
-        Animation *jump = new Animation(2, 6, 100);
+        Animation* jump = new Animation(2, 6, 100);
         anims.emplace("JUMP", jump);
 
         Play("IDLE");
@@ -67,7 +68,8 @@ class Sprite : public Component
     void Update() override
     {
         if (is_anim)
-            src->x = src->w * static_cast<int>((SDL_GetTicks() / speed) % frames);
+            src->x = src->w * static_cast<int>(
+                (SDL_GetTicks() / speed) % frames);
 
         src->y = anim_index * transf->height;
 
@@ -82,13 +84,19 @@ class Sprite : public Component
         TextureManager::Draw(tex, src, dst, sprite_flip);
     }
 
-    inline void SetTexture(const std::string &id)
+    inline void SetTexture(const std::string& id)
     {
         tex = Game::assets.GetTexture(id);
     }
 
-    void Play(const char *anim_name)
+    void Play(const char* anim_name)
     {
+        if(anims.find(anim_name) == std::end(anims))
+        {
+            printf("Animation does't exist\n");
+            return;
+        }
+        
         auto anim = anims[anim_name];
 
         frames = anim->frames;
@@ -96,12 +104,12 @@ class Sprite : public Component
         speed = anim->speed;
     }
 
-  private:
-    SDL_Texture *tex;
-    SDL_Rect *src;
-    SDL_Rect *dst;
+private:
+    SDL_Texture* tex;
+    SDL_Rect* src;
+    SDL_Rect* dst;
 
-    Transform *transf;
+    Transform* transf;
 
     int frames = 0;
     int speed = 100;

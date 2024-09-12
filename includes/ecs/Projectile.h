@@ -9,8 +9,9 @@ namespace GAlpha
 {
 class Projectile : public Component
 {
-  public:
-    Projectile(Vector2D vel, int range, int speed) : vel(vel), range(range), speed(speed)
+public:
+    Projectile(Vector2D vel, int range, int speed)
+    : vel(vel), range(range), speed(speed)
     {
     }
 
@@ -29,24 +30,19 @@ class Projectile : public Component
     {
         distance += speed;
 
-        if (distance > range)
-            entity->Destroy();
+        if (distance > range) entity->Destroy();
 
-        if (transf->pos.x < Game::camera->x)
-            entity->Destroy();
-
+        if (transf->pos.x < Game::camera->x) entity->Destroy();
         if (transf->pos.x > Game::camera->x + Game::camera->w)
             entity->Destroy();
-
-        if (transf->pos.y < Game::camera->y)
-            entity->Destroy();
-
+        
+        if (transf->pos.y < Game::camera->y) entity->Destroy();
         if (transf->pos.y > Game::camera->y + Game::camera->h)
             entity->Destroy();
     }
 
-  private:
-    Transform *transf;
+private:
+    Transform* transf;
 
     Vector2D vel;
 

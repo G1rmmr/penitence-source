@@ -12,18 +12,20 @@ namespace GAlpha
 {
 class AssetManager
 {
-  public:
-    AssetManager(Manager &manager);
+public:
+    AssetManager(Manager& manager);
     ~AssetManager();
 
-    void CreateProj(const std::string &id, Vector2D pos, Vector2D vel, int range, int speed);
+    bool Check() const { return textures.size() == 0; }
 
-    // Texture management
-    void AddTexture(const std::string &id, const char *path);
-    SDL_Texture *GetTexture(const std::string &id);
+    void CreateProj(const std::string& id,
+		Vector2D pos, Vector2D vel, int range, int speed);
 
-  private:
-    std::unordered_map<std::string, SDL_Texture *> textures;
+    void AddTexture(const std::string& id, const char* path);
+    SDL_Texture *GetTexture(const std::string& id);
+
+private:
+    std::unordered_map<std::string, SDL_Texture*> textures;
     Manager& manager;
 };
 } // namespace GAlpha

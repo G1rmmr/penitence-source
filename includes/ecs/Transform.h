@@ -8,7 +8,7 @@ namespace GAlpha
 {
 class Transform : public Component
 {
-  public:
+public:
     Vector2D pos;
     Vector2D vel;
 
@@ -26,11 +26,13 @@ class Transform : public Component
     {
     }
 
-    Transform(int scale) : pos(0.0f, 0.0f), width(0.0f), height(0.0f), scale(scale)
+    Transform(int scale)
+    : pos(0.0f, 0.0f), width(0.0f), height(0.0f), scale(scale)
     {
     }
 
-    Transform(float x, float y, float w, float h, float scale) : pos(x, y), width(w), height(h), scale(scale)
+    Transform(float x, float y, float w, float h, float scale)
+    : pos(x, y), width(w), height(h), scale(scale)
     {
         pos.x = x;
         pos.y = y;

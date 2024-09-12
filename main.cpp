@@ -13,8 +13,12 @@ int main(int argc, char *argv[])
     int frame_time = 0;
 
     Game *game = new Game();
-    game->Init("ThePenitence", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, Game::SCREEN_WIDTH, Game::SCREEN_HEIGHT,
-               false);
+    game->Init("ThePenitence",
+        SDL_WINDOWPOS_CENTERED,
+        SDL_WINDOWPOS_CENTERED,
+        Game::SCREEN_WIDTH,
+        Game::SCREEN_HEIGHT,
+        false);
 
     while (game->IsRunning())
     {

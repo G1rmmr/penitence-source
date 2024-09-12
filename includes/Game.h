@@ -13,17 +13,16 @@ class Collider;
 
 class Game
 {
-  public:
-    static SDL_Renderer *renderer;
-    static SDL_Event *event;
+public:
+    static SDL_Renderer* renderer;
+    static SDL_Event* event;
 
-    static SDL_Rect *camera;
+    static SDL_Rect* camera;
 
     static AssetManager assets;
     static bool is_running;
 
     // Screen size
-
     static int SCREEN_WIDTH;
     static int SCREEN_HEIGHT;
 
@@ -42,7 +41,7 @@ class Game
     Game();
     ~Game();
 
-    void Init(const char *title, int x, int y, int w, int h, bool is_full);
+    void Init(const char* title, int x, int y, int w, int h, bool is_full);
 
     void HandleEvents();
 
@@ -50,12 +49,9 @@ class Game
     void Render();
     void Clean();
 
-    inline bool IsRunning() const
-    {
-        return Game::is_running;
-    }
+    inline bool IsRunning() const { return Game::is_running; }
 
-  private:
-    SDL_Window *window;
+private:
+    SDL_Window* window;
 };
 } // namespace GAlpha

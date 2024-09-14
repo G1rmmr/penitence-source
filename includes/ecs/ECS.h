@@ -10,168 +10,171 @@
 
 namespace GAlpha
 {
-class Entity;
-class Manager;
+	class Entity;
+	class Manager;
 
-class Component
-{
-public:
-    Entity* entity;
+	class Component
+	{
+	public:
+		Entity* entity;
 
-    virtual void Init() {}
-    virtual void Update() {}
-    virtual void Draw() {}
+		virtual void Init() {}
+		virtual void Update() {}
+		virtual void Draw() {}
 
-    virtual ~Component() {}
-};
+		virtual ~Component() {}
+	};
 
-using ComponentID = std::size_t;
+	using ComponentID = std::size_t;
 
-inline ComponentID GetNewComponentTypeID()
-{
-    static ComponentID last_id = 0u;
-    return last_id++;
-}
+	inline ComponentID GetNewComponentTypeID()
+	{
+		static ComponentID last_id = 0u;
+		return last_id++;
+	}
 
-template <typename T>
-inline ComponentID GetComponentTypeID() noexcept
-{
-    static ComponentID type_id = GetNewComponentTypeID();
-    return type_id;
-}
+	template <typename T>
+	inline ComponentID GetComponentTypeID() noexcept
+	{
+		static_assert(std::is_base_of<Component, T>::value, "");
+		static ComponentID type_id = GetNewComponentTypeID();
+		return type_id;
+	}
 
-constexpr std::size_t MAX_COMPONENTS = 32;
+	constexpr std::size_t MAX_COMPONENTS = 32;
 
-using ComponentArr = std::array<Component*, MAX_COMPONENTS>;
-using ComponentBitSet = std::bitset<MAX_COMPONENTS>;
+	using ComponentArr = std::array<Component*, MAX_COMPONENTS>;
+	using ComponentBitSet = std::bitset<MAX_COMPONENTS>;
 
-constexpr std::size_t MAX_GROUPS = 32;
+	constexpr std::size_t MAX_GROUPS = 32;
 
-using GroupBitSet = std::bitset<MAX_GROUPS>;
-using Group = std::size_t;
+	using GroupBitSet = std::bitset<MAX_GROUPS>;
+	using Group = std::size_t;
 
-class Entity
-{
-public:
-    Entity(Manager& manager) : manager(manager)
-    {
-    }
+	class Entity
+	{
+	public:
+		Entity();
 
-    void Update()
-    {
-        for (auto& comp : components) comp->Update();
-    }
+		Entity(Manager& manager) : manager(manager)
+		{
+		}
 
-    void Draw()
-    {
-        for (auto& comp : components) comp->Draw();
-    }
+		void Update()
+		{
+			for(auto& comp : components) comp->Update();
+		}
 
-    inline bool IsActivated() const { return activated; }
-    inline void Destroy() { activated = false; }
+		void Draw()
+		{
+			for(auto& comp : components) comp->Draw();
+		}
 
-    template <typename T>
-    inline bool HasComponent() const
-    {
-        return components_bit_set[GetComponentTypeID<T>()];
-    }
+		inline bool IsActivated() const { return activated; }
+		inline void Destroy() { activated = false; }
 
-    template <typename T, typename... TArgs>
-    T& AddComponent(TArgs&&...args)
-    {
-        T* component(new T(std::forward<TArgs>(args)...));
-        component->entity = this;
+		template <typename T>
+		inline bool HasComponent() const
+		{
+			return components_bit_set[GetComponentTypeID<T>()];
+		}
 
-        std::unique_ptr<Component> component_ptr{component};
-        components.emplace_back(std::move(component_ptr));
+		template <typename T, typename... TArgs>
+		T& AddComponent(TArgs&&... args)
+		{
+			T* component(new T(std::forward<TArgs>(args)...));
+			component->entity = this;
 
-        components_arr[GetComponentTypeID<T>()] = component;
-        components_bit_set[GetComponentTypeID<T>()] = true;
+			std::unique_ptr<Component> component_ptr{component};
+			components.emplace_back(std::move(component_ptr));
 
-        component->Init();
+			components_arr[GetComponentTypeID<T>()] = component;
+			components_bit_set[GetComponentTypeID<T>()] = true;
 
-        return *component;
-    }
+			component->Init();
 
-    template <typename T> inline T &GetComponent() const
-    {
-        auto ptr(components_arr[GetComponentTypeID<T>()]);
-        return *static_cast<T *>(ptr);
-    }
+			return *component;
+		}
 
-    void AddGroup(Group group);
+		template <typename T> inline T& GetComponent() const
+		{
+			auto ptr(components_arr[GetComponentTypeID<T>()]);
+			return *static_cast<T*>(ptr);
+		}
 
-    inline bool HasGroup(Group group) { return group_bit_set[group]; }
-    inline void DelGroup(Group group) { group_bit_set.reset(group); }
+		void AddGroup(Group group);
 
-private:
-    std::vector<std::unique_ptr<Component>> components;
+		inline bool HasGroup(Group group) { return group_bit_set[group]; }
+		inline void DelGroup(Group group) { group_bit_set.reset(group); }
 
-    ComponentArr components_arr;
-    ComponentBitSet components_bit_set;
-    GroupBitSet group_bit_set;
+	private:
+		std::vector<std::unique_ptr<Component>> components;
 
-    Manager &manager;
+		ComponentArr components_arr = {};
+		ComponentBitSet components_bit_set;
+		GroupBitSet group_bit_set;
 
-    bool activated = true;
-};
+		Manager& manager;
 
-class Manager
-{
-public:
-    void Update()
-    {
-        for (auto &entity : entities) entity->Update();
-    }
+		bool activated = true;
+	};
 
-    void Draw()
-    {
-        for (auto &entity : entities) entity->Draw();
-    }
+	class Manager
+	{
+	public:
+		void Update()
+		{
+			for(auto& entity : entities) entity->Update();
+		}
 
-    void Refresh()
-    {
-        for (auto i(0u); i < MAX_GROUPS; ++i)
-        {
-            auto& vec(grouped_entities[i]);
+		void Draw()
+		{
+			for(auto& entity : entities) entity->Draw();
+		}
 
-            vec.erase(std::remove_if(std::begin(vec), std::end(vec),
-                [i](Entity* entity)
-                {
-                    return !entity->IsActivated() || !entity->HasGroup(i);
-                }),
-                std::end(vec));
-        }
+		void Refresh()
+		{
+			for(auto i(0u); i < MAX_GROUPS; ++i)
+			{
+				auto& vec(grouped_entities[i]);
 
-        entities.erase(std::remove_if(std::begin(entities), std::end(entities),
-            [](const std::unique_ptr<Entity>& entity)
-            {
-                return !entity->IsActivated();
-            }),
-            std::end(entities));
-    }
+				vec.erase(std::remove_if(std::begin(vec), std::end(vec),
+					[i](Entity* entity)
+					{
+						return !entity->IsActivated() || !entity->HasGroup(i);
+					}),
+					std::end(vec));
+			}
 
-    Entity& AddEntity()
-    {
-        Entity* ent = new Entity(*this);
-        std::unique_ptr<Entity> entitiy_ptr{ent};
+			entities.erase(std::remove_if(std::begin(entities), std::end(entities),
+				[](const std::unique_ptr<Entity>& entity)
+				{
+					return !entity->IsActivated();
+				}),
+				std::end(entities));
+		}
 
-        entities.emplace_back(std::move(entitiy_ptr));
-        return *ent;
-    }
+		Entity& AddEntity()
+		{
+			Entity* ent = new Entity(*this);
+			std::unique_ptr<Entity> entitiy_ptr{ent};
 
-    inline void AddToGroup(Entity* entity, Group group)
-    {
-        grouped_entities[group].emplace_back(entity);
-    }
+			entities.emplace_back(std::move(entitiy_ptr));
+			return *ent;
+		}
 
-    inline std::vector<Entity*>& GetGroup(Group group)
-    {
-        return grouped_entities[group];
-    }
+		inline void AddToGroup(Entity* entity, Group group)
+		{
+			grouped_entities[group].emplace_back(entity);
+		}
 
-private:
-    std::vector<std::unique_ptr<Entity>> entities;
-    std::array<std::vector<Entity *>, MAX_GROUPS> grouped_entities;
-};
+		inline std::vector<Entity*>& GetGroup(Group group)
+		{
+			return grouped_entities[group];
+		}
+
+	private:
+		std::vector<std::unique_ptr<Entity>> entities;
+		std::array<std::vector<Entity*>, MAX_GROUPS> grouped_entities;
+	};
 } // namespace GAlpha

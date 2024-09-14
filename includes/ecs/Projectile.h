@@ -7,47 +7,47 @@
 
 namespace GAlpha
 {
-class Projectile : public Component
-{
-public:
-    Projectile(Vector2D vel, int range, int speed)
-    : vel(vel), range(range), speed(speed)
-    {
-    }
+	class Projectile : public Component
+	{
+	public:
+		Projectile(Vector2D vel, int range, int speed)
+			: vel(vel), range(range), speed(speed)
+		{
+		}
 
-    ~Projectile()
-    {
-        delete transf;
-    }
+		~Projectile()
+		{
+			delete transf;
+		}
 
-    void Init() override
-    {
-        transf = &entity->GetComponent<Transform>();
-        transf->vel = vel;
-    }
+		void Init() override
+		{
+			transf = &entity->GetComponent<Transform>();
+			transf->vel = vel;
+		}
 
-    void Update() override
-    {
-        distance += speed;
+		void Update() override
+		{
+			distance += speed;
 
-        if (distance > range) entity->Destroy();
+			if(distance > range) entity->Destroy();
 
-        if (transf->pos.x < Game::camera->x) entity->Destroy();
-        if (transf->pos.x > Game::camera->x + Game::camera->w)
-            entity->Destroy();
-        
-        if (transf->pos.y < Game::camera->y) entity->Destroy();
-        if (transf->pos.y > Game::camera->y + Game::camera->h)
-            entity->Destroy();
-    }
+			if(transf->pos.x < Game::camera->x) entity->Destroy();
+			if(transf->pos.x > Game::camera->x + Game::camera->w)
+				entity->Destroy();
 
-private:
-    Transform* transf;
+			if(transf->pos.y < Game::camera->y) entity->Destroy();
+			if(transf->pos.y > Game::camera->y + Game::camera->h)
+				entity->Destroy();
+		}
 
-    Vector2D vel;
+	private:
+		Transform* transf = new Transform();
 
-    int range = 0;
-    int speed = 0;
-    int distance = 0;
-};
+		Vector2D vel;
+
+		int range = 0;
+		int speed = 0;
+		int distance = 0;
+	};
 } // namespace GAlpha

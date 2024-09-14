@@ -1,60 +1,56 @@
 #pragma once
 
-#include <SDL.h>
-
 #include "ECS.h"
 #include "Sprite.h"
 #include "Transform.h"
 
 namespace GAlpha
 {
-class Tile : public Component
-{
-public:
-    SDL_Texture* tex;
-    SDL_Rect* src;
-    SDL_Rect* dst;
+	class Tile : public Component
+	{
+	public:
+		SDL_Texture* tex = nullptr;
+		SDL_Rect* src = new SDL_Rect();
+		SDL_Rect* dst = new SDL_Rect();
 
-    Vector2D pos;
+		Vector2D pos;
 
-    Tile() = default;
+		Tile() = default;
 
-    ~Tile()
-    {
-        SDL_DestroyTexture(tex);
-    }
+		~Tile()
+		{
+			SDL_DestroyTexture(tex);
+		}
 
-    Tile(const std::string& id, 
-        int tile_size, int tile_scale, 
-        int src_x, int src_y, int x, int y)
-    {
-        tex = Game::assets.GetTexture(id);
+		Tile(const std::string& id,
+			int tile_size, int tile_scale,
+			int src_x, int src_y, int x, int y)
+		{
+			tex = Game::assets->GetTexture(id);
 
-        pos.x = x;
-        pos.y = y;
+			pos.x = static_cast<float>(x);
+			pos.y = static_cast<float>(y);
 
-        src = new SDL_Rect();
-        src->x = src_x;
-        src->y = src_y;
-        src->w = tile_size;
-        src->h = tile_size;
+			src->x = src_x;
+			src->y = src_y;
+			src->w = tile_size;
+			src->h = tile_size;
 
-        dst = new SDL_Rect();
-        dst->x = x;
-        dst->y = y;
-        dst->w = tile_size * tile_scale;
-        dst->h = tile_size * tile_scale;
-    }
+			dst->x = x;
+			dst->y = y;
+			dst->w = tile_size * tile_scale;
+			dst->h = tile_size * tile_scale;
+		}
 
-    void Update() override
-    {
-        dst->x = pos.x - Game::camera->x;
-        dst->y = pos.y - Game::camera->y;
-    }
+		void Update() override
+		{
+			dst->x = static_cast<int>(pos.x - Game::camera->x);
+			dst->y = static_cast<int>(pos.y - Game::camera->y);
+		}
 
-    void Draw() override
-    {
-        TextureManager::Draw(tex, src, dst, SDL_FLIP_NONE);
-    }
-};
+		void Draw() override
+		{
+			TextureManager::Draw(tex, src, dst, SDL_FLIP_NONE);
+		}
+	};
 } // namespace GAlpha

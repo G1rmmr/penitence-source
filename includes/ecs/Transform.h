@@ -18,6 +18,8 @@ public:
     float height = 128.0f;
     float scale = 1.0f;
 
+    bool is_blocked = false;
+
     Transform() : pos(0.0f, 0.0f)
     {
     }
@@ -26,13 +28,14 @@ public:
     {
     }
 
-    Transform(int scale)
-    : pos(0.0f, 0.0f), width(0.0f), height(0.0f), scale(scale)
+    Transform(float scale)
+    : pos(), width(0.0f), height(0.0f), scale(scale)
     {
+        pos.Zero();
     }
 
     Transform(float x, float y, float w, float h, float scale)
-    : pos(x, y), width(w), height(h), scale(scale)
+    : pos(), width(w), height(h), scale(scale)
     {
         pos.x = x;
         pos.y = y;

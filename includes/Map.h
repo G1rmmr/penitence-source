@@ -15,8 +15,9 @@ public:
 
   private:
     std::string id;
-    int scale;
-    int tile_size;
-    int scaled_size;
+
+    int scale = 0;
+    int tile_size = 0;
+    int scaled_size = 0;
 };
 } // namespace GAlpha

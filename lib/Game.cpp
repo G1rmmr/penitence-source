@@ -11,24 +11,27 @@
 using namespace GAlpha;
 
 // Screen size
-int Game::SCREEN_WIDTH = 640;
-int Game::SCREEN_HEIGHT = 480;
+int Game::SCREEN_WIDTH = 1280;
+int Game::SCREEN_HEIGHT = 960;
 
 // Set FPS
 int Game::FPS = 24;
 int Game::FRAME_DELAY = 1000 / FPS;
 
-Map* map = new Map("terrain", 0, 0);
+Map* map;
 Manager manager;
-AssetManager Game::assets(manager);
 
-SDL_Renderer *Game::renderer;
-SDL_Event* Game::event = new SDL_Event();
-SDL_Rect *Game::camera = new SDL_Rect();
+AssetManager* Game::assets = new AssetManager(&manager);
 
-auto &player(manager.AddEntity());
+SDL_Renderer* Game::renderer = nullptr;
+SDL_Event Game::event;
+
+SDL_Rect* Game::camera = new SDL_Rect{
+	0, 0, Game::SCREEN_WIDTH, Game::SCREEN_HEIGHT};
 
 bool Game::is_running = false;
+
+auto& player(manager.AddEntity());
 
 Game::Game()
 {
@@ -36,134 +39,134 @@ Game::Game()
 
 Game::~Game()
 {
-    SDL_DestroyRenderer(renderer);
+	SDL_DestroyRenderer(renderer);
 }
 
-void Game::Init(const char *title, int x, int y, int w, int h, bool is_full)
+void Game::Init(const char* title, int x, int y, int w, int h, bool is_full)
 {
-    int full_screen_flag = is_full ? SDL_WINDOW_FULLSCREEN : 0;
+	int full_screen_flag = is_full ? SDL_WINDOW_FULLSCREEN : 0;
 
-    if (SDL_Init(SDL_INIT_EVERYTHING))
-    {
-        printf("System was not initialized!\n");
-        return;
-    }
+	if(SDL_Init(SDL_INIT_EVERYTHING))
+	{
+		printf("System was not initialized!\n");
+		return;
+	}
 
-    window = SDL_CreateWindow(title, x, y, w, h, full_screen_flag);
-    if (!window)
-    {
-        printf("Window was not created!\n");
-        return;
-    }
+	if(IMG_Init(IMG_INIT_PNG) != IMG_INIT_PNG)
+	{
+		printf("Image loader not initialized with PNG format!\n");
+		return;
+	}
 
-    renderer = SDL_CreateRenderer(window, -1, 0);
-    if (!renderer)
-    {
-        printf("Renderer was not created!\n");
-        return;
-    }
+	window = SDL_CreateWindow(title, x, y, w, h, full_screen_flag);
+	if(!window)
+	{
+		printf("Window was not created!\n");
+		return;
+	}
 
-    Game::camera->x = 0;
-    Game::camera->y = 0;
-    Game::camera->w = Game::SCREEN_WIDTH;
-    Game::camera->h = Game::SCREEN_HEIGHT;
+	renderer = SDL_CreateRenderer(window, -1, 0);
+	if(!renderer)
+	{
+		printf("Renderer was not created!\n");
+		return;
+	}
 
-    SDL_SetRenderDrawColor(renderer, 0x00, 0x00, 0x00, 0x00);
+	SDL_SetRenderDrawColor(renderer, 0xF0, 0xF0, 0xF0, 0xF0);
 
-    assets.AddTexture("Player", "../assets/player_anim.PNG");
+	assets->AddTexture("Player", "C:/Blackhand Studio/penitence-source/assets/player_anim.PNG");
+	assets->AddTexture("terrain", "C:/Blackhand Studio/penitence-source/assets/temp_tile.PNG");
 
-    if(assets.Check()) printf("ANG?\n");
+	map = new Map("terrain", 0, 0);
 
-    player.AddComponent<Transform>(2);
-    player.AddComponent<Sprite>("Player", true);
-    player.AddComponent<KeyboardController>();
-    player.AddComponent<Collider>("Player");
-    player.AddGroup(GROUP_PLAYERS);
+	player.AddComponent<Transform>(200, 300, 128, 128, 3);
+	player.AddComponent<Sprite>("Player", true);
+	player.AddComponent<KeyboardController>();
+	player.AddComponent<Collider>("Player");
+	player.AddGroup(GROUP_PLAYERS);
 
-    is_running = true;
-    printf("GAME IS READY\n");
+	is_running = true;
+	printf("GAME IS READY\n");
 }
 
-auto &tiles(manager.GetGroup(Game::GROUP_MAP));
-auto &players(manager.GetGroup(Game::GROUP_PLAYERS));
-auto &colliders(manager.GetGroup(Game::GROUP_COLLIDERS));
-auto &projs(manager.GetGroup(Game::GROUP_PROJECTILES));
+auto& tiles(manager.GetGroup(Game::GROUP_MAP));
+auto& players(manager.GetGroup(Game::GROUP_PLAYERS));
+auto& colliders(manager.GetGroup(Game::GROUP_COLLIDERS));
+auto& projs(manager.GetGroup(Game::GROUP_PROJECTILES));
 
 void Game::HandleEvents()
 {
-    SDL_PollEvent(Game::event);
+	SDL_PollEvent(&Game::event);
 
-    if(!Game::event) printf("Event doesn't polled!\n");
+	switch(Game::event.type)
+	{
+	case SDL_QUIT:
+		is_running = false;
+		break;
 
-    switch (Game::event->type)
-    {
-    case SDL_QUIT:
-        is_running = false;
-        break;
-
-    default:
-        break;
-    }
+	default:
+		break;
+	}
 }
 
 void Game::Update()
 {
-    SDL_Rect* player_coll = player.GetComponent<Collider>().collider;
-    Vector2D player_pos = player.GetComponent<Transform>().pos;
+	SDL_Rect* player_coll = player.GetComponent<Collider>().collider;
+	Vector2D player_pos = player.GetComponent<Transform>().pos;
 
-    manager.Refresh();
-    manager.Update();
+	manager.Refresh();
+	manager.Update();
 
-    for (auto &elem : colliders)
-    {
-        SDL_Rect *elem_coll = elem->GetComponent<Collider>().collider;
+	for(auto& elem : colliders)
+	{
+		SDL_Rect* elem_coll = elem->GetComponent<Collider>().collider;
 
-        if (Collision::BothAABBCollide(elem_coll, player_coll))
-        {
-            player.GetComponent<Transform>().pos = player_pos;
-        }
-    }
+		if(Collision::BothAABBCollide(elem_coll, player_coll))
+		{
+			player.GetComponent<Transform>().pos = player_pos;
+		}
+	}
 
-    for (auto &proj : projs)
-    {
-        if (Collision::BothAABBCollide(
-            player.GetComponent<Collider>().collider,
-            proj->GetComponent<Collider>().collider))
-            proj->Destroy();
-    }
+	for(auto& proj : projs)
+	{
+		if(Collision::BothAABBCollide(
+			player.GetComponent<Collider>().collider,
+			proj->GetComponent<Collider>().collider))
+			proj->Destroy();
+	}
 
-    camera->x = player.GetComponent<Transform>().pos.x
-        - Game::SCREEN_WIDTH * 0.5f;
+	camera->x = static_cast<int>(
+		player.GetComponent<Transform>().pos.x
+		- Game::SCREEN_WIDTH * 0.5f);
 
-    camera->y = player.GetComponent<Transform>().pos.y
-        - Game::SCREEN_HEIGHT * 0.5f;
+	camera->y = static_cast<int>(
+		player.GetComponent<Transform>().pos.y
+		- Game::SCREEN_HEIGHT * 0.5f);
 
-    camera->x = camera->x < 0 ? 0 : camera->x;
-    camera->x = camera->x > camera->w ? camera->w : camera->x;
+	camera->x = camera->x < 0 ? 0 : camera->x;
+	camera->x = camera->x > camera->w ? camera->w : camera->x;
 
-    camera->y = camera->y < 0 ? 0 : camera->y;
-    camera->y = camera->y > camera->h ? camera->h : camera->y;
+	camera->y = camera->y < 0 ? 0 : camera->y;
+	camera->y = camera->y > camera->h ? camera->h : camera->y;
 }
 
 void Game::Render()
 {
-    SDL_RenderClear(renderer);
+	SDL_RenderClear(renderer);
 
-    // for (auto &tile : tiles) tile->Draw();
-    // for (auto &coll : colliders) coll->Draw();
-    for (auto &player : players) player->Draw();
-    // for (auto &proj : projs) proj->Draw();
+	// for (auto &tile : tiles) tile->Draw();
+	// for (auto &coll : colliders) coll->Draw();
+	for(auto& p : players) p->Draw();
+	// for (auto &proj : projs) proj->Draw();
 
-    SDL_RenderPresent(renderer);
+	SDL_RenderPresent(renderer);
 }
 
 void Game::Clean()
 {
-    SDL_DestroyWindow(window);
-    SDL_DestroyRenderer(renderer);
-    SDL_Quit();
+	SDL_DestroyWindow(window);
+	SDL_DestroyRenderer(renderer);
+	SDL_Quit();
 
-    delete Game::event;
-
-    printf("Game Cleaned!\n");
+	printf("Game Cleaned!\n");
 }

@@ -18,7 +18,21 @@ void Game::Init()
 
 void Game::Update()
 {
+    static sf::Clock clock;
+    float delta_time = clock.restart().asSeconds();
+    float speed = 200.f;
+
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+        circle.move(0.f, -speed * delta_time);
     
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+        circle.move(0.f, speed * delta_time);
+    
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+        circle.move(-speed * delta_time, 0.f);
+
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+        circle.move(speed * delta_time, 0.f);
 }
 
 void Game::Run()
@@ -36,10 +50,11 @@ void Game::Run()
         default: break;
         }
     }
+
+    Update();
     window.clear(sf::Color::Black);
 
     Render();
-
     window.display();
 }
 

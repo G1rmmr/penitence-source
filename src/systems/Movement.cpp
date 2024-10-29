@@ -13,6 +13,5 @@ void Movement::Update(Entity& entity, const float dt)
     assert(entity.HasComponent<Transform>() && "To move entity, it must has a position.");
 
     Transform& transf = entity.GetComponent<Transform>();
-    transf.pos.x += dt * transf.vel.x;
-    transf.pos.y += dt * transf.vel.y;
+    transf.pos += dt * transf.vel;
 }

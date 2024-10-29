@@ -4,6 +4,7 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 
 #include <cstdio>
 #include <string>
@@ -47,6 +48,7 @@ namespace G2D
     private:
         sf::RenderWindow window;
         sf::Event event;
+        sf::Music music;
         
         World world;
 

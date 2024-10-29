@@ -53,6 +53,13 @@ void Game::Init()
 
     Rendering& render_sys = world.GetSystem<Rendering>();
     render_sys.SetWindow(&window);
+
+    // Set Music
+    if(!music.openFromFile("../assets/audios/Penitence.wav"))
+        return;
+
+    music.play();
+    music.setLoop(true);
 }
 
 void Game::HandleEvent()
@@ -134,10 +141,9 @@ void Game::Update()
     const float speed = 200.f;
 
     Transform& transf = protagonist.GetComponent<Transform>();
-    InputBehavior& behavior = protagonist.GetComponent<InputBehavior>();
+    transf.vel = sf::Vector2f{0.f, 0.f};
 
-    if(!behavior.up && !behavior.left && !behavior.down && !behavior.right)
-        transf.vel = sf::Vector2f{0.f, 0.f};
+    InputBehavior& behavior = protagonist.GetComponent<InputBehavior>();
 
     if(behavior.up) transf.vel.y = -speed;
     if(behavior.left) transf.vel.x = -speed;
@@ -149,10 +155,10 @@ void Game::Update()
         Sprite& spr = protagonist.GetComponent<Sprite>();
 
         if(behavior.left)
-            spr.sprite.setScale(-1.f, 1.f);
+            spr.sprite.setScale(-0.5f, 0.5f);
 
         else
-            spr.sprite.setScale(1.f, 1.f);
+            spr.sprite.setScale(0.5f, 0.5f);
     }
 
     world.Update(dt);

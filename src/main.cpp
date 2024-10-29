@@ -1,8 +1,11 @@
-#include <game/Game.hpp>
+// Created on Tue Oct 29 2024
+// © 2024 BLACKHAND Studio. All rights reserved.
+
+#include <core/Game.hpp>
 
 int main()
 {
-    GEngine::Game game;
+    G2D::Game game;
     game.Init();
 
     while(game.IsRunning())

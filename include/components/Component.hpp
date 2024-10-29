@@ -1,9 +1,13 @@
+// Created on Tue Oct 29 2024
+// © 2024 BLACKHAND Studio. All rights reserved.
+
 #pragma once
 
-namespace GEngine
+namespace G2D
 {
-    struct Compoenent
+    struct Component
     {
-        virtual ~Compoenent() = default;
+        Component() = default;
+        virtual ~Component() = default;
     };
 }

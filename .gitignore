@@ -17,6 +17,7 @@
 *.lock
 *.pid
 *.gz
+*.json
 
 .vscode/
 *.code-workspace

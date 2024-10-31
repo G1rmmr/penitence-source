@@ -38,6 +38,17 @@ namespace G2D
 
         }
 
+        Entity& operator=(const Entity& other)
+        {
+            if(this != &other)
+            {
+                this->components = other.components;
+                this->id = other.id;
+            }
+            
+            return *this;
+        }
+
         inline const ID GetID() const
         {
             return id;

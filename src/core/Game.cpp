@@ -19,21 +19,28 @@ using namespace G2D;
 
 void Game::Init()
 {
+    bool use_save = true;
+
     // Window creation
     window.create(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), WINDOW_TITLE);
 
+    if(use_save)
+    {
+        world.Load(protagonist);
+    }
+    else
+    {
+        protagonist.AddComponent<Transform>();
+        Transform& transf = protagonist.GetComponent<Transform>();
+        transf.pos = sf::Vector2f(WINDOW_WIDTH * 0.5f, WINDOW_HEIGHT * 0.5f);
+    }
+
     // Protagonist creation
-    protagonist.AddComponent<Transform>();
     protagonist.AddComponent<Sprite>();
     protagonist.AddComponent<InputBehavior>();
     protagonist.AddComponent<Animation>();
 
-    // Set protagonist transform, sprite, Animation
-    Transform& transf = protagonist.GetComponent<Transform>();
-    transf.pos = sf::Vector2f(PROTAGONIST_WIDTH * 0.5f, PROTAGONIST_HEIGHT * 0.5f);
-
     Sprite& spr = protagonist.GetComponent<Sprite>();
-        sf::IntRect{0, 0, PROTAGONIST_WIDTH, PROTAGONIST_HEIGHT};
 
     if(spr.texture.loadFromFile("../assets/images/player_anim.png"))
     {
@@ -194,4 +201,5 @@ void Game::Run()
 void Game::Shutdown()
 {
     printf("GAME OVER\n");
+    world.Save();
 }

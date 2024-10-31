@@ -15,12 +15,6 @@
 
 #pragma once
 
-#include <SFML/Graphics.hpp>
-#include <SFML/Audio.hpp>
-
-#include <cstdio>
-#include <string>
-
 #include "Core.hpp"
 
 namespace G2D

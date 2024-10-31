@@ -17,10 +17,6 @@
 
 #include <SFML/Graphics.hpp>
 
-#include <cstdint>
-#include <string>
-#include <cstdio>
-
 #include "Component.hpp"
 
 namespace G2D

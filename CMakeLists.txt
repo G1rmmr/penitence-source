@@ -9,10 +9,12 @@ if(NOT CMAKE_BUILD_TYPE)
 endif()
 
 set(SFML_ROOT "${CMAKE_SOURCE_DIR}/libs/SFML")
+set(JSON_ROOT "${CMAKE_SOURCE_DIR}/libs/JSON")
 
 include_directories(
     "${CMAKE_SOURCE_DIR}/include"
-    "${SFML_ROOT}/include")
+    "${SFML_ROOT}/include"
+    "${JSON_ROOT}")
 
 file(GLOB_RECURSE PROJECT_SOURCES "${CMAKE_SOURCE_DIR}/src/*.cpp")
 

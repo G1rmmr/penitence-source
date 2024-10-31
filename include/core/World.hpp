@@ -15,16 +15,21 @@
 
 #pragma once
 
+#include <cstdio>
 #include <cstdint>
 #include <cassert>
 #include <memory>
 #include <typeindex>
-
 #include <unordered_map>
 #include <vector>
+#include <string>
+#include <fstream>
+
+#include <json.hpp>
 
 #include "Entity.hpp"
-#include "systems/System.hpp"
+#include "components/Components.hpp"
+#include "systems/Systems.hpp"
 
 namespace G2D
 {
@@ -40,6 +45,9 @@ namespace G2D
 
         void AddEntity(const Entity& entity);
         void RemoveEntity(Entity& entity);
+
+        void Save();
+        void Load(Entity& protagonist);
         
         template<typename T>
         inline void AddSystem()
@@ -62,6 +70,6 @@ namespace G2D
     private:
         std::unordered_map<std::type_index, std::shared_ptr<System>> systems;
         std::unordered_map<Entity::ID, Entity> entities;
-        Entity::ID last_id;
+        Entity::ID last_id = 0;
     };
 }

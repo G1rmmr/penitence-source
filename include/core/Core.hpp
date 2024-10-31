@@ -15,8 +15,27 @@
 
 #pragma once
 
+// SFML header
+#include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
+
+// STD header
+#include <cstdio>
+#include <cstdint>
+#include <cassert>
+
+#include <memory>
+#include <stdexcept>
+#include <typeindex>
+
+#include <unordered_map>
+#include <vector>
+
+#include <string>
+#include <fstream>
+
+// Custom header
 #include "Entity.hpp"
 #include "components/Components.hpp"
 #include "systems/Systems.hpp"
-
 #include "World.hpp"

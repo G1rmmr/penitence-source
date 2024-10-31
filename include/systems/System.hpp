@@ -19,7 +19,6 @@
 #include <memory>
 
 #include "core/Entity.hpp"
-#include "core/World.hpp"
 
 namespace G2D
 {

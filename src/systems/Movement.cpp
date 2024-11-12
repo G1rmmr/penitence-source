@@ -20,7 +20,7 @@
 
 using namespace G2D;
 
-void Movement::Update(Entity& entity, const float dt)
+void Movement::Update(ECSManager& manager, const float dt)
 {
     assert(entity.HasComponent<Transform>() && "To move entity, it must has a position.");
 

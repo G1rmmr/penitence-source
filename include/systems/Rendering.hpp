@@ -15,8 +15,6 @@
 
 #pragma once
 
-#include <SFML/Graphics.hpp>
-
 #include "System.hpp"
 
 namespace G2D
@@ -24,12 +22,7 @@ namespace G2D
     class Rendering final : public System
     {
     public:
-        void Update(Entity& entity, const float dt) override final;
-        void Render(Entity& entity) override final;
-
-        void SetWindow(sf::RenderWindow* r_window);
-
-    private:
-        sf::RenderWindow* window = nullptr;
+        void Update(const Entity::ID id, const float dt) override final;
+        void Render(const Entity::ID id, sf::RenderWindow* window);
     };
 }

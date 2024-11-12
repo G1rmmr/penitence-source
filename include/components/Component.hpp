@@ -17,8 +17,12 @@
 
 namespace G2D
 {
+    constexpr std::uint8_t MAX_COMPONENTS = 0xA0;
+    
     struct Component
     {
+        using Tag = std::uint32_t;
+        
         Component() = default;
         virtual ~Component() = default;
     };

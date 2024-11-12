@@ -18,5 +18,6 @@
 #include "Animation.hpp"
 #include "Collider.hpp"
 #include "Sprite.hpp"
-#include "Transform.hpp"
+#include "Position.hpp"
+#include "Velocity.hpp"
 #include "InputBehavior.hpp"

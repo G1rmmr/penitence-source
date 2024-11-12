@@ -15,10 +15,7 @@
 
 #pragma once
 
-#include <vector>
-#include <memory>
-
-#include "core/Entity.hpp"
+#include "core/ECSManager.hpp"
 
 namespace G2D
 {
@@ -28,7 +25,6 @@ namespace G2D
         System() = default;
         virtual ~System() = default;
         
-        virtual void Update(Entity& entity, const float dt) = 0;
-        virtual void Render(Entity& entity) = 0;
+        virtual void Update(ECSManager& manager, const float dt) = 0;
     };
 }

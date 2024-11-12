@@ -22,10 +22,6 @@ namespace G2D
     class Movement final : public System
     {
     public:
-        void Update(Entity& entity, const float dt) override final;
-        void Render(Entity& entity) override final
-        {
-            return;
-        }
+        void Update(ECSManager& manager, const float dt) override final;
     };
 }

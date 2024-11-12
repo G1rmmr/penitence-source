@@ -1,4 +1,4 @@
-// Created on Wed Oct 30 2024
+// Created on Tue Nov 12 2024
 // © 2024 BLACKHAND Studio. All rights reserved.
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,19 +13,23 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#pragma once
+#include "core/ECSManager.hpp"
 
-#include <SFML/Graphics.hpp>
 
-#include <memory>
 
-#include "Component.hpp"
-
-namespace G2D
+Entity::ID ECSManager::CreateEntity()
 {
-    struct Sprite final : public Component
-    {
-        std::unique_ptr<sf::Texture> texture;
-        std::unique_ptr<sf::Sprite> sprite;
-    };
+    Entity::ID id = GetID();
+    masks[]
+    return id;
+}
+
+void ECSManager::DestoryEntity(Entity::ID id)
+{
+
+}
+
+static Entity::ID ECSManager::GetID()
+{
+
 }

@@ -15,16 +15,14 @@
 
 #pragma once
 
-#include <SFML/Graphics.hpp>
-
 #include "Component.hpp"
 
 namespace G2D
 {
     struct Transform final : public Component
     {
-        sf::Vector2f pos;
-        sf::Vector2f vel;
+        float x;
+        float y;
     };
     
 }

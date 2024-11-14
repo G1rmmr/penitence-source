@@ -19,8 +19,8 @@
 
 namespace G2D
 {
-    namespace Entity
+    struct Entity
     {
-        using ID = uint8_t;
-    }
+        using ID = uint16_t;
+    };
 }

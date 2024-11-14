@@ -19,62 +19,39 @@ using namespace G2D;
 
 const std::string SAVE_FILE = "../savedata/save.json";
 
-void World::AddEntity(const Entity& entity)
+void World::Update(ECSManager& manager, const float dt)
 {
-    if(last_id != entity.GetID())
-    {
-        entities[last_id] = entity;
-        ++last_id;
-    }
+    for(auto& sys : systems)
+        sys->Update(manager, dt);
 }
 
-void World::RemoveEntity(Entity& entity)
+void World::Render(ECSManager& manager, sf::RenderWindow& window)
 {
-    entities.erase(entity.GetID());
-}
-
-void World::Update(const float dt)
-{
-    for(auto& [_, sys] : systems)
-    {
-        for(auto& [_, entity] : entities)
-            sys->Update(entity, dt);
-    }
-}
-
-void World::Render()
-{
-    for(auto& [_, sys] : systems)
-    {
-        for(auto& [_, entity] : entities)
-            sys->Render(entity);
-    }
+    Rendering* sys = GetSystem<Rendering>();
+    sys->Render(manager, window);
 }
 
 using namespace nlohmann;
 
-void World::Save()
+void World::Save(ECSManager& manager)
 {
     json state_json;
     json entities_json = json::array();
 
-    for(const auto& [_, entity] : entities)
+    std::vector<Entity::ID> entities = manager.Query<Position>();
+
+    for(const auto& id : entities)
     {
         json entity_json;
-        entity_json["id"] = entity.GetID();
+        entity_json["id"] = id;
 
-        if(entity.HasComponent<Transform>())
-        {
-            Transform& transf = entity.GetComponent<Transform>();
+        std::shared_ptr<Position> pos = manager.GetComponent<Position>(id);
 
-            json j;
-            j["pos_x"] = transf.pos.x;
-            j["pos_y"] = transf.pos.y;
-            j["vel_x"] = transf.vel.x;
-            j["vel_y"] = transf.vel.y;
+        json j;
+        j["x"] = pos->x;
+        j["y"] = pos->y;
 
-            entity_json["Transform"] = j;
-        }
+        entity_json["Position"] = j;
         entities_json.push_back(entity_json);
     }
 
@@ -92,7 +69,7 @@ void World::Save()
     output.close();
 }
 
-void World::Load(Entity& protagonist)
+void World::Load(ECSManager& manager)
 {
     std::ifstream input(SAVE_FILE);
     assert(input.is_open() && "Failed to open file for saving game state.");
@@ -101,23 +78,19 @@ void World::Load(Entity& protagonist)
     input >> state_json;
     input.close();
 
-    for (const auto& entity_json : state_json["entities"])
+    for(const auto& entity_json : state_json["entities"])
     {
-        Entity entity(entity_json["id"].get<Entity::ID>());
-        printf("%d\n", entity.GetID());
+        Entity::ID id(entity_json["id"].get<Entity::ID>());
 
-        if (entity_json.contains("Transform"))
+        if(entity_json.contains("Position"))
         {
-            entity.AddComponent<Transform>();
-            json j = entity_json["Transform"];
+            json j = entity_json["Position"];
+            Position pos;
 
-            Transform& transf = entity.GetComponent<Transform>();
-            transf.pos.x = j.at("pos_x").get<float>();
-            transf.pos.y = j.at("pos_y").get<float>();
-            transf.vel.x = j.at("vel_x").get<float>();
-            transf.vel.y = j.at("vel_y").get<float>();
+            pos.x = j.at("pos_x").get<float>();
+            pos.y = j.at("pos_y").get<float>();
 
-            protagonist = entity;
+            manager.AddComponent<Position>(id, std::move(pos));
         }
     }
 }

@@ -15,17 +15,13 @@
 
 #pragma once
 
-#include <SFML/Graphics.hpp>
-
-#include <memory>
-
 #include "Component.hpp"
 
 namespace G2D
 {
-    struct Sprite final : public Component
+    struct Position final : public Component
     {
-        std::unique_ptr<sf::Texture> texture;
-        std::unique_ptr<sf::Sprite> sprite;
+        float x;
+        float y;
     };
 }

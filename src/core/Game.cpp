@@ -19,38 +19,49 @@ using namespace G2D;
 
 void Game::Init()
 {
-    bool use_save = true;
+    bool use_save = false;
+
+    window = std::make_unique<sf::RenderWindow>();
+    event = std::make_unique<sf::Event>();
+    music = std::make_unique<sf::Music>();
+    world = std::make_unique<World>();
+    manager = std::make_unique<ECSManager>();
 
     // Window creation
-    window.create(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), WINDOW_TITLE);
+    window->create(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), WINDOW_TITLE);
+    Entity::ID protagonist = manager->CreateEntity();
 
     if(use_save)
     {
-        world.Load(protagonist);
+        world->Load(*manager);
     }
     else
     {
-        protagonist.AddComponent<Transform>();
-        Transform& transf = protagonist.GetComponent<Transform>();
-        transf.pos = sf::Vector2f(WINDOW_WIDTH * 0.5f, WINDOW_HEIGHT * 0.5f);
+        Position pos;
+        pos.x = WINDOW_WIDTH * 0.5f;
+        pos.y = WINDOW_HEIGHT * 0.5f;
+        manager->AddComponent<Position>(protagonist, std::move(pos));
     }
 
     // Protagonist creation
-    protagonist.AddComponent<Sprite>();
-    protagonist.AddComponent<InputBehavior>();
-    protagonist.AddComponent<Animation>();
+    Sprite spr;
+    spr.texture = std::make_unique<sf::Texture>();
+    spr.sprite = std::make_unique<sf::Sprite>();
 
-    Sprite& spr = protagonist.GetComponent<Sprite>();
-
-    if(spr.texture.loadFromFile("../assets/images/player_anim.png"))
+    if(spr.texture->loadFromFile("../assets/images/player_anim.png"))
     {
-        spr.sprite.setTexture(spr.texture);
-        spr.sprite.setTextureRect(sf::IntRect{
+        spr.sprite->setTexture(*(spr.texture));
+        
+        std::shared_ptr<Position> pos = manager->GetComponent<Position>(protagonist);
+        spr.sprite->setPosition(pos->x, pos->y);
+        spr.sprite->setScale(0.5f, 0.5f);
+
+        spr.sprite->setTextureRect(sf::IntRect{
             0, 0, PROTAGONIST_WIDTH, PROTAGONIST_HEIGHT});
 
-        spr.sprite.setScale(0.5f, 0.5f);
+        manager->AddComponent<Sprite>(protagonist, std::move(spr));
 
-        Animation& anim = protagonist.GetComponent<Animation>();
+        Animation anim;
         anim.delay = 1.f / 6.f;
         anim.num_frame = 4;
 
@@ -60,93 +71,42 @@ void Game::Init()
             anim.frames.emplace_back(sf::IntRect{
                 i * PROTAGONIST_WIDTH, 0, PROTAGONIST_WIDTH, PROTAGONIST_HEIGHT});
         }
+        manager->AddComponent<Animation>(protagonist, std::move(anim));
     }
     else
         fprintf(stderr, "TEXTURE NOT FOUND!\n");
 
     // Set a world;
-    world.AddEntity(protagonist);
-
-    world.AddSystem<Movement>();
-    world.AddSystem<Rendering>();
-
-    Rendering& render_sys = world.GetSystem<Rendering>();
-    render_sys.SetWindow(&window);
+    world->AddSystem<Movement>();
+    world->AddSystem<Rendering>();
 
     // Set Music
-    if(!music.openFromFile("../assets/audios/Penitence.wav"))
+    if(!music->openFromFile("../assets/audios/Penitence.wav"))
         return;
 
-    music.play();
-    music.setLoop(true);
+    music->play();
+    music->setLoop(true);
 }
 
 void Game::HandleEvent()
 {
-    sf::Event event;
-    InputBehavior& behavior = protagonist.GetComponent<InputBehavior>();
-
-    while(window.pollEvent(event))
+    while(window->pollEvent(*event))
     {
-        switch(event.type)
+        switch(event->type)
         {
         case sf::Event::Closed:
-            window.close();
+            window->close();
             break;
 
         case sf::Event::KeyPressed:
-            switch(event.key.code)
+            switch(event->key.code)
             {
-            case sf::Keyboard::W:
-                behavior.up = true;
-                now_state = ProtState::Move;
-                break;
-
-            case sf::Keyboard::A:
-                behavior.left = true;
-                now_state = ProtState::Move;
-                break;
-
-            case sf::Keyboard::S:
-                behavior.down = true;
-                now_state = ProtState::Move;
-                break;
-
-            case sf::Keyboard::D:
-                behavior.right = true;
-                now_state = ProtState::Move;
-                break;
-
             case sf::Keyboard::Escape:
-                window.close();
-
+                window->close();
+                break;
+            
             default: break;
             }
-            break;
-
-        case sf::Event::KeyReleased:
-            switch(event.key.code)
-            {
-                case sf::Keyboard::W:
-                    behavior.up = false;
-                    break;
-                case sf::Keyboard::A:
-                    behavior.left = false;
-                    break;
-                case sf::Keyboard::S:
-                    behavior.down = false;
-                    break;
-                case sf::Keyboard::D:
-                    behavior.right = false;
-                    break;
-                default:
-                    break;
-            }
-            if(!behavior.up && !behavior.left && !behavior.down && !behavior.right)
-                now_state = ProtState::Idle;
-
-            break;
-
         default: break;
         }
     }
@@ -159,33 +119,12 @@ void Game::Update()
     const float dt = clock.restart().asSeconds();
     const float speed = 200.f;
 
-    Transform& transf = protagonist.GetComponent<Transform>();
-    transf.vel = sf::Vector2f{0.f, 0.f};
-
-    InputBehavior& behavior = protagonist.GetComponent<InputBehavior>();
-
-    if(behavior.up) transf.vel.y = -speed;
-    if(behavior.left) transf.vel.x = -speed;
-    if(behavior.down) transf.vel.y = speed;
-    if(behavior.right) transf.vel.x = speed;
-
-    if(now_state == ProtState::Move)
-    {
-        Sprite& spr = protagonist.GetComponent<Sprite>();
-
-        if(behavior.left)
-            spr.sprite.setScale(-0.5f, 0.5f);
-
-        else
-            spr.sprite.setScale(0.5f, 0.5f);
-    }
-
-    world.Update(dt);
+    world->Update(*manager, dt);
 }
 
 void Game::Render()
 {
-    world.Render();
+    world->Render(*manager, *window);
 }
 
 void Game::Run()
@@ -193,13 +132,13 @@ void Game::Run()
     HandleEvent();
     Update();
 
-    window.clear(sf::Color::Black);
+    window->clear(sf::Color::Black);
     Render();
-    window.display();
+    window->display();
 }
 
 void Game::Shutdown()
 {
     printf("GAME OVER\n");
-    world.Save();
+    world->Save(*manager);
 }

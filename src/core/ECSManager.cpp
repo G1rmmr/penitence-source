@@ -1,4 +1,4 @@
-// Created on Wed Oct 30 2024
+// Created on Tue Nov 12 2024
 // © 2024 BLACKHAND Studio. All rights reserved.
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,17 +13,28 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#pragma once
+#include "core/ECSManager.hpp"
 
-#include "Component.hpp"
+using namespace G2D;
 
-namespace G2D
+Component::Tag ECSManager::next_tag = 0;
+
+ECSManager::~ECSManager()
 {
-    struct InputBehavior final : public Component
-    {
-        bool up = false;
-        bool left = false;
-        bool down = false;
-        bool right = false;
-    };
+    pools.clear();
+}
+
+Entity::ID ECSManager::CreateEntity()
+{
+    static Entity::ID id = next_id++;
+    masks[id] = Mask();
+    return id;
+}
+
+void ECSManager::DestoryEntity(Entity::ID id)
+{
+    masks.erase(id);
+
+    for(auto& [tag, data] : components[id])
+        components[id].erase(tag);
 }

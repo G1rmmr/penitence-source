@@ -15,14 +15,13 @@
 
 #pragma once
 
-#include <SFML/Graphics.hpp>
-
 #include "Component.hpp"
 
 namespace G2D
 {
     struct Collider final : public Component
     {
-        sf::FloatRect box;
+        float width;
+        float height;
     };
 }

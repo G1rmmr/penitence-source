@@ -16,14 +16,20 @@
 #include <cassert>
 
 #include "systems/Movement.hpp"
-#include "core/Core.hpp"
+#include "components/Components.hpp"
 
 using namespace G2D;
 
-void Movement::Update(Entity& entity, const float dt)
+void Movement::Update(ECSManager& manager, const float dt)
 {
-    assert(entity.HasComponent<Transform>() && "To move entity, it must has a position.");
+    std::vector<Entity::ID> entities = manager.Query<Position, Velocity>();
 
-    Transform& transf = entity.GetComponent<Transform>();
-    transf.pos += dt * transf.vel;
+    for(const auto& id : entities)
+    {
+        std::shared_ptr<Position> pos = manager.GetComponent<Position>(id);
+        std::shared_ptr<Velocity> vel = manager.GetComponent<Velocity>(id);
+
+        pos->x += vel->x * dt;
+        pos->y += vel->y * dt;
+    }
 }

@@ -1,4 +1,4 @@
-// Created on Wed Oct 30 2024
+// Created on Fri Nov 15 2024
 // © 2024 BLACKHAND Studio. All rights reserved.
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,28 +15,29 @@
 
 #pragma once
 
-// SFML header
-#include <SFML/Graphics.hpp>
-#include <SFML/Audio.hpp>
-
-// STD header
-#include <cstdio>
-#include <cstdint>
-#include <cassert>
-
-#include <memory>
-#include <stdexcept>
-#include <typeindex>
-
-#include <unordered_map>
-#include <vector>
-
 #include <string>
 #include <fstream>
+#include <vector>
 
-// Custom header
-#include "Entity.hpp"
+#include <json.hpp>
+
+#include "ECSManager.hpp"
 #include "components/Components.hpp"
-#include "systems/Systems.hpp"
-#include "World.hpp"
-#include "Storage.hpp"
+
+namespace G2D
+{
+    class Storage
+    {
+    public:
+        Storage(const std::string& path) : save_path(path)
+        {
+
+        }
+
+        void Save(ECSManager& manager);
+        void Load(ECSManager& manager);
+
+    private:
+        std::string save_path;
+    };
+}

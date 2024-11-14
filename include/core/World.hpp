@@ -15,14 +15,8 @@
 
 #pragma once
 
-#include <cstdio>
-#include <cstdint>
 #include <memory>
 #include <vector>
-#include <string>
-#include <fstream>
-
-#include <json.hpp>
 
 #include "ECSManager.hpp"
 
@@ -38,9 +32,6 @@ namespace G2D
         
         void Update(ECSManager& manager, const float dt);
         void Render(ECSManager& manager, sf::RenderWindow& window);
-
-        void Save(ECSManager& manager);
-        void Load(ECSManager& manager);
         
         template<typename T>
         inline void AddSystem()

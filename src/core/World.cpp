@@ -17,8 +17,6 @@
 
 using namespace G2D;
 
-const std::string SAVE_FILE = "../savedata/save.json";
-
 void World::Update(ECSManager& manager, const float dt)
 {
     for(auto& sys : systems)
@@ -29,68 +27,4 @@ void World::Render(ECSManager& manager, sf::RenderWindow& window)
 {
     Rendering* sys = GetSystem<Rendering>();
     sys->Render(manager, window);
-}
-
-using namespace nlohmann;
-
-void World::Save(ECSManager& manager)
-{
-    json state_json;
-    json entities_json = json::array();
-
-    std::vector<Entity::ID> entities = manager.Query<Position>();
-
-    for(const auto& id : entities)
-    {
-        json entity_json;
-        entity_json["id"] = id;
-
-        std::shared_ptr<Position> pos = manager.GetComponent<Position>(id);
-
-        json j;
-        j["x"] = pos->x;
-        j["y"] = pos->y;
-
-        entity_json["Position"] = j;
-        entities_json.push_back(entity_json);
-    }
-
-    state_json["entities"] = entities_json;
-
-    std::ofstream output(SAVE_FILE);
-
-    if (!output.is_open())
-    {
-        fprintf(stderr, "Failed to open file for saving game state.");
-        return;
-    }
-
-    output << state_json.dump(4);
-    output.close();
-}
-
-void World::Load(ECSManager& manager)
-{
-    std::ifstream input(SAVE_FILE);
-    assert(input.is_open() && "Failed to open file for saving game state.");
-
-    json state_json;
-    input >> state_json;
-    input.close();
-
-    for(const auto& entity_json : state_json["entities"])
-    {
-        Entity::ID id(entity_json["id"].get<Entity::ID>());
-
-        if(entity_json.contains("Position"))
-        {
-            json j = entity_json["Position"];
-            Position pos;
-
-            pos.x = j.at("pos_x").get<float>();
-            pos.y = j.at("pos_y").get<float>();
-
-            manager.AddComponent<Position>(id, std::move(pos));
-        }
-    }
 }

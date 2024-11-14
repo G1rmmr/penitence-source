@@ -17,6 +17,8 @@
 
 using namespace G2D;
 
+const std::string SAVE_FILE = "../savedata/save.json";
+
 void Game::Init()
 {
     bool use_save = false;
@@ -26,6 +28,7 @@ void Game::Init()
     music = std::make_unique<sf::Music>();
     world = std::make_unique<World>();
     manager = std::make_unique<ECSManager>();
+    storage = std::make_unique<Storage>(SAVE_FILE);
 
     // Window creation
     window->create(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), WINDOW_TITLE);
@@ -33,7 +36,7 @@ void Game::Init()
 
     if(use_save)
     {
-        world->Load(*manager);
+        storage->Load(*manager);
     }
     else
     {
@@ -140,5 +143,5 @@ void Game::Run()
 void Game::Shutdown()
 {
     printf("GAME OVER\n");
-    world->Save(*manager);
+    storage->Save(*manager);
 }

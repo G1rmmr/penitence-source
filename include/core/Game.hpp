@@ -51,5 +51,6 @@ namespace G2D
 
         std::unique_ptr<World> world;
         std::unique_ptr<ECSManager> manager;
+        std::unique_ptr<Storage> storage;
     };
 }

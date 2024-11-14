@@ -21,40 +21,55 @@
 
 namespace G2D
 {
+    class PoolBase
+    {
+    public:
+        virtual ~PoolBase() = default;
+    };
+
     template <typename T>
-    class ComponentPool
+    class ComponentPool : public PoolBase, public std::enable_shared_from_this<ComponentPool<T>>
     {
     public:
         static constexpr std::size_t MAX_SIZE = 0x80;
-        
+
         ComponentPool()
         {
             for (std::size_t i = 0; i < MAX_SIZE; ++i)
                 pool.push(std::make_unique<T>());
         }
 
-        std::shared_ptr<T> Acquire()
+        template <typename... Args>
+        inline std::shared_ptr<T> Acquire(Args&&... args)
         {
             if (pool.empty())
-                return nullptr_t;
+                return std::make_shared<T>(std::forward<Args>(args)...);
 
             auto component = std::move(pool.top());
             pool.pop();
 
-            return std::make_shared<T>(component.Release(),
-                [this](T* comp)
+            std::weak_ptr<ComponentPool<T>> self = this->shared_from_this();
+
+            return std::shared_ptr<T>(component.release(),
+                [self](T* comp)
                 {
-                    this->Release(comp);
+                    if (auto pool = self.lock())
+                        pool->Release(comp);
+                    else
+                        delete comp;
                 });
         }
 
     private:
-        void Release(T* component)
+        inline void Release(T* component)
         {
-            if(pool.size() < MAX_SIZE)
-                pool.push(std::unique_ptr<T>(component));
-            else
-                delete component;
+            if(component)
+            {
+                if(pool.size() < MAX_SIZE)
+                    pool.push(std::unique_ptr<T>(component));
+                else
+                    delete component;
+            }
         }
         std::stack<std::unique_ptr<T>> pool;
     };

@@ -28,12 +28,13 @@ namespace G2D
 {
     using Mask = std::bitset<MAX_COMPONENTS>;
     using Data = std::unordered_map<Component::Tag, std::shared_ptr<Component>>;
-    using Pool = std::unique_ptr<ComponentPool<Component>>;
+    using Pool = std::shared_ptr<PoolBase>;
 
     class ECSManager
     {
     public:
         ECSManager() = default;
+        ~ECSManager();
 
         Entity::ID CreateEntity();
         void DestoryEntity(Entity::ID id);
@@ -48,7 +49,7 @@ namespace G2D
             masks[id].set(tag);
 
             if(pools.find(tag) == pools.end())
-                pools[tag] = std::make_unique<ComponentPool<T>>();
+                pools[tag] = std::make_shared<ComponentPool<T>>();
 
             auto& pool = static_cast<ComponentPool<T>&>(*pools[tag]);
             auto component = pool.Acquire(std::forward<Args>(args)...);
@@ -62,10 +63,10 @@ namespace G2D
             if(!masks[id][tag])
                 return nullptr;
 
-            Data dictionary = components[id];
+            auto it = components.find(id);
 
-            if(dictionary.find(tag) != dictionary.end())
-                return std::static_pointer_cast<T>(dictionary[tag]);
+            if (it != components.end() && it->second.find(tag) != it->second.end())
+                return std::static_pointer_cast<T>(it->second[tag]);
 
             return nullptr;
         }
@@ -76,7 +77,7 @@ namespace G2D
             std::vector<Entity::ID> result;
 
             for(const auto& [id, mask] : masks)
-                if(mask.test(GetTag<Components>(), ...))
+                if((mask.test(GetTag<Components>()) && ...))
                     result.emplace_back(id);
 
             return result;
@@ -85,16 +86,18 @@ namespace G2D
     private:
         std::unordered_map<Entity::ID, Data> components;
         std::unordered_map<Entity::ID, Mask> masks;
-
         std::unordered_map<Component::Tag, Pool> pools;
         
-        Entity::ID next_id;
-        Component::Tag next_tag = 0;
+        Entity::ID next_id = 0;
+        static Component::Tag next_tag;
 
-        static Entity::ID GetID();
+        inline Entity::ID GetID()
+        {
+            return next_id++;
+        }
         
         template <typename T>
-        static Component::Tag GetTag()
+        static inline Component::Tag GetTag()
         {
             static Component::Tag tag = next_tag++;
             return tag;

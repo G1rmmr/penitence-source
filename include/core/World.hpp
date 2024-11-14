@@ -17,59 +17,51 @@
 
 #include <cstdio>
 #include <cstdint>
-#include <cassert>
 #include <memory>
-#include <typeindex>
-#include <unordered_map>
 #include <vector>
 #include <string>
 #include <fstream>
 
 #include <json.hpp>
 
-#include "Entity.hpp"
+#include "ECSManager.hpp"
+
 #include "components/Components.hpp"
 #include "systems/Systems.hpp"
 
 namespace G2D
-{
-    class System;
-    
+{   
     class World
     {
     public:
         World() = default;
         
-        void Update(const float dt);
-        void Render();
+        void Update(ECSManager& manager, const float dt);
+        void Render(ECSManager& manager, sf::RenderWindow& window);
 
-        void AddEntity(const Entity& entity);
-        void RemoveEntity(Entity& entity);
-
-        void Save();
-        void Load(Entity& protagonist);
+        void Save(ECSManager& manager);
+        void Load(ECSManager& manager);
         
         template<typename T>
         inline void AddSystem()
         {
-            std::type_index type_index(typeid(T));
-            assert(systems.find(type_index) == std::end(systems) && "Adding system more than once.");
-            systems[type_index] = std::make_shared<T>();
-        }
-
-        template <typename T>
-        inline T& GetSystem() const
-        {
-            auto iter = systems.find(typeid(T));
-            if(iter != std::end(systems))
-                return *static_cast<T*>(iter->second.get());
-
-            throw std::runtime_error("Component not found");
+            std::unique_ptr<T> system = std::make_unique<T>();
+            systems.emplace_back(std::move(system));
         }
 
     private:
-        std::unordered_map<std::type_index, std::shared_ptr<System>> systems;
-        std::unordered_map<Entity::ID, Entity> entities;
-        Entity::ID last_id = 0;
+        std::vector<std::unique_ptr<System>> systems;
+
+        template<typename T>
+        inline T* GetSystem()
+        {
+            for(const auto& sys : systems)
+            {
+                T* target = dynamic_cast<T*>(sys.get());
+                if (target)
+                    return target;
+            }
+            return nullptr;
+        }
     };
 }

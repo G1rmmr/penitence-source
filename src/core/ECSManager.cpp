@@ -15,21 +15,26 @@
 
 #include "core/ECSManager.hpp"
 
+using namespace G2D;
 
+Component::Tag ECSManager::next_tag = 0;
+
+ECSManager::~ECSManager()
+{
+    pools.clear();
+}
 
 Entity::ID ECSManager::CreateEntity()
 {
-    Entity::ID id = GetID();
-    masks[]
+    static Entity::ID id = next_id++;
+    masks[id] = Mask();
     return id;
 }
 
 void ECSManager::DestoryEntity(Entity::ID id)
 {
+    masks.erase(id);
 
-}
-
-static Entity::ID ECSManager::GetID()
-{
-
+    for(auto& [tag, data] : components[id])
+        components[id].erase(tag);
 }

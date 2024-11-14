@@ -19,10 +19,9 @@
 
 namespace G2D
 {
-    struct Transform final : public Component
+    struct Position final : public Component
     {
         float x;
         float y;
     };
-    
 }

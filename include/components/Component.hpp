@@ -25,5 +25,11 @@ namespace G2D
         
         Component() = default;
         virtual ~Component() = default;
+
+        Component(const Component&) = delete;
+        Component& operator=(const Component&) = delete;
+
+        Component(Component&&) noexcept = default;
+        Component& operator=(Component&&) noexcept = default;
     };
 }

@@ -22,7 +22,7 @@ namespace G2D
     class Rendering final : public System
     {
     public:
-        void Update(const Entity::ID id, const float dt) override final;
-        void Render(const Entity::ID id, sf::RenderWindow* window);
+        void Update(ECSManager& manager, const float dt) override final;
+        void Render(ECSManager& manager, sf::RenderWindow& window);
     };
 }

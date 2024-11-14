@@ -13,48 +13,46 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include <cassert>
+#include <SFML/Graphics.hpp>
 
 #include "systems/Rendering.hpp"
-#include "core/Core.hpp"
+
+#include "components/Components.hpp"
 
 using namespace G2D;
 
-void Rendering::Update(Entity& entity, const float dt)
+void Rendering::Update(ECSManager& manager, const float dt)
 {
-    assert(entity.HasComponent<Animation>() && entity.HasComponent<Sprite>()
-        && "To update sprite, it must has a Animation and a sprite.");
+    std::vector<Entity::ID> entities = manager.Query<Sprite, Animation>();
 
-    Animation& anim = entity.GetComponent<Animation>();
-    Sprite& spr = entity.GetComponent<Sprite>();
-
-    if(anim.frames.empty())
-        return;
-
-    anim.elapsed += dt;
-
-    if(anim.elapsed >= anim.delay)
+    for(auto& id : entities)
     {
-        anim.elapsed = 0.f;
-        anim.curr = (anim.curr + 1) % anim.frames.size();
-        spr.sprite.setTextureRect(anim.frames[anim.curr]);
+        std::shared_ptr<Animation> anim = manager.GetComponent<Animation>(id);
+        std::shared_ptr<Sprite> spr = manager.GetComponent<Sprite>(id);
+
+        if(anim->frames.empty())
+            continue;
+
+        anim->elapsed += dt;
+
+        if(anim->elapsed >= anim->delay)
+        {
+            anim->elapsed = 0.f;
+            anim->curr = (anim->curr + 1) % anim->frames.size();
+            spr->sprite->setTextureRect(anim->frames[anim->curr]);
+        }
     }
 }
 
-void Rendering::Render(Entity& entity)
+void Rendering::Render(ECSManager& manager, sf::RenderWindow& window)
 {
-    assert(entity.HasComponent<Sprite>() && entity.HasComponent<Transform>()
-        && "To render entity, it must has a sprite and a transform.");
+    std::vector<Entity::ID> entities = manager.Query<Sprite>();
 
-    Transform& transf = entity.GetComponent<Transform>();
+    for(const auto& id : entities)
+    {
+        std::shared_ptr<Sprite> spr = manager.GetComponent<Sprite>(id);
 
-    Sprite& spr = entity.GetComponent<Sprite>();
-    spr.sprite.setPosition(transf.pos);
-
-    window->draw(spr.sprite);
-}
-
-void Rendering::SetWindow(sf::RenderWindow* r_window)
-{
-    window = r_window;
+        if (spr && spr->sprite)
+            window.draw(*(spr->sprite));
+    }
 }

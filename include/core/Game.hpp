@@ -22,20 +22,13 @@ namespace G2D
     class Game
     {
     public:
-        inline static const uint16_t WINDOW_WIDTH = 800;
-        inline static const uint16_t WINDOW_HEIGHT = 600;
         inline static const std::string WINDOW_TITLE = "The Penitence";
 
-        inline static const uint8_t PROTAGONIST_WIDTH = 128;
-        inline static const uint8_t PROTAGONIST_HEIGHT = 128;
-
-        enum class ProtState : uint8_t
-        {
-            Idle,
-            Move,
-            Jump,
-            Fall
-        };
+        inline static const uint16_t WINDOW_WIDTH = 800;
+        inline static const uint16_t WINDOW_HEIGHT = 600;
+        
+        inline static const uint16_t PROTAGONIST_WIDTH = 0x0100;
+        inline static const uint16_t PROTAGONIST_HEIGHT = 0x0100;
 
         Game() = default;
 
@@ -48,17 +41,15 @@ namespace G2D
 
         inline bool IsRunning() const
         {
-            return window.isOpen();
+            return window->isOpen();
         }
 
     private:
-        sf::RenderWindow window;
-        sf::Event event;
-        sf::Music music;
-        
-        World world;
+        std::unique_ptr<sf::RenderWindow> window;
+        std::unique_ptr<sf::Event> event;
+        std::unique_ptr<sf::Music> music;
 
-        Entity protagonist;
-        ProtState now_state = ProtState::Idle;
+        std::unique_ptr<World> world;
+        std::unique_ptr<ECSManager> manager;
     };
 }

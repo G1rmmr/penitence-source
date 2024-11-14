@@ -19,7 +19,7 @@
 
 namespace G2D
 {
-    struct Transform final : public Component
+    struct Velocity final : public Component
     {
         float x;
         float y;

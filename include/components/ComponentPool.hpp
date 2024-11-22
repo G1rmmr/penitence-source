@@ -16,8 +16,10 @@
 #pragma once
 
 #include <cstdint>
-#include <stack>
 #include <memory>
+#include <stack>
+#include <functional>
+#include <stdexcept>
 
 namespace G2D
 {
@@ -28,49 +30,50 @@ namespace G2D
     };
 
     template <typename T>
-    class ComponentPool : public PoolBase, public std::enable_shared_from_this<ComponentPool<T>>
+    class ComponentPool : public PoolBase
     {
     public:
-        static constexpr std::size_t MAX_SIZE = 0x80;
+        static constexpr std::size_t MAX_SIZE = 0xFF;
 
-        ComponentPool()
-        {
-            for (std::size_t i = 0; i < MAX_SIZE; ++i)
-                pool.push(std::make_unique<T>());
-        }
+        ComponentPool() = default;
 
         template <typename... Args>
-        inline std::shared_ptr<T> Acquire(Args&&... args)
+        inline std::unique_ptr<Component,
+            std::function<void(Component*)>> Acquire(Args&&... args)
         {
+            T* component;
+
             if (pool.empty())
-                return std::make_shared<T>(std::forward<Args>(args)...);
+                component = new T(std::forward<Args>(args)...);
+            else
+            {
+                component = pool.top();
+                pool.pop();
 
-            auto component = std::move(pool.top());
-            pool.pop();
+                *component = T(std::forward<Args>(args)...);
+            }
 
-            std::weak_ptr<ComponentPool<T>> self = this->shared_from_this();
+            auto deleter = [this](Component* ptr)
+            {
+                this->Release(static_cast<T*>(ptr));
+            };
 
-            return std::shared_ptr<T>(component.release(),
-                [self](T* comp)
-                {
-                    if (auto pool = self.lock())
-                        pool->Release(comp);
-                    else
-                        delete comp;
-                });
+            return std::unique_ptr<Component,
+                std::function<void(Component*)>>(component, deleter);
         }
 
     private:
+        std::stack<T*> pool;
+
         inline void Release(T* component)
         {
             if(component)
             {
                 if(pool.size() < MAX_SIZE)
-                    pool.push(std::unique_ptr<T>(component));
+                    pool.push(component);
                 else
                     delete component;
             }
         }
-        std::stack<std::unique_ptr<T>> pool;
     };
 }

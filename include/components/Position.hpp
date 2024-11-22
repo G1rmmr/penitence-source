@@ -23,5 +23,15 @@ namespace G2D
     {
         float x;
         float y;
+
+        Position() : x(0.f), y(0.f)
+        {
+            
+        }
+
+        Position(float x, float y) : x(x), y(y)
+        {
+            
+        }
     };
 }

@@ -26,52 +26,48 @@ void Game::Init()
     music = std::make_unique<sf::Music>();
     world = std::make_unique<World>();
     manager = std::make_unique<ECSManager>();
+    storage = std::make_unique<Storage>(SAVE_PATH);
 
     // Window creation
     window->create(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), WINDOW_TITLE);
     Entity::ID protagonist = manager->CreateEntity();
 
-    if(use_save)
-    {
-        world->Load(*manager);
-    }
-    else
-    {
-        Position pos;
-        pos.x = WINDOW_WIDTH * 0.5f;
-        pos.y = WINDOW_HEIGHT * 0.5f;
-        manager->AddComponent<Position>(protagonist, std::move(pos));
-    }
-
     // Protagonist creation
-    Sprite spr;
-    spr.texture = std::make_unique<sf::Texture>();
-    spr.sprite = std::make_unique<sf::Sprite>();
 
-    if(spr.texture->loadFromFile("../assets/images/player_anim.png"))
+    if(use_save)
+        storage->Load(*manager);
+    else
+        manager->AddComponent<Position>(protagonist,
+            static_cast<float>(WINDOW_WIDTH) * 0.5f,
+            static_cast<float>(WINDOW_HEIGHT) * 0.5f);
+
+    manager->AddComponent<Velocity>(protagonist);
+
+    std::shared_ptr<sf::Texture> texture = std::make_shared<sf::Texture>();
+    if(texture->loadFromFile("../assets/images/player_anim.png"))
     {
-        spr.sprite->setTexture(*(spr.texture));
-        
-        std::shared_ptr<Position> pos = manager->GetComponent<Position>(protagonist);
-        spr.sprite->setPosition(pos->x, pos->y);
-        spr.sprite->setScale(0.5f, 0.5f);
+        Position* pos = manager->GetComponent<Position>(protagonist);
 
-        spr.sprite->setTextureRect(sf::IntRect{
+        auto spr = std::make_shared<Sprite>(texture);
+        spr->sprite.setPosition(pos->x, pos->y);
+        spr->sprite.setScale(0.5f, 0.5f);
+        spr->sprite.setTextureRect(sf::IntRect{
             0, 0, PROTAGONIST_WIDTH, PROTAGONIST_HEIGHT});
 
-        manager->AddComponent<Sprite>(protagonist, std::move(spr));
+        manager->AddComponent<Sprite>(protagonist, texture);
 
-        Animation anim;
-        anim.delay = 1.f / 6.f;
-        anim.num_frame = 4;
+        std::vector<sf::IntRect> frames;
+
+        float delay = 1.f / 6.f;
+        uint8_t num_frame = 4;
 
         // Animation set.
-        for(uint8_t i = 0; i < anim.num_frame; ++i)
-        {
-            anim.frames.emplace_back(sf::IntRect{
+        for(uint8_t i = 0; i < num_frame; ++i)
+            frames.emplace_back(sf::IntRect{
                 i * PROTAGONIST_WIDTH, 0, PROTAGONIST_WIDTH, PROTAGONIST_HEIGHT});
-        }
-        manager->AddComponent<Animation>(protagonist, std::move(anim));
+        
+        manager->AddComponent<Animation>(protagonist,
+            frames, delay, 0.f, num_frame, 0, 0);
     }
     else
         fprintf(stderr, "TEXTURE NOT FOUND!\n");
@@ -140,5 +136,5 @@ void Game::Run()
 void Game::Shutdown()
 {
     printf("GAME OVER\n");
-    world->Save(*manager);
+    storage->Save(*manager);
 }

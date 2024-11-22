@@ -27,8 +27,8 @@ void Rendering::Update(ECSManager& manager, const float dt)
 
     for(auto& id : entities)
     {
-        std::shared_ptr<Animation> anim = manager.GetComponent<Animation>(id);
-        std::shared_ptr<Sprite> spr = manager.GetComponent<Sprite>(id);
+        Animation* anim = manager.GetComponent<Animation>(id);
+        Sprite* spr = manager.GetComponent<Sprite>(id);
 
         if(anim->frames.empty())
             continue;
@@ -39,7 +39,7 @@ void Rendering::Update(ECSManager& manager, const float dt)
         {
             anim->elapsed = 0.f;
             anim->curr = (anim->curr + 1) % anim->frames.size();
-            spr->sprite->setTextureRect(anim->frames[anim->curr]);
+            spr->sprite.setTextureRect(anim->frames[anim->curr]);
         }
     }
 }
@@ -50,9 +50,9 @@ void Rendering::Render(ECSManager& manager, sf::RenderWindow& window)
 
     for(const auto& id : entities)
     {
-        std::shared_ptr<Sprite> spr = manager.GetComponent<Sprite>(id);
-
-        if (spr && spr->sprite)
-            window.draw(*(spr->sprite));
+        Sprite* spr = manager.GetComponent<Sprite>(id);
+        
+        if(spr && spr->texture && spr->texture->getSize().x > 0 && spr->texture->getSize().y > 0)
+            window.draw(spr->sprite);
     }
 }

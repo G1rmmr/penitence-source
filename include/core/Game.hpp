@@ -23,12 +23,13 @@ namespace G2D
     {
     public:
         inline static const std::string WINDOW_TITLE = "The Penitence";
+        inline static const std::string SAVE_PATH = "../savedata/save.json";
 
         inline static const uint16_t WINDOW_WIDTH = 800;
         inline static const uint16_t WINDOW_HEIGHT = 600;
         
-        inline static const uint16_t PROTAGONIST_WIDTH = 0x0100;
-        inline static const uint16_t PROTAGONIST_HEIGHT = 0x0100;
+        inline static const uint16_t PROTAGONIST_WIDTH = 128;
+        inline static const uint16_t PROTAGONIST_HEIGHT = 128;
 
         Game() = default;
 
@@ -51,5 +52,6 @@ namespace G2D
 
         std::unique_ptr<World> world;
         std::unique_ptr<ECSManager> manager;
+        std::unique_ptr<Storage> storage;
     };
 }

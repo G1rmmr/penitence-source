@@ -39,3 +39,4 @@
 #include "components/Components.hpp"
 #include "systems/Systems.hpp"
 #include "World.hpp"
+#include "Storage.hpp"

@@ -1,4 +1,4 @@
-// Created on Wed Oct 30 2024
+// Created on Fri Nov 15 2024
 // © 2024 BLACKHAND Studio. All rights reserved.
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,14 +15,29 @@
 
 #pragma once
 
+#include <string>
+#include <fstream>
+#include <vector>
+
+#include <json.hpp>
+
+#include "ECSManager.hpp"
+#include "components/Components.hpp"
+
 namespace G2D
 {
-    constexpr std::uint8_t MAX_COMPONENTS = 0xFF;
-
-    struct Component
+    class Storage
     {
-        using Tag = std::uint32_t;
-        
-        virtual ~Component() = default;
+    public:
+        Storage(const std::string& path) : save_path(path)
+        {
+
+        }
+
+        void Save(ECSManager& manager);
+        void Load(ECSManager& manager);
+
+    private:
+        std::string save_path;
     };
 }

@@ -15,7 +15,7 @@
 
 #pragma once
 
-#include "Core.hpp"
+#include "core/Core.hpp"
 
 namespace G2D
 {
@@ -30,6 +30,8 @@ namespace G2D
         
         inline static const uint16_t PROTAGONIST_WIDTH = 128;
         inline static const uint16_t PROTAGONIST_HEIGHT = 128;
+
+        inline static const bool USING_SAVE_FILE = false;
 
         Game() = default;
 
@@ -53,5 +55,8 @@ namespace G2D
         std::unique_ptr<World> world;
         std::unique_ptr<ECSManager> manager;
         std::unique_ptr<Storage> storage;
+
+        std::unique_ptr<Announcer> announcer;
+        std::unique_ptr<Dispatcher> dispatcher;
     };
 }

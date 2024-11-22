@@ -13,20 +13,20 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "core/Game.hpp"
+#include "Game.hpp"
 
 using namespace G2D;
 
 void Game::Init()
 {
-    bool use_save = false;
-
     window = std::make_unique<sf::RenderWindow>();
     event = std::make_unique<sf::Event>();
     music = std::make_unique<sf::Music>();
     world = std::make_unique<World>();
     manager = std::make_unique<ECSManager>();
     storage = std::make_unique<Storage>(SAVE_PATH);
+    announcer = std::make_unique<Announcer>();
+    dispatcher = std::make_unique<Dispatcher>();
 
     // Window creation
     window->create(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), WINDOW_TITLE);
@@ -34,7 +34,7 @@ void Game::Init()
 
     // Protagonist creation
 
-    if(use_save)
+    if(USING_SAVE_FILE)
         storage->Load(*manager);
     else
         manager->AddComponent<Position>(protagonist,
@@ -76,6 +76,49 @@ void Game::Init()
     world->AddSystem<Movement>();
     world->AddSystem<Rendering>();
 
+    dispatcher->AddListener(EventType::KeyPressed,
+        [&](const std::shared_ptr<Event>& event)
+        {
+            auto key = std::static_pointer_cast<KeyPressed>(event);
+            Velocity* vel = manager->GetComponent<Velocity>(protagonist);
+
+            switch(key->code)
+            {
+            case sf::Keyboard::A:
+                vel->x -= 200.f;
+                break;
+
+            case sf::Keyboard::D:
+                vel->x += 200.f;
+                break;
+
+            case sf::Keyboard::Escape:
+                window->close();
+                break;
+
+            default: break;
+            }
+        });
+
+    dispatcher->AddListener(EventType::KeyReleased,
+        [&](const std::shared_ptr<Event>& event)
+        {
+            printf("DEBUG\n");
+            auto key = std::static_pointer_cast<KeyReleased>(event);
+            Velocity* vel = manager->GetComponent<Velocity>(protagonist);
+
+            switch(key->code)
+            {
+            case sf::Keyboard::A:
+            case sf::Keyboard::D:
+                vel->x = 0.f;
+                break;
+
+            default:
+                break;
+            }
+        });
+
     // Set Music
     if(!music->openFromFile("../assets/audios/Penitence.wav"))
         return;
@@ -88,24 +131,16 @@ void Game::HandleEvent()
 {
     while(window->pollEvent(*event))
     {
-        switch(event->type)
-        {
-        case sf::Event::Closed:
+        if(event->type == sf::Event::Closed)
             window->close();
-            break;
 
-        case sf::Event::KeyPressed:
-            switch(event->key.code)
-            {
-            case sf::Keyboard::Escape:
-                window->close();
-                break;
-            
-            default: break;
-            }
-        default: break;
-        }
+        else if(event->type == sf::Event::KeyPressed)
+            announcer->PublishEvent(std::make_shared<KeyPressed>(event->key.code));
+
+        else if(event->type == sf::Event::KeyReleased)
+            announcer->PublishEvent(std::make_shared<KeyReleased>(event->key.code));
     }
+    announcer->ProcessEvents(*dispatcher);
 }
 
 void Game::Update()
@@ -126,6 +161,7 @@ void Game::Render()
 void Game::Run()
 {
     HandleEvent();
+
     Update();
 
     window->clear(sf::Color::Black);
@@ -136,5 +172,7 @@ void Game::Run()
 void Game::Shutdown()
 {
     printf("GAME OVER\n");
-    storage->Save(*manager);
+
+    if(USING_SAVE_FILE)
+        storage->Save(*manager);
 }

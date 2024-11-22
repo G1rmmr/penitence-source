@@ -1,4 +1,4 @@
-// Created on Wed Oct 30 2024
+// Created on Fri Nov 22 2024
 // © 2024 BLACKHAND Studio. All rights reserved.
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,16 +13,20 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "Game.hpp"
+#include "core/events/Dispatcher.hpp"
 
-int main()
+using namespace G2D;
+
+void Dispatcher::AddListener(EventType type, Handler handler)
 {
-    G2D::Game game;
-    game.Init();
+    listeners[type].emplace_back(handler);
+}
 
-    while(game.IsRunning())
-        game.Run();
-        
-    game.Shutdown();
-    return 0;
+void Dispatcher::DispatchEvent(const std::shared_ptr<Event>& event)
+{
+    auto it = listeners.find(event->type);
+
+    if(it != listeners.end())
+        for(auto& handler : it->second)
+            handler(event);
 }

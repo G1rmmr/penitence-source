@@ -1,4 +1,4 @@
-// Created on Wed Oct 30 2024
+// Created on Fri Nov 22 2024
 // © 2024 BLACKHAND Studio. All rights reserved.
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,16 +13,19 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "Game.hpp"
+#include <SFML/Window.hpp>
 
-int main()
+#include "Event.hpp"
+
+namespace G2D
 {
-    G2D::Game game;
-    game.Init();
+    struct KeyPressed : public Event
+    {
+        sf::Keyboard::Key code;
 
-    while(game.IsRunning())
-        game.Run();
-        
-    game.Shutdown();
-    return 0;
+        KeyPressed(sf::Keyboard::Key code) : code(code)
+        {
+
+        }
+    };
 }

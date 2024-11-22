@@ -1,4 +1,4 @@
-// Created on Wed Oct 30 2024
+// Created on Fri Nov 22 2024
 // © 2024 BLACKHAND Studio. All rights reserved.
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,16 +13,24 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "Game.hpp"
+#include <cstdio>
 
-int main()
+#include "core/events/Announcer.hpp"
+
+using namespace G2D;
+
+void Announcer::PublishEvent(const std::shared_ptr<Event>& event)
 {
-    G2D::Game game;
-    game.Init();
+    events.push(event);
+}
 
-    while(game.IsRunning())
-        game.Run();
-        
-    game.Shutdown();
-    return 0;
+void Announcer::ProcessEvents(Dispatcher& dispatcher)
+{
+    while (!events.empty())
+    {
+        auto event = events.front();
+        events.pop();
+        printf("Processing Event: %d\n", event->type);
+        dispatcher.DispatchEvent(event);
+    }
 }

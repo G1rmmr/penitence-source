@@ -17,24 +17,39 @@
 
 using namespace G2D;
 
-Component::Tag ECSManager::next_tag = 0;
-
 ECSManager::~ECSManager()
 {
+    components.clear();
+    masks.clear();
     pools.clear();
 }
 
 Entity::ID ECSManager::CreateEntity()
 {
-    static Entity::ID id = next_id++;
+    Entity::ID id = -1;
+    
+    if(!id_queue.empty())
+    {
+        id = id_queue.front();
+        id_queue.pop();
+    }
+    else
+        id = next_id++;
+
+    if (masks.find(id) != masks.end())
+        throw std::runtime_error("Entity ID already in use");
+    
     masks[id] = Mask();
+    components[id] = Data();
     return id;
 }
 
 void ECSManager::DestoryEntity(Entity::ID id)
 {
-    masks.erase(id);
+    if (masks.find(id) == masks.end())
+        return;
 
-    for(auto& [tag, data] : components[id])
-        components[id].erase(tag);
+    masks.erase(id);
+    components.erase(id);
+    id_queue.push(id);
 }

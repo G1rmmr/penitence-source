@@ -19,6 +19,8 @@
 #include <vector>
 #include <bitset>
 #include <memory>
+#include <concepts>
+#include <queue>
 
 #include "Entity.hpp"
 #include "components/Component.hpp"
@@ -27,7 +29,10 @@
 namespace G2D
 {
     using Mask = std::bitset<MAX_COMPONENTS>;
-    using Data = std::unordered_map<Component::Tag, std::shared_ptr<Component>>;
+
+    using Data = std::unordered_map<Component::Tag,
+        std::unique_ptr<Component, std::function<void(Component*)>>>;
+
     using Pool = std::shared_ptr<PoolBase>;
 
     class ECSManager
@@ -40,24 +45,28 @@ namespace G2D
         void DestoryEntity(Entity::ID id);
 
         template <typename T, typename... Args>
+        requires std::constructible_from<T, Args...>
         inline void AddComponent(Entity::ID id, Args&&... args)
         {
+            if (masks.find(id) == masks.end())
+                throw std::runtime_error("Invalid Entity ID");
+
             Component::Tag tag = GetTag<T>();
-            if(masks[id][tag])
-                return;
+            if (masks[id][tag])
+                throw std::runtime_error("Component already exists for this Entity");
             
             masks[id].set(tag);
 
             if(pools.find(tag) == pools.end())
                 pools[tag] = std::make_shared<ComponentPool<T>>();
 
-            auto& pool = static_cast<ComponentPool<T>&>(*pools[tag]);
-            auto component = pool.Acquire(std::forward<Args>(args)...);
-            components[id][tag] = component;
+            auto pool = std::static_pointer_cast<ComponentPool<T>>(pools[tag]);
+            auto component = pool->Acquire(std::forward<Args>(args)...);
+            components[id][tag] = std::move(component);
         }
 
         template <typename T>
-        inline std::shared_ptr<T> GetComponent(Entity::ID id)
+        inline T* GetComponent(Entity::ID id)
         {
             Component::Tag tag = GetTag<T>();
             if(!masks[id][tag])
@@ -65,8 +74,8 @@ namespace G2D
 
             auto it = components.find(id);
 
-            if (it != components.end() && it->second.find(tag) != it->second.end())
-                return std::static_pointer_cast<T>(it->second[tag]);
+            if(it != components.end() && it->second.find(tag) != it->second.end())
+                return static_cast<T*>(it->second[tag].get());
 
             return nullptr;
         }
@@ -87,9 +96,11 @@ namespace G2D
         std::unordered_map<Entity::ID, Data> components;
         std::unordered_map<Entity::ID, Mask> masks;
         std::unordered_map<Component::Tag, Pool> pools;
+
+        std::queue<Entity::ID> id_queue;
         
-        Entity::ID next_id = 0;
-        static Component::Tag next_tag;
+        inline static Entity::ID next_id = 0;
+        inline static Component::Tag next_tag;
 
         inline Entity::ID GetID()
         {
@@ -97,7 +108,7 @@ namespace G2D
         }
         
         template <typename T>
-        static inline Component::Tag GetTag()
+        inline static Component::Tag GetTag()
         {
             static Component::Tag tag = next_tag++;
             return tag;

@@ -25,7 +25,18 @@ namespace G2D
 {
     struct Sprite final : public Component
     {
-        std::unique_ptr<sf::Texture> texture;
-        std::unique_ptr<sf::Sprite> sprite;
+        std::shared_ptr<sf::Texture> texture;
+        sf::Sprite sprite;
+
+        Sprite() : texture(nullptr), sprite()
+        {
+
+        }
+
+        Sprite(std::shared_ptr<sf::Texture> texture) : texture(texture), sprite()
+        {
+            if (texture)
+                sprite.setTexture(*texture);
+        }
     };
 }

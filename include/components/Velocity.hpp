@@ -23,6 +23,16 @@ namespace G2D
     {
         float x;
         float y;
+
+        Velocity() : x(0.f), y(0.f)
+        {
+            
+        }
+
+        Velocity(float x, float y) : x(x), y(y)
+        {
+            
+        }
     };
     
 }

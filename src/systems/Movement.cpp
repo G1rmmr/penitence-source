@@ -26,8 +26,8 @@ void Movement::Update(ECSManager& manager, const float dt)
 
     for(const auto& id : entities)
     {
-        std::shared_ptr<Position> pos = manager.GetComponent<Position>(id);
-        std::shared_ptr<Velocity> vel = manager.GetComponent<Velocity>(id);
+        Position* pos = manager.GetComponent<Position>(id);
+        Velocity* vel = manager.GetComponent<Velocity>(id);
 
         pos->x += vel->x * dt;
         pos->y += vel->y * dt;

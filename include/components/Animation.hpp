@@ -34,5 +34,20 @@ namespace G2D
         uint8_t num_frame;
         uint8_t curr;
         uint8_t type;
+
+        Animation() : frames(), delay(0.f), elapsed(0.f),
+            num_frame(0), curr(0), type(0)
+        {
+            frames = std::vector<sf::IntRect>();
+        } 
+
+        Animation(const std::vector<sf::IntRect>& frames,
+            float delay, float elapsed,
+            uint8_t num_frame, uint8_t curr, uint8_t type)
+        : frames(frames), delay(delay), elapsed(elapsed),
+        num_frame(num_frame), curr(curr), type(type)
+        {
+            
+        }
     };
 }

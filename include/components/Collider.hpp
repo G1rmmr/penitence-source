@@ -23,5 +23,15 @@ namespace G2D
     {
         float width;
         float height;
+
+        Collider() : width(0.f), height(0.f)
+        {
+
+        }
+
+        Collider(float width, float height) : width(width), height(height)
+        {
+            
+        }
     };
 }

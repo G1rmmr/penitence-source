@@ -30,7 +30,7 @@ void Storage::Save(ECSManager& manager)
         json entity_json;
         entity_json["id"] = id;
 
-        std::shared_ptr<Position> pos = manager.GetComponent<Position>(id);
+        Position* pos = manager.GetComponent<Position>(id);
 
         json j;
         j["x"] = pos->x;
@@ -70,11 +70,7 @@ void Storage::Load(ECSManager& manager)
         if(entity_json.contains("Position"))
         {
             json j = entity_json["Position"];
-            Position pos;
-
-            pos.x = j.at("pos_x").get<float>();
-            pos.y = j.at("pos_y").get<float>();
-
+            Position pos(j.at("pos_x").get<float>(), j.at("pos_y").get<float>());
             manager.AddComponent<Position>(id, std::move(pos));
         }
     }

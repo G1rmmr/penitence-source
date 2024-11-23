@@ -19,11 +19,21 @@
 
 namespace G2D
 {
-    struct KeyReleased : public Event
+    enum class Key
     {
-        sf::Keyboard::Key code;
+        W = sf::Keyboard::W,
+        A = sf::Keyboard::A,
+        S = sf::Keyboard::S,
+        D = sf::Keyboard::D,
+        ESC = sf::Keyboard::Escape
+    };
 
-        KeyReleased(sf::Keyboard::Key code) : code(code)
+    struct Keyboard : public Event
+    {
+        Key code;
+        bool is_pressed = false;
+
+        Keyboard(Key code, bool pressed) : code(code), is_pressed(pressed)
         {
 
         }

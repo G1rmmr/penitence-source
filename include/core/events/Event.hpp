@@ -15,12 +15,13 @@
 
 #pragma once
 
+#include <string>
+
 namespace G2D
 {
     enum class EventType
     {
-        KeyPressed,
-        KeyReleased
+        KeyInput,
     };
 
     struct Event

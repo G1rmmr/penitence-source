@@ -76,46 +76,29 @@ void Game::Init()
     world->AddSystem<Movement>();
     world->AddSystem<Rendering>();
 
-    dispatcher->AddListener(EventType::KeyPressed,
+    dispatcher->AddListener(EventType::KeyInput,
         [&](const std::shared_ptr<Event>& event)
         {
-            auto key = std::static_pointer_cast<KeyPressed>(event);
+            auto key = std::static_pointer_cast<Keyboard>(event);
             Velocity* vel = manager->GetComponent<Velocity>(protagonist);
 
             switch(key->code)
             {
-            case sf::Keyboard::A:
-                vel->x -= 200.f;
+            case Key::A:
+                vel->x = key->is_pressed ? -200.f : 0.f;
                 break;
 
-            case sf::Keyboard::D:
-                vel->x += 200.f;
+            case Key::D:
+                vel->x = key->is_pressed ? 200.f : 0.f;
                 break;
 
-            case sf::Keyboard::Escape:
-                window->close();
+            case Key::ESC:
+                if(key->is_pressed)
+                    window->close();
+
                 break;
 
             default: break;
-            }
-        });
-
-    dispatcher->AddListener(EventType::KeyReleased,
-        [&](const std::shared_ptr<Event>& event)
-        {
-            printf("DEBUG\n");
-            auto key = std::static_pointer_cast<KeyReleased>(event);
-            Velocity* vel = manager->GetComponent<Velocity>(protagonist);
-
-            switch(key->code)
-            {
-            case sf::Keyboard::A:
-            case sf::Keyboard::D:
-                vel->x = 0.f;
-                break;
-
-            default:
-                break;
             }
         });
 
@@ -135,10 +118,16 @@ void Game::HandleEvent()
             window->close();
 
         else if(event->type == sf::Event::KeyPressed)
-            announcer->PublishEvent(std::make_shared<KeyPressed>(event->key.code));
+        {
+            Key code = static_cast<Key>(event->key.code);
+            announcer->PublishEvent(std::make_shared<Keyboard>(code, true));
+        }
 
         else if(event->type == sf::Event::KeyReleased)
-            announcer->PublishEvent(std::make_shared<KeyReleased>(event->key.code));
+        {
+            Key code = static_cast<Key>(event->key.code);
+            announcer->PublishEvent(std::make_shared<Keyboard>(code, false));
+        }
     }
     announcer->ProcessEvents(*dispatcher);
 }
@@ -161,10 +150,11 @@ void Game::Render()
 void Game::Run()
 {
     HandleEvent();
-
     Update();
 
-    window->clear(sf::Color::Black);
+    sf::Color gray{0x7f, 0x7f, 0x7f};
+    window->clear(gray);
+
     Render();
     window->display();
 }
@@ -172,7 +162,5 @@ void Game::Run()
 void Game::Shutdown()
 {
     printf("GAME OVER\n");
-
-    if(USING_SAVE_FILE)
-        storage->Save(*manager);
+    storage->Save(*manager);
 }

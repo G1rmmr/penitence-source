@@ -17,6 +17,8 @@
 
 #include "core/Core.hpp"
 
+// TO-DO : SFML 라이브러리를 추상화하여 오로지 G2D 라이브러리만을 사용할 것.
+
 namespace G2D
 {
     class Game
@@ -31,7 +33,7 @@ namespace G2D
         inline static const uint16_t PROTAGONIST_WIDTH = 128;
         inline static const uint16_t PROTAGONIST_HEIGHT = 128;
 
-        inline static const bool USING_SAVE_FILE = false;
+        inline static const bool USING_SAVE_FILE = true;
 
         Game() = default;
 

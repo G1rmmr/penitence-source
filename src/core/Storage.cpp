@@ -70,7 +70,7 @@ void Storage::Load(ECSManager& manager)
         if(entity_json.contains("Position"))
         {
             json j = entity_json["Position"];
-            Position pos(j.at("pos_x").get<float>(), j.at("pos_y").get<float>());
+            Position pos(j.at("x").get<float>(), j.at("y").get<float>());
             manager.AddComponent<Position>(id, std::move(pos));
         }
     }

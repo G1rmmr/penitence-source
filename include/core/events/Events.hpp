@@ -16,5 +16,4 @@
 #pragma once
 
 #include "Event.hpp"
-#include "KeyPressed.hpp"
-#include "KeyReleased.hpp"
+#include "Keyboard.hpp"

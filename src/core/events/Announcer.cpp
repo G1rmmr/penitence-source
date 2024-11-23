@@ -19,18 +19,18 @@
 
 using namespace G2D;
 
-void Announcer::PublishEvent(const std::shared_ptr<Event>& event)
+void Announcer::PublishEvent(const std::shared_ptr<Event>& event) // DONE
 {
     events.push(event);
 }
 
 void Announcer::ProcessEvents(Dispatcher& dispatcher)
 {
-    while (!events.empty())
+    while(!events.empty())
     {
         auto event = events.front();
         events.pop();
-        printf("Processing Event: %d\n", event->type);
+        
         dispatcher.DispatchEvent(event);
     }
 }

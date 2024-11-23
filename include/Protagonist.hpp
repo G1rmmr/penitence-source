@@ -22,9 +22,18 @@ namespace MIR
     class Protagonist
     {
     public:
+        enum class State
+        {
+            Idle,
+            MoveLeft,
+            MoveRight,
+            Jump
+        };
+
         Protagonist() = default;
-        
+
         void Init(ECSManager& manager, Storage& storage);
+        void SetState(State state);
         
         inline Entity::ID GetID() const
         {
@@ -40,5 +49,6 @@ namespace MIR
         const bool USING_SAVE_FILE = true;
 
         Entity::ID id;
+        State now_state;
     };
 }

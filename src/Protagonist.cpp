@@ -55,4 +55,11 @@ void Protagonist::Init(ECSManager& manager, Storage& storage)
     }
     else
         fprintf(stderr, "TEXTURE NOT FOUND!\n");
+
+    now_state = State::Idle;
+}
+
+void Protagonist::SetState(State state)
+{
+    now_state = state;
 }

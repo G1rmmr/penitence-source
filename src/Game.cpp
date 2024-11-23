@@ -40,11 +40,30 @@ void Game::Init()
             switch(key->code)
             {
             case Key::A:
-                vel->x = key->is_pressed ? -200.f : 0.f;
+                if(key->is_pressed)
+                {
+                    vel->x = -200.f;
+                    protagonist->SetState(Protagonist::State::MoveLeft);
+                }
+                else
+                {
+                    vel->x = 0.f;
+                    protagonist->SetState(Protagonist::State::Idle);
+                }
+
                 break;
 
             case Key::D:
-                vel->x = key->is_pressed ? 200.f : 0.f;
+                if(key->is_pressed)
+                {
+                    vel->x = 200.f;
+                    protagonist->SetState(Protagonist::State::MoveLeft);
+                }
+                else
+                {
+                    vel->x = 0.f;
+                    protagonist->SetState(Protagonist::State::Idle);
+                }
                 break;
 
             case Key::ESC:
@@ -92,8 +111,6 @@ void Game::Update()
     static sf::Clock clock;
 
     const float dt = clock.restart().asSeconds();
-    const float speed = 200.f;
-
     world->Update(*manager, dt);
 }
 

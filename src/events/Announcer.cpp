@@ -13,20 +13,24 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "core/events/Dispatcher.hpp"
+#include <cstdio>
+
+#include "events/Announcer.hpp"
 
 using namespace MIR;
 
-void Dispatcher::AddListener(EventType type, Handler handler)
+void Announcer::PublishEvent(const std::shared_ptr<Event>& event) // DONE
 {
-    listeners[type].emplace_back(handler);
+    events.push(event);
 }
 
-void Dispatcher::DispatchEvent(const std::shared_ptr<Event>& event)
+void Announcer::ProcessEvents(Dispatcher& dispatcher)
 {
-    auto it = listeners.find(event->type);
-
-    if(it != listeners.end())
-        for(auto& handler : it->second)
-            handler(event);
+    while(!events.empty())
+    {
+        auto event = events.front();
+        events.pop();
+        
+        dispatcher.DispatchEvent(event);
+    }
 }

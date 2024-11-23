@@ -17,7 +17,7 @@
 
 int main()
 {
-    G2D::Game game;
+    MIR::Game game;
     game.Init();
 
     while(game.IsRunning())

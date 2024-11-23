@@ -21,7 +21,7 @@
 #include "Events.hpp"
 #include "Dispatcher.hpp"
 
-namespace G2D
+namespace MIR
 {
     class Announcer
     {

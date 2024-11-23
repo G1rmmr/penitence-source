@@ -15,7 +15,7 @@
 
 #pragma once
 
-namespace G2D
+namespace MIR
 {
     constexpr std::uint8_t MAX_COMPONENTS = 0xFF;
 

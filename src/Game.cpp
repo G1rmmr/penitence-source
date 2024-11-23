@@ -15,7 +15,7 @@
 
 #include "Game.hpp"
 
-using namespace G2D;
+using namespace MIR;
 
 void Game::Init()
 {

@@ -15,7 +15,7 @@
 
 #include "core/Storage.hpp"
 
-using namespace G2D;
+using namespace MIR;
 using namespace nlohmann;
 
 void Storage::Save(ECSManager& manager)

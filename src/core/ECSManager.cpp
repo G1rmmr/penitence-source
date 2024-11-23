@@ -15,7 +15,7 @@
 
 #include "core/ECSManager.hpp"
 
-using namespace G2D;
+using namespace MIR;
 
 ECSManager::~ECSManager()
 {

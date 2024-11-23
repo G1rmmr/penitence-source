@@ -17,7 +17,7 @@
 
 #include "Event.hpp"
 
-namespace G2D
+namespace MIR
 {
     enum class Key
     {

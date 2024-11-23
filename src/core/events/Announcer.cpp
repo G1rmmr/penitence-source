@@ -17,7 +17,7 @@
 
 #include "core/events/Announcer.hpp"
 
-using namespace G2D;
+using namespace MIR;
 
 void Announcer::PublishEvent(const std::shared_ptr<Event>& event) // DONE
 {

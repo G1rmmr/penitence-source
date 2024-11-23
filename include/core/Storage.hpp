@@ -24,7 +24,7 @@
 #include "ECSManager.hpp"
 #include "components/Components.hpp"
 
-namespace G2D
+namespace MIR
 {
     class Storage
     {

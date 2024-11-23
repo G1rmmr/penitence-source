@@ -19,7 +19,7 @@
 
 #include "components/Components.hpp"
 
-using namespace G2D;
+using namespace MIR;
 
 void Rendering::Update(ECSManager& manager, const float dt)
 {

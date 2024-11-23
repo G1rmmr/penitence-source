@@ -17,9 +17,9 @@
 
 #include "core/Core.hpp"
 
-// TO-DO : SFML 라이브러리를 추상화하여 오로지 G2D 라이브러리만을 사용할 것.
+// TO-DO : SFML 라이브러리를 추상화하여 오로지 MIR 라이브러리만을 사용할 것.
 
-namespace G2D
+namespace MIR
 {
     class Game
     {

@@ -26,7 +26,7 @@
 #include "components/Component.hpp"
 #include "components/ComponentPool.hpp"
 
-namespace G2D
+namespace MIR
 {
     using Mask = std::bitset<MAX_COMPONENTS>;
 

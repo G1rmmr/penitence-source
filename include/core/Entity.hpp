@@ -17,7 +17,7 @@
 
 #include <cstdint>
 
-namespace G2D
+namespace MIR
 {
     struct Entity
     {

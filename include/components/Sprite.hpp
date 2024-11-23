@@ -21,7 +21,7 @@
 
 #include "Component.hpp"
 
-namespace G2D
+namespace MIR
 {
     struct Sprite final : public Component
     {

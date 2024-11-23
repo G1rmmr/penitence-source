@@ -15,7 +15,7 @@
 
 #include "core/events/Dispatcher.hpp"
 
-using namespace G2D;
+using namespace MIR;
 
 void Dispatcher::AddListener(EventType type, Handler handler)
 {

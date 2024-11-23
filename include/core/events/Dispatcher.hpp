@@ -21,7 +21,7 @@
 
 #include "Event.hpp"
 
-namespace G2D
+namespace MIR
 {
     class Dispatcher
     {

@@ -21,7 +21,7 @@
 #include <functional>
 #include <stdexcept>
 
-namespace G2D
+namespace MIR
 {
     class PoolBase
     {

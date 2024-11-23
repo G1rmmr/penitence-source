@@ -13,20 +13,20 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "core/Game.hpp"
+#include "Game.hpp"
 
 using namespace G2D;
 
 void Game::Init()
 {
-    bool use_save = false;
-
     window = std::make_unique<sf::RenderWindow>();
     event = std::make_unique<sf::Event>();
     music = std::make_unique<sf::Music>();
     world = std::make_unique<World>();
     manager = std::make_unique<ECSManager>();
     storage = std::make_unique<Storage>(SAVE_PATH);
+    announcer = std::make_unique<Announcer>();
+    dispatcher = std::make_unique<Dispatcher>();
 
     // Window creation
     window->create(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), WINDOW_TITLE);
@@ -34,7 +34,7 @@ void Game::Init()
 
     // Protagonist creation
 
-    if(use_save)
+    if(USING_SAVE_FILE)
         storage->Load(*manager);
     else
         manager->AddComponent<Position>(protagonist,
@@ -76,6 +76,32 @@ void Game::Init()
     world->AddSystem<Movement>();
     world->AddSystem<Rendering>();
 
+    dispatcher->AddListener(EventType::KeyInput,
+        [&](const std::shared_ptr<Event>& event)
+        {
+            auto key = std::static_pointer_cast<Keyboard>(event);
+            Velocity* vel = manager->GetComponent<Velocity>(protagonist);
+
+            switch(key->code)
+            {
+            case Key::A:
+                vel->x = key->is_pressed ? -200.f : 0.f;
+                break;
+
+            case Key::D:
+                vel->x = key->is_pressed ? 200.f : 0.f;
+                break;
+
+            case Key::ESC:
+                if(key->is_pressed)
+                    window->close();
+
+                break;
+
+            default: break;
+            }
+        });
+
     // Set Music
     if(!music->openFromFile("../assets/audios/Penitence.wav"))
         return;
@@ -88,24 +114,22 @@ void Game::HandleEvent()
 {
     while(window->pollEvent(*event))
     {
-        switch(event->type)
-        {
-        case sf::Event::Closed:
+        if(event->type == sf::Event::Closed)
             window->close();
-            break;
 
-        case sf::Event::KeyPressed:
-            switch(event->key.code)
-            {
-            case sf::Keyboard::Escape:
-                window->close();
-                break;
-            
-            default: break;
-            }
-        default: break;
+        else if(event->type == sf::Event::KeyPressed)
+        {
+            Key code = static_cast<Key>(event->key.code);
+            announcer->PublishEvent(std::make_shared<Keyboard>(code, true));
+        }
+
+        else if(event->type == sf::Event::KeyReleased)
+        {
+            Key code = static_cast<Key>(event->key.code);
+            announcer->PublishEvent(std::make_shared<Keyboard>(code, false));
         }
     }
+    announcer->ProcessEvents(*dispatcher);
 }
 
 void Game::Update()
@@ -128,7 +152,9 @@ void Game::Run()
     HandleEvent();
     Update();
 
-    window->clear(sf::Color::Black);
+    sf::Color gray{0x7f, 0x7f, 0x7f};
+    window->clear(gray);
+
     Render();
     window->display();
 }

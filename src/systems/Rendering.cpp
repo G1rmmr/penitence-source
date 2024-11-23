@@ -23,12 +23,15 @@ using namespace G2D;
 
 void Rendering::Update(ECSManager& manager, const float dt)
 {
-    std::vector<Entity::ID> entities = manager.Query<Sprite, Animation>();
+    std::vector<Entity::ID> entities = manager.Query<Position, Sprite, Animation>();
 
     for(auto& id : entities)
     {
         Animation* anim = manager.GetComponent<Animation>(id);
         Sprite* spr = manager.GetComponent<Sprite>(id);
+        Position* pos = manager.GetComponent<Position>(id);
+
+        spr->sprite.setPosition({pos->x, pos->y});
 
         if(anim->frames.empty())
             continue;

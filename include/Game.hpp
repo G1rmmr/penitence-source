@@ -15,7 +15,9 @@
 
 #pragma once
 
-#include "Core.hpp"
+#include "core/Core.hpp"
+
+// TO-DO : SFML 라이브러리를 추상화하여 오로지 G2D 라이브러리만을 사용할 것.
 
 namespace G2D
 {
@@ -30,6 +32,8 @@ namespace G2D
         
         inline static const uint16_t PROTAGONIST_WIDTH = 128;
         inline static const uint16_t PROTAGONIST_HEIGHT = 128;
+
+        inline static const bool USING_SAVE_FILE = true;
 
         Game() = default;
 
@@ -53,5 +57,8 @@ namespace G2D
         std::unique_ptr<World> world;
         std::unique_ptr<ECSManager> manager;
         std::unique_ptr<Storage> storage;
+
+        std::unique_ptr<Announcer> announcer;
+        std::unique_ptr<Dispatcher> dispatcher;
     };
 }

@@ -23,27 +23,13 @@ using namespace MIR;
 
 void Rendering::Update(ECSManager& manager, const float dt)
 {
-    std::vector<Entity::ID> entities = manager.Query<Position, Sprite, Animation>();
+    std::vector<Entity::ID> entities = manager.Query<Position, Sprite>();
 
     for(auto& id : entities)
     {
-        Animation* anim = manager.GetComponent<Animation>(id);
         Sprite* spr = manager.GetComponent<Sprite>(id);
         Position* pos = manager.GetComponent<Position>(id);
-
         spr->sprite.setPosition({pos->x, pos->y});
-
-        if(anim->frames.empty())
-            continue;
-
-        anim->elapsed += dt;
-
-        if(anim->elapsed >= anim->delay)
-        {
-            anim->elapsed = 0.f;
-            anim->curr = (anim->curr + 1) % anim->frames.size();
-            spr->sprite.setTextureRect(anim->frames[anim->curr]);
-        }
     }
 }
 

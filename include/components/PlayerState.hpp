@@ -1,4 +1,4 @@
-// Created on Wed Oct 30 2024
+// Created on Sun Nov 24 2024
 // © 2024 BLACKHAND Studio. All rights reserved.
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,6 +15,30 @@
 
 #pragma once
 
-#include "systems/Movement.hpp"
-#include "systems/Rendering.hpp"
-#include "systems/Animating.hpp"
+#include <cstdint>
+
+#include "Component.hpp"
+
+namespace MIR
+{
+    using State = std::uint8_t;
+
+    struct PlayerState : public Component
+    {
+        enum
+        {
+            Idle = 0,
+            Moving = 1,
+            Jumping = 2
+        };
+
+        State now_state = PlayerState::Idle;
+
+        PlayerState() = default;
+
+        PlayerState(State state) : now_state(state)
+        {
+
+        }
+    };
+}

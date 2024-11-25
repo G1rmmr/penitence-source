@@ -39,27 +39,15 @@ void Protagonist::Init(ECSManager& manager, Storage& storage)
         spr->sprite.setTextureRect(sf::IntRect{
             0, 0, PROTAGONIST_WIDTH, PROTAGONIST_HEIGHT});
 
-        manager.AddComponent<Sprite>(id, texture);
+        manager.AddComponent<Sprite>(id, texture, PROTAGONIST_WIDTH, PROTAGONIST_HEIGHT);
 
         std::vector<sf::IntRect> frames;
-
         float delay = 1.f / 6.f;
-        uint8_t num_frame = 4;
-
-        // Animation set.
-        for(uint8_t i = 0; i < num_frame; ++i)
-            frames.emplace_back(sf::IntRect{
-                i * PROTAGONIST_WIDTH, 0, PROTAGONIST_WIDTH, PROTAGONIST_HEIGHT});
-        
-        manager.AddComponent<Animation>(id, frames, delay, 0.f, num_frame, 0, 0);
+        std::uint8_t num_frame = 4;
+        manager.AddComponent<Animation>(id, frames, delay, 0.f, num_frame, 0);
     }
     else
         fprintf(stderr, "TEXTURE NOT FOUND!\n");
 
-    now_state = State::Idle;
-}
-
-void Protagonist::SetState(State state)
-{
-    now_state = state;
+    manager.AddComponent<PlayerState>(id);
 }

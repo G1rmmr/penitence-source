@@ -1,4 +1,4 @@
-// Created on Wed Oct 30 2024
+// Created on Sun Nov 24 2024
 // © 2024 BLACKHAND Studio. All rights reserved.
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,6 +15,15 @@
 
 #pragma once
 
-#include "systems/Movement.hpp"
-#include "systems/Rendering.hpp"
-#include "systems/Animating.hpp"
+#include "System.hpp"
+
+#include "core/ECSManager.hpp"
+
+namespace MIR
+{
+    class Animating : public System
+    {
+    public:
+        virtual void Update(ECSManager& manager, const float dt) = 0;
+    };
+}

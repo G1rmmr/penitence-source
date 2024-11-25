@@ -35,44 +35,43 @@ void Game::Init()
         [&](const std::shared_ptr<Event>& event)
         {
             auto key = std::static_pointer_cast<Keyboard>(event);
+
             Velocity* vel = manager->GetComponent<Velocity>(prot_id);
+            PlayerState* prot_state = manager->GetComponent<PlayerState>(prot_id);
 
-            switch(key->code)
+            if(key->is_pressed)
             {
-            case Key::A:
-                if(key->is_pressed)
+                switch(key->code)
                 {
+                case Key::A:
                     vel->x = -200.f;
-                    protagonist->SetState(Protagonist::State::MoveLeft);
-                }
-                else
-                {
-                    vel->x = 0.f;
-                    protagonist->SetState(Protagonist::State::Idle);
-                }
+                    prot_state->now_state = PlayerState::Moving;
+                    break;
 
-                break;
-
-            case Key::D:
-                if(key->is_pressed)
-                {
+                case Key::D:
                     vel->x = 200.f;
-                    protagonist->SetState(Protagonist::State::MoveLeft);
-                }
-                else
-                {
-                    vel->x = 0.f;
-                    protagonist->SetState(Protagonist::State::Idle);
-                }
-                break;
+                    prot_state->now_state = PlayerState::Moving;
+                    break;
 
-            case Key::ESC:
-                if(key->is_pressed)
+                case Key::ESC:
                     window->close();
+                    break;
 
-                break;
+                default: break;
+                }
+            }
+            else
+            {
+                switch(key->code)
+                {
+                case Key::A:
+                case Key::D:
+                    vel->x = 0.f;
+                    prot_state->now_state = PlayerState::Idle;
+                    break;
 
-            default: break;
+                default: break;
+                }
             }
         });
 

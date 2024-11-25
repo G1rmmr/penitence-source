@@ -19,35 +19,41 @@ using namespace MIR;
 
 void Protagonist::Init(ECSManager& manager, Storage& storage)
 {
+    // ID set
     id = manager.CreateEntity();
 
+    // Position set
     if(USING_SAVE_FILE)
         storage.Load(manager);
     else
         manager.AddComponent<Position>(id, INIT_WIDTH, INIT_HEIGHT);
 
+    // Velocity set
     manager.AddComponent<Velocity>(id);
 
+    // Sprite set
     std::shared_ptr<sf::Texture> texture = std::make_shared<sf::Texture>();
     if(texture->loadFromFile(IMG_PATH))
     {
-        Position* pos = manager.GetComponent<Position>(id);
-
-        auto spr = std::make_shared<Sprite>(texture);
-        spr->sprite.setPosition(pos->x, pos->y);
-        spr->sprite.setScale(0.5f, 0.5f);
-        spr->sprite.setTextureRect(sf::IntRect{
-            0, 0, PROTAGONIST_WIDTH, PROTAGONIST_HEIGHT});
-
         manager.AddComponent<Sprite>(id, texture, PROTAGONIST_WIDTH, PROTAGONIST_HEIGHT);
-
-        std::vector<sf::IntRect> frames;
-        float delay = 1.f / 6.f;
-        std::uint8_t num_frame = 4;
-        manager.AddComponent<Animation>(id, frames, delay, 0.f, num_frame, 0);
+        Sprite* spr = manager.GetComponent<Sprite>(id);
+        spr->sprite.setScale(0.5f, 0.5f);
+        spr->sprite.setTextureRect({0, 0, PROTAGONIST_WIDTH, PROTAGONIST_HEIGHT});
     }
     else
         fprintf(stderr, "TEXTURE NOT FOUND!\n");
 
+    // State set
     manager.AddComponent<PlayerState>(id);
+
+    // Animation set
+    manager.AddComponent<Animation>(id);
+    
+    Animation* anim = manager.GetComponent<Animation>(id);
+
+    for(std::size_t i = 0; i < 4; ++i)
+        anim->frames.emplace_back(sf::IntRect{
+            static_cast<int>(i * PROTAGONIST_WIDTH), 0,
+            static_cast<int>(PROTAGONIST_WIDTH),
+            static_cast<int>(PROTAGONIST_HEIGHT)});
 }

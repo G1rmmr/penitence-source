@@ -30,6 +30,7 @@ void Game::Init()
     // Set a world;
     world->AddSystem<Movement>();
     world->AddSystem<Rendering>();
+    world->AddSystem<Animating>();
 
     dispatcher->AddListener(EventType::KeyInput,
         [&](const std::shared_ptr<Event>& event)
@@ -108,7 +109,6 @@ void Game::HandleEvent()
 void Game::Update()
 {
     static sf::Clock clock;
-
     const float dt = clock.restart().asSeconds();
     world->Update(*manager, dt);
 }

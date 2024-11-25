@@ -17,7 +17,6 @@
 
 #include <SFML/Graphics.hpp>
 
-#include <cstdint>
 #include <vector>
 
 #include "Component.hpp"
@@ -31,19 +30,13 @@ namespace MIR
         float delay;
         float elapsed;
 
-        std::uint8_t num_frame;
-        std::uint8_t curr;
+        std::size_t curr_frame;
 
-        Animation() : frames(), delay(0.f), elapsed(0.f), num_frame(0), curr(0)
-        {
-            frames = std::vector<sf::IntRect>();
-        } 
+        bool is_looping;
+        bool is_playing;
 
-        Animation(const std::vector<sf::IntRect>& frames,
-            float delay, float elapsed,
-            uint8_t num_frame, uint8_t curr)
-        : frames(frames), delay(delay), elapsed(elapsed),
-        num_frame(num_frame), curr(curr)
+        Animation()
+            : delay(0.1f), elapsed(0.f), curr_frame(0), is_looping(true), is_playing(true)
         {
             
         }

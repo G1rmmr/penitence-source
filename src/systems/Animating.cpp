@@ -20,31 +20,34 @@ using namespace MIR;
 
 void Animating::Update(ECSManager& manager, const float dt)
 {
-    std::vector<Entity::ID> entities = manager.Query<Sprite, PlayerState, Animation>();
+    auto entities = manager.Query<Animation, Sprite>();
 
-    for(auto& id : entities)
+    for(const auto id : entities)
     {
         Animation* anim = manager.GetComponent<Animation>(id);
         Sprite* spr = manager.GetComponent<Sprite>(id);
-        PlayerState* state = manager.GetComponent<PlayerState>(id);
 
-        if(anim->frames.empty())
-            continue;
-
-        anim->frames.clear();
-
-        for(std::uint8_t i = 0; i < anim->num_frame; ++i)
-            anim->frames.emplace_back(sf::IntRect{
-                i * spr->width, state->now_state * spr->height,
-                    spr->width, spr->height});
+        if(!anim->is_playing || anim->frames.empty())
+             continue;
 
         anim->elapsed += dt;
 
         if(anim->elapsed >= anim->delay)
         {
             anim->elapsed = 0.f;
-            anim->curr = (anim->curr + 1) % anim->frames.size();
-            spr->sprite.setTextureRect(anim->frames[anim->curr]);
+            anim->curr_frame++;
+            
+            if(anim->curr_frame >= anim->frames.size())
+            {
+                if(anim->is_looping)
+                    anim->curr_frame = 0;
+                else
+                {
+                    anim->curr_frame--;
+                    anim->is_playing = false;
+                }
+            }
+            spr->sprite.setTextureRect(anim->frames[anim->curr_frame]);
         }
     }
 }

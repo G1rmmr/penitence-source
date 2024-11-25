@@ -33,12 +33,17 @@ namespace MIR
 
     private:
         const std::string IMG_PATH = "../assets/images/player_anim.png";
+
         const std::uint16_t INIT_WIDTH = 400;
         const std::uint16_t INIT_HEIGHT = 300;
-        const uint16_t PROTAGONIST_WIDTH = 128;
-        const uint16_t PROTAGONIST_HEIGHT = 128;
+        const std::uint16_t PROTAGONIST_WIDTH = 128;
+        const std::uint16_t PROTAGONIST_HEIGHT = 128;
+
+        const std::uint8_t MAX_ANIMATION = 3;
+
         const bool USING_SAVE_FILE = true;
 
+        std::unordered_map<State, std::vector<sf::IntRect>> anim_set;
         Entity::ID id;
     };
 }

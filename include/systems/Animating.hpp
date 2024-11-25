@@ -15,6 +15,9 @@
 
 #pragma once
 
+#include <unordered_map>
+#include <cstdint>
+
 #include "System.hpp"
 
 #include "core/ECSManager.hpp"
@@ -24,6 +27,6 @@ namespace MIR
     class Animating : public System
     {
     public:
-        virtual void Update(ECSManager& manager, const float dt) = 0;
+        void Update(ECSManager& manager, const float dt) override final;
     };
 }

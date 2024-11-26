@@ -17,7 +17,7 @@
 
 #include "core/ECSManager.hpp"
 
-namespace G2D
+namespace MIR
 {
     class System
     {

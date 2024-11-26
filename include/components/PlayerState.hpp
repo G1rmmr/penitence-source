@@ -1,4 +1,4 @@
-// Created on Fri Nov 22 2024
+// Created on Sun Nov 24 2024
 // © 2024 BLACKHAND Studio. All rights reserved.
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,18 +15,30 @@
 
 #pragma once
 
-#include <string>
+#include <cstdint>
 
-namespace G2D
+#include "Component.hpp"
+
+namespace MIR
 {
-    enum class EventType
-    {
-        KeyInput,
-    };
+    using State = std::uint8_t;
 
-    struct Event
+    struct PlayerState : public Component
     {
-        virtual ~Event() = default;
-        EventType type;
+        enum
+        {
+            Idle = 0,
+            Moving = 1,
+            Jumping = 2
+        };
+
+        State now_state = PlayerState::Idle;
+
+        PlayerState() = default;
+
+        PlayerState(State state) : now_state(state)
+        {
+
+        }
     };
 }

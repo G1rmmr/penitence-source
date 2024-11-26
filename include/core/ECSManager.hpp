@@ -26,7 +26,7 @@
 #include "components/Component.hpp"
 #include "components/ComponentPool.hpp"
 
-namespace G2D
+namespace MIR
 {
     using Mask = std::bitset<MAX_COMPONENTS>;
 
@@ -78,6 +78,13 @@ namespace G2D
                 return static_cast<T*>(it->second[tag].get());
 
             return nullptr;
+        }
+
+        template <typename T>
+        inline bool HasComponent(Entity::ID id)
+        {
+            Component::Tag tag = GetTag<T>();
+            return masks[id][tag];
         }
 
         template <typename... Components>

@@ -18,7 +18,7 @@
 #include "systems/Movement.hpp"
 #include "components/Components.hpp"
 
-using namespace G2D;
+using namespace MIR;
 
 void Movement::Update(ECSManager& manager, const float dt)
 {

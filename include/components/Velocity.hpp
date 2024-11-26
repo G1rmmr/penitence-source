@@ -17,7 +17,7 @@
 
 #include "Component.hpp"
 
-namespace G2D
+namespace MIR
 {
     struct Velocity final : public Component
     {

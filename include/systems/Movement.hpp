@@ -17,7 +17,7 @@
 
 #include "System.hpp"
 
-namespace G2D
+namespace MIR
 {
     class Movement final : public System
     {

@@ -13,25 +13,24 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#pragma once
+#include <cstdio>
 
-#include <memory>
-#include <queue>
+#include "events/Announcer.hpp"
 
-#include "Events.hpp"
-#include "Dispatcher.hpp"
+using namespace MIR;
 
-namespace G2D
+void Announcer::PublishEvent(const std::shared_ptr<Event>& event) // DONE
 {
-    class Announcer
-    {
-    public:
-        Announcer() = default;
-        
-        void PublishEvent(const std::shared_ptr<Event>& event);
-        void ProcessEvents(Dispatcher& dispatcher);
+    events.push(event);
+}
 
-    private:
-        std::queue<std::shared_ptr<Event>> events;
-    };
+void Announcer::ProcessEvents(Dispatcher& dispatcher)
+{
+    while(!events.empty())
+    {
+        auto event = events.front();
+        events.pop();
+        
+        dispatcher.DispatchEvent(event);
+    }
 }

@@ -13,27 +13,29 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#pragma once
-
-#include <unordered_map>
-#include <vector>
-#include <functional>
+#include <SFML/Window.hpp>
 
 #include "Event.hpp"
 
-namespace G2D
+namespace MIR
 {
-    class Dispatcher
+    enum class Key
     {
-        using Handler = std::function<void(const std::shared_ptr<Event>&)>;
+        W = sf::Keyboard::W,
+        A = sf::Keyboard::A,
+        S = sf::Keyboard::S,
+        D = sf::Keyboard::D,
+        ESC = sf::Keyboard::Escape
+    };
 
-    public:
-        Dispatcher() = default;
+    struct Keyboard : public Event
+    {
+        Key code;
+        bool is_pressed = false;
 
-        void AddListener(EventType type, Handler handler);
-        void DispatchEvent(const std::shared_ptr<Event>& event);
+        Keyboard(Key code, bool pressed) : code(code), is_pressed(pressed)
+        {
 
-    private:
-        std::unordered_map<EventType, std::vector<Handler>> listeners;
+        }
     };
 }

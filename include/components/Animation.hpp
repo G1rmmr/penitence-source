@@ -17,12 +17,11 @@
 
 #include <SFML/Graphics.hpp>
 
-#include <cstdint>
 #include <vector>
 
 #include "Component.hpp"
 
-namespace G2D
+namespace MIR
 {
     struct Animation final : public Component
     {
@@ -31,21 +30,13 @@ namespace G2D
         float delay;
         float elapsed;
 
-        uint8_t num_frame;
-        uint8_t curr;
-        uint8_t type;
+        std::size_t curr_frame;
 
-        Animation() : frames(), delay(0.f), elapsed(0.f),
-            num_frame(0), curr(0), type(0)
-        {
-            frames = std::vector<sf::IntRect>();
-        } 
+        bool is_looping;
+        bool is_playing;
 
-        Animation(const std::vector<sf::IntRect>& frames,
-            float delay, float elapsed,
-            uint8_t num_frame, uint8_t curr, uint8_t type)
-        : frames(frames), delay(delay), elapsed(elapsed),
-        num_frame(num_frame), curr(curr), type(type)
+        Animation()
+            : delay(0.16f), elapsed(0.f), curr_frame(0), is_looping(true), is_playing(true)
         {
             
         }

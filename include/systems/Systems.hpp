@@ -17,3 +17,4 @@
 
 #include "systems/Movement.hpp"
 #include "systems/Rendering.hpp"
+#include "systems/Animating.hpp"

@@ -1,4 +1,4 @@
-// Created on Wed Oct 30 2024
+// Created on Fri Nov 22 2024
 // © 2024 BLACKHAND Studio. All rights reserved.
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,23 +15,25 @@
 
 #pragma once
 
-#include "Component.hpp"
+#include <unordered_map>
+#include <vector>
+#include <functional>
+
+#include "Event.hpp"
 
 namespace MIR
 {
-    struct Position final : public Component
+    class Dispatcher
     {
-        float x;
-        float y;
+        using Handler = std::function<void(const std::shared_ptr<Event>&)>;
 
-        Position() : x(0.f), y(0.f)
-        {
-            
-        }
+    public:
+        Dispatcher() = default;
 
-        Position(float x, float y) : x(x), y(y)
-        {
-            
-        }
+        void AddListener(EventType type, Handler handler);
+        void DispatchEvent(const std::shared_ptr<Event>& event);
+
+    private:
+        std::unordered_map<EventType, std::vector<Handler>> listeners;
     };
 }

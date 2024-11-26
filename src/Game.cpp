@@ -15,90 +15,67 @@
 
 #include "Game.hpp"
 
-using namespace G2D;
+using namespace MIR;
 
 void Game::Init()
 {
-    window = std::make_unique<sf::RenderWindow>();
-    event = std::make_unique<sf::Event>();
-    music = std::make_unique<sf::Music>();
-    world = std::make_unique<World>();
-    manager = std::make_unique<ECSManager>();
-    storage = std::make_unique<Storage>(SAVE_PATH);
-    announcer = std::make_unique<Announcer>();
-    dispatcher = std::make_unique<Dispatcher>();
-
-    // Window creation
+    SetManagers();
     window->create(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), WINDOW_TITLE);
-    Entity::ID protagonist = manager->CreateEntity();
 
-    // Protagonist creation
+    std::unique_ptr<Protagonist> protagonist = std::make_unique<Protagonist>();
+    protagonist->Init(*manager, *storage);
 
-    if(USING_SAVE_FILE)
-        storage->Load(*manager);
-    else
-        manager->AddComponent<Position>(protagonist,
-            static_cast<float>(WINDOW_WIDTH) * 0.5f,
-            static_cast<float>(WINDOW_HEIGHT) * 0.5f);
-
-    manager->AddComponent<Velocity>(protagonist);
-
-    std::shared_ptr<sf::Texture> texture = std::make_shared<sf::Texture>();
-    if(texture->loadFromFile("../assets/images/player_anim.png"))
-    {
-        Position* pos = manager->GetComponent<Position>(protagonist);
-
-        auto spr = std::make_shared<Sprite>(texture);
-        spr->sprite.setPosition(pos->x, pos->y);
-        spr->sprite.setScale(0.5f, 0.5f);
-        spr->sprite.setTextureRect(sf::IntRect{
-            0, 0, PROTAGONIST_WIDTH, PROTAGONIST_HEIGHT});
-
-        manager->AddComponent<Sprite>(protagonist, texture);
-
-        std::vector<sf::IntRect> frames;
-
-        float delay = 1.f / 6.f;
-        uint8_t num_frame = 4;
-
-        // Animation set.
-        for(uint8_t i = 0; i < num_frame; ++i)
-            frames.emplace_back(sf::IntRect{
-                i * PROTAGONIST_WIDTH, 0, PROTAGONIST_WIDTH, PROTAGONIST_HEIGHT});
-        
-        manager->AddComponent<Animation>(protagonist,
-            frames, delay, 0.f, num_frame, 0, 0);
-    }
-    else
-        fprintf(stderr, "TEXTURE NOT FOUND!\n");
+    Entity::ID prot_id = protagonist->GetID();
 
     // Set a world;
     world->AddSystem<Movement>();
     world->AddSystem<Rendering>();
+    world->AddSystem<Animating>();
 
     dispatcher->AddListener(EventType::KeyInput,
         [&](const std::shared_ptr<Event>& event)
         {
             auto key = std::static_pointer_cast<Keyboard>(event);
-            Velocity* vel = manager->GetComponent<Velocity>(protagonist);
 
-            switch(key->code)
+            Velocity* vel = manager->GetComponent<Velocity>(prot_id);
+            PlayerState* prot_state = manager->GetComponent<PlayerState>(prot_id);
+            Sprite* spr = manager->GetComponent<Sprite>(prot_id);
+
+            if(key->is_pressed)
             {
-            case Key::A:
-                vel->x = key->is_pressed ? -200.f : 0.f;
-                break;
+                switch(key->code)
+                {
+                case Key::A:
+                    vel->x = -200.f;
+                    prot_state->now_state = PlayerState::Moving;
+                    spr->sprite.setScale(-0.5f, 0.5f);
+                    break;
 
-            case Key::D:
-                vel->x = key->is_pressed ? 200.f : 0.f;
-                break;
+                case Key::D:
+                    vel->x = 200.f;
+                    prot_state->now_state = PlayerState::Moving;
+                    spr->sprite.setScale(0.5f, 0.5f);
+                    break;
 
-            case Key::ESC:
-                if(key->is_pressed)
+                case Key::ESC:
                     window->close();
+                    break;
 
-                break;
+                default: break;
+                }
+            }
+            else
+            {
+                switch(key->code)
+                {
+                case Key::A:
+                case Key::D:
+                    vel->x = 0.f;
+                    prot_state->now_state = PlayerState::Idle;
+                    break;
 
-            default: break;
+                default: break;
+                }
             }
         });
 
@@ -135,10 +112,7 @@ void Game::HandleEvent()
 void Game::Update()
 {
     static sf::Clock clock;
-
     const float dt = clock.restart().asSeconds();
-    const float speed = 200.f;
-
     world->Update(*manager, dt);
 }
 

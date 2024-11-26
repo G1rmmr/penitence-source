@@ -1,4 +1,4 @@
-// Created on Fri Nov 22 2024
+// Created on Sun Nov 24 2024
 // © 2024 BLACKHAND Studio. All rights reserved.
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,29 +13,20 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include <SFML/Window.hpp>
+#pragma once
 
-#include "Event.hpp"
+#include <unordered_map>
+#include <cstdint>
 
-namespace G2D
+#include "System.hpp"
+
+#include "core/ECSManager.hpp"
+
+namespace MIR
 {
-    enum class Key
+    class Animating : public System
     {
-        W = sf::Keyboard::W,
-        A = sf::Keyboard::A,
-        S = sf::Keyboard::S,
-        D = sf::Keyboard::D,
-        ESC = sf::Keyboard::Escape
-    };
-
-    struct Keyboard : public Event
-    {
-        Key code;
-        bool is_pressed = false;
-
-        Keyboard(Key code, bool pressed) : code(code), is_pressed(pressed)
-        {
-
-        }
+    public:
+        void Update(ECSManager& manager, const float dt) override final;
     };
 }

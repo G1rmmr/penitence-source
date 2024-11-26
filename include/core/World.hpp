@@ -23,7 +23,7 @@
 #include "components/Components.hpp"
 #include "systems/Systems.hpp"
 
-namespace G2D
+namespace MIR
 {   
     class World
     {

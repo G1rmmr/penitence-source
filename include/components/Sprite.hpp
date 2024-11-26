@@ -21,21 +21,33 @@
 
 #include "Component.hpp"
 
-namespace G2D
+namespace MIR
 {
     struct Sprite final : public Component
     {
         std::shared_ptr<sf::Texture> texture;
         sf::Sprite sprite;
 
-        Sprite() : texture(nullptr), sprite()
+        std::uint16_t width;
+        std::uint16_t height;
+
+        Sprite() : texture(nullptr), sprite(), width(0), height(0)
         {
 
         }
 
-        Sprite(std::shared_ptr<sf::Texture> texture) : texture(texture), sprite()
+        Sprite(std::shared_ptr<sf::Texture> texture)
+            : texture(texture), sprite(), width(0), height(0)
         {
-            if (texture)
+            if(texture)
+                sprite.setTexture(*texture);
+        }
+
+
+        Sprite(std::shared_ptr<sf::Texture> texture, std::uint16_t width, std::uint16_t height)
+            : texture(texture), sprite(), width(width), height(height)
+        {
+            if(texture)
                 sprite.setTexture(*texture);
         }
     };

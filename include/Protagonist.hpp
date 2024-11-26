@@ -1,4 +1,4 @@
-// Created on Fri Nov 15 2024
+// Created on Sun Nov 24 2024
 // © 2024 BLACKHAND Studio. All rights reserved.
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,29 +15,35 @@
 
 #pragma once
 
-#include <string>
-#include <fstream>
-#include <vector>
-
-#include <json.hpp>
-
-#include "ECSManager.hpp"
-#include "components/Components.hpp"
+#include "core/Core.hpp"
 
 namespace MIR
 {
-    class Storage
+    class Protagonist
     {
     public:
-        Storage(const std::string& path) : save_path(path)
-        {
+        Protagonist() = default;
 
+        void Init(ECSManager& manager, Storage& storage);
+        
+        inline Entity::ID GetID() const
+        {
+            return id;
         }
 
-        void Save(ECSManager& manager);
-        void Load(ECSManager& manager);
-
     private:
-        std::string save_path;
+        const std::string IMG_PATH = "../assets/images/player_anim.png";
+
+        const std::uint16_t INIT_WIDTH = 400;
+        const std::uint16_t INIT_HEIGHT = 300;
+        const std::uint16_t PROTAGONIST_WIDTH = 128;
+        const std::uint16_t PROTAGONIST_HEIGHT = 128;
+
+        const std::uint8_t MAX_ANIMATION = 3;
+
+        const bool USING_SAVE_FILE = true;
+
+        std::unordered_map<State, std::vector<sf::IntRect>> anim_set;
+        Entity::ID id;
     };
 }

@@ -13,24 +13,20 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include <cstdio>
+#include "events/Dispatcher.hpp"
 
-#include "core/events/Announcer.hpp"
+using namespace MIR;
 
-using namespace G2D;
-
-void Announcer::PublishEvent(const std::shared_ptr<Event>& event) // DONE
+void Dispatcher::AddListener(EventType type, Handler handler)
 {
-    events.push(event);
+    listeners[type].emplace_back(handler);
 }
 
-void Announcer::ProcessEvents(Dispatcher& dispatcher)
+void Dispatcher::DispatchEvent(const std::shared_ptr<Event>& event)
 {
-    while(!events.empty())
-    {
-        auto event = events.front();
-        events.pop();
-        
-        dispatcher.DispatchEvent(event);
-    }
+    auto it = listeners.find(event->type);
+
+    if(it != listeners.end())
+        for(auto& handler : it->second)
+            handler(event);
 }

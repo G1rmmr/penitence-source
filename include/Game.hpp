@@ -16,25 +16,15 @@
 #pragma once
 
 #include "core/Core.hpp"
+#include "Protagonist.hpp"
 
-// TO-DO : SFML 라이브러리를 추상화하여 오로지 G2D 라이브러리만을 사용할 것.
+// TO-DO : SFML 라이브러리를 추상화하여 오로지 MIR 라이브러리만을 사용할 것.
 
-namespace G2D
+namespace MIR
 {
     class Game
     {
     public:
-        inline static const std::string WINDOW_TITLE = "The Penitence";
-        inline static const std::string SAVE_PATH = "../savedata/save.json";
-
-        inline static const uint16_t WINDOW_WIDTH = 800;
-        inline static const uint16_t WINDOW_HEIGHT = 600;
-        
-        inline static const uint16_t PROTAGONIST_WIDTH = 128;
-        inline static const uint16_t PROTAGONIST_HEIGHT = 128;
-
-        inline static const bool USING_SAVE_FILE = true;
-
         Game() = default;
 
         void Init();
@@ -50,6 +40,12 @@ namespace G2D
         }
 
     private:
+        const std::string WINDOW_TITLE = "The Penitence";
+        const std::string SAVE_PATH = "../savedata/save.json";
+
+        const uint16_t WINDOW_WIDTH = 800;
+        const uint16_t WINDOW_HEIGHT = 600;
+
         std::unique_ptr<sf::RenderWindow> window;
         std::unique_ptr<sf::Event> event;
         std::unique_ptr<sf::Music> music;
@@ -60,5 +56,17 @@ namespace G2D
 
         std::unique_ptr<Announcer> announcer;
         std::unique_ptr<Dispatcher> dispatcher;
+
+        void SetManagers()
+        {
+            window = std::make_unique<sf::RenderWindow>();
+            event = std::make_unique<sf::Event>();
+            music = std::make_unique<sf::Music>();
+            world = std::make_unique<World>();
+            manager = std::make_unique<ECSManager>();
+            storage = std::make_unique<Storage>(SAVE_PATH);
+            announcer = std::make_unique<Announcer>();
+            dispatcher = std::make_unique<Dispatcher>();
+        }
     };
 }

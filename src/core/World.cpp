@@ -15,7 +15,7 @@
 
 #include "core/World.hpp"
 
-using namespace G2D;
+using namespace MIR;
 
 void World::Update(ECSManager& manager, const float dt)
 {

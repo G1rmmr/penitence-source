@@ -39,6 +39,7 @@ void Protagonist::Init(ECSManager& manager, Storage& storage)
         Sprite* spr = manager.GetComponent<Sprite>(id);
         spr->sprite.setScale(0.5f, 0.5f);
         spr->sprite.setTextureRect({0, 0, PROTAGONIST_WIDTH, PROTAGONIST_HEIGHT});
+        spr->sprite.setOrigin(PROTAGONIST_WIDTH * 0.5f,PROTAGONIST_HEIGHT * 0.5f);
     }
     else
         fprintf(stderr, "TEXTURE NOT FOUND!\n");

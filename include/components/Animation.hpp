@@ -36,7 +36,7 @@ namespace MIR
         bool is_playing;
 
         Animation()
-            : delay(0.1f), elapsed(0.f), curr_frame(0), is_looping(true), is_playing(true)
+            : delay(0.16f), elapsed(0.f), curr_frame(0), is_looping(true), is_playing(true)
         {
             
         }

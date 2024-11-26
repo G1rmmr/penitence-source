@@ -39,6 +39,7 @@ void Game::Init()
 
             Velocity* vel = manager->GetComponent<Velocity>(prot_id);
             PlayerState* prot_state = manager->GetComponent<PlayerState>(prot_id);
+            Sprite* spr = manager->GetComponent<Sprite>(prot_id);
 
             if(key->is_pressed)
             {
@@ -47,11 +48,13 @@ void Game::Init()
                 case Key::A:
                     vel->x = -200.f;
                     prot_state->now_state = PlayerState::Moving;
+                    spr->sprite.setScale(-0.5f, 0.5f);
                     break;
 
                 case Key::D:
                     vel->x = 200.f;
                     prot_state->now_state = PlayerState::Moving;
+                    spr->sprite.setScale(0.5f, 0.5f);
                     break;
 
                 case Key::ESC:

@@ -80,6 +80,13 @@ namespace MIR
             return nullptr;
         }
 
+        template <typename T>
+        inline bool HasComponent(Entity::ID id)
+        {
+            Component::Tag tag = GetTag<T>();
+            return masks[id][tag];
+        }
+
         template <typename... Components>
         inline std::vector<Entity::ID> Query() const
         {

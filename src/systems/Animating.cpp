@@ -27,6 +27,21 @@ void Animating::Update(ECSManager& manager, const float dt)
         Animation* anim = manager.GetComponent<Animation>(id);
         Sprite* spr = manager.GetComponent<Sprite>(id);
 
+        if(manager.HasComponent<PlayerState>(id))
+        {
+            PlayerState* state = manager.GetComponent<PlayerState>(id);
+            anim->frames.clear();
+            
+            std::size_t frame_size = 4 + (state->now_state * 2);
+
+            for(std::size_t i = 0; i < frame_size; ++i)
+                anim->frames.emplace_back(sf::IntRect{
+                    static_cast<int>(i * spr->width),
+                    static_cast<int>(state->now_state * spr->height),
+                    static_cast<int>(spr->width),
+                    static_cast<int>(spr->height)});
+        }
+
         if(!anim->is_playing || anim->frames.empty())
              continue;
 

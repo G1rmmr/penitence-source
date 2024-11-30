@@ -17,44 +17,66 @@
 
 using namespace MIR;
 
+Game::Game()
+{
+    window = std::make_unique<sf::RenderWindow>();
+    event = std::make_unique<sf::Event>();
+    music = std::make_unique<sf::Music>();
+    world = std::make_unique<World>();
+    manager = std::make_unique<ECSManager>();
+    storage = std::make_unique<Storage>(SAVE_PATH);
+}
+
+Game::~Game()
+{
+
+}
+
 void Game::Init()
 {
-    SetManagers();
+    std::shared_ptr<Dispatcher> dispatcher = std::make_shared<Dispatcher>();
+    std::shared_ptr<Announcer> announcer = std::make_shared<Announcer>();
+
+    ServiceLocator::Instance().RegisterService(dispatcher);
+    ServiceLocator::Instance().RegisterService(announcer);
+
     window->create(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), WINDOW_TITLE);
 
+    // Entities set
     std::unique_ptr<Protagonist> protagonist = std::make_unique<Protagonist>();
     protagonist->Init(*manager, *storage);
-
     Entity::ID prot_id = protagonist->GetID();
+
+    Entity::ID wall = manager->CreateEntity();
+    manager->AddComponent<Position>(wall, 700, -100);
+    manager->AddComponent<Collider>(wall, 100, 1000);
 
     // Set a world;
     world->AddSystem<Movement>();
     world->AddSystem<Rendering>();
     world->AddSystem<Animating>();
+    world->AddSystem<Collision>();
 
     dispatcher->AddListener(EventType::KeyInput,
         [&](const std::shared_ptr<Event>& event)
         {
             auto key = std::static_pointer_cast<Keyboard>(event);
-
-            Velocity* vel = manager->GetComponent<Velocity>(prot_id);
             PlayerState* prot_state = manager->GetComponent<PlayerState>(prot_id);
-            Sprite* spr = manager->GetComponent<Sprite>(prot_id);
 
             if(key->is_pressed)
             {
                 switch(key->code)
                 {
                 case Key::A:
-                    vel->x = -200.f;
-                    prot_state->now_state = PlayerState::Moving;
-                    spr->sprite.setScale(-0.5f, 0.5f);
+                    prot_state->now_state = PlayerState::MovingLeft;
                     break;
 
                 case Key::D:
-                    vel->x = 200.f;
-                    prot_state->now_state = PlayerState::Moving;
-                    spr->sprite.setScale(0.5f, 0.5f);
+                    prot_state->now_state = PlayerState::MovingRight;
+                    break;
+
+                case Key::W:
+                    prot_state->now_state = PlayerState::Jumping;
                     break;
 
                 case Key::ESC:
@@ -70,13 +92,19 @@ void Game::Init()
                 {
                 case Key::A:
                 case Key::D:
-                    vel->x = 0.f;
                     prot_state->now_state = PlayerState::Idle;
                     break;
 
                 default: break;
                 }
             }
+        });
+
+    dispatcher->AddListener(EventType::CollisionHit,
+        [&](const std::shared_ptr<Event>& event)
+        {
+            PlayerState* prot_state = manager->GetComponent<PlayerState>(prot_id);
+            prot_state->now_state = PlayerState::Idle;
         });
 
     // Set Music
@@ -89,6 +117,9 @@ void Game::Init()
 
 void Game::HandleEvent()
 {
+    auto announcer = ServiceLocator::Instance().GetService<Announcer>();
+    auto dispatcher = ServiceLocator::Instance().GetService<Dispatcher>();
+
     while(window->pollEvent(*event))
     {
         if(event->type == sf::Event::Closed)

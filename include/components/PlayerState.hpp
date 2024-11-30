@@ -27,9 +27,10 @@ namespace MIR
     {
         enum
         {
-            Idle = 0,
-            Moving = 1,
-            Jumping = 2
+            Idle,
+            MovingLeft,
+            MovingRight,
+            Jumping
         };
 
         State now_state = PlayerState::Idle;

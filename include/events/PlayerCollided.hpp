@@ -1,4 +1,4 @@
-// Created on Fri Nov 22 2024
+// Created on Tue Nov 26 2024
 // © 2024 BLACKHAND Studio. All rights reserved.
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,5 +16,16 @@
 #pragma once
 
 #include "Event.hpp"
-#include "Keyboard.hpp"
-#include "PlayerCollided.hpp"
+
+#include "core/Entity.hpp"
+
+namespace MIR
+{
+    struct PlayerCollided : public Event
+    {
+        PlayerCollided() : Event(EventType::CollisionHit)
+        {
+
+        }
+    };
+}

@@ -41,7 +41,7 @@ namespace MIR
 
         const std::uint8_t MAX_ANIMATION = 3;
 
-        const bool USING_SAVE_FILE = true;
+        const bool USING_SAVE_FILE = false;
 
         std::unordered_map<State, std::vector<sf::IntRect>> anim_set;
         Entity::ID id;

@@ -22,12 +22,37 @@ using namespace MIR;
 
 void Movement::Update(ECSManager& manager, const float dt)
 {
-    std::vector<Entity::ID> entities = manager.Query<Position, Velocity>();
+    std::vector<Entity::ID> entities = manager.Query<Position, Velocity, PlayerState, Sprite>();
 
     for(const auto& id : entities)
     {
         Position* pos = manager.GetComponent<Position>(id);
         Velocity* vel = manager.GetComponent<Velocity>(id);
+        PlayerState* state = manager.GetComponent<PlayerState>(id);
+        Sprite* spr = manager.GetComponent<Sprite>(id);
+
+        switch(state->now_state)
+        {
+        case PlayerState::Idle:
+            vel->x = 0.f;
+            vel->y = 0.f;
+            break;
+        
+        case PlayerState::MovingLeft:
+            vel->x = -200.f;
+            spr->sprite.setScale(-0.5f, 0.5f);
+            break;
+
+        case PlayerState::MovingRight:
+            vel->x = 200.f;
+            spr->sprite.setScale(0.5f, 0.5f);
+            break;
+
+        case PlayerState::Jumping:
+            break;
+
+        default: break;
+        }
 
         pos->x += vel->x * dt;
         pos->y += vel->y * dt;

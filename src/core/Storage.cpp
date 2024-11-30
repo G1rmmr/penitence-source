@@ -23,7 +23,7 @@ void Storage::Save(ECSManager& manager)
     json state_json;
     json entities_json = json::array();
 
-    std::vector<Entity::ID> entities = manager.Query<Position>();
+    std::vector<Entity::ID> entities = manager.Query<Position, PlayerState>();
 
     for(const auto& id : entities)
     {

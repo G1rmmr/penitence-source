@@ -40,6 +40,7 @@
 #include "systems/Systems.hpp"
 #include "World.hpp"
 #include "Storage.hpp"
+#include "ServiceLocater.hpp"
 
 #include "events/Events.hpp"
 #include "events/Announcer.hpp"

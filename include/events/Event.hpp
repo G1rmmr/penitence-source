@@ -15,18 +15,22 @@
 
 #pragma once
 
-#include <string>
-
 namespace MIR
 {
     enum class EventType
     {
-        KeyInput
+        KeyInput,
+        CollisionHit
     };
 
     struct Event
     {
         virtual ~Event() = default;
         EventType type;
+
+        Event(EventType type) : type(type)
+        {
+            
+        }
     };
 }

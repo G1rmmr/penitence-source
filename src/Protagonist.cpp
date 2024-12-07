@@ -57,4 +57,7 @@ void Protagonist::Init(ECSManager& manager, Storage& storage)
             static_cast<int>(i * PROTAGONIST_WIDTH), 0,
             static_cast<int>(PROTAGONIST_WIDTH),
             static_cast<int>(PROTAGONIST_HEIGHT)});
+
+    manager.AddComponent<Collider>(id,
+        PROTAGONIST_WIDTH, PROTAGONIST_HEIGHT);
 }

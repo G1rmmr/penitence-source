@@ -1,4 +1,4 @@
-// Created on Sun Nov 24 2024
+// Created on Tue Nov 26 2024
 // © 2024 BLACKHAND Studio. All rights reserved.
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,18 +15,28 @@
 
 #pragma once
 
-#include <unordered_map>
-#include <cstdint>
-
 #include "System.hpp"
-
-#include "core/ECSManager.hpp"
+#include "components/Collider.hpp"
+#include "components/Position.hpp"
 
 namespace MIR
 {
-    class Animating final : public System
+    class Collision final : public System
     {
     public:
         void Update(ECSManager& manager, const float dt) override final;
+
+    private:
+        inline bool IsColliding(
+            const Position* left_pos,
+            const Position* right_pos,
+            const Collider* left_box,
+            const Collider* right_box) const
+        {
+            return (left_pos->x < right_pos->x + right_box->width
+                && left_pos->x + left_box->width > right_pos->x
+                && left_pos->y < right_pos->y + right_box->height
+                && left_pos->y + left_box->height > right_pos->y);
+        }
     };
 }

@@ -1,4 +1,4 @@
-// Created on Sun Nov 24 2024
+// Created on Tue Nov 26 2024
 // © 2024 BLACKHAND Studio. All rights reserved.
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,30 +15,15 @@
 
 #pragma once
 
-#include <cstdint>
+#include "Event.hpp"
 
-#include "Component.hpp"
+#include "core/Entity.hpp"
 
 namespace MIR
 {
-    using State = std::uint8_t;
-
-    struct PlayerState final : public Component
+    struct PlayerCollided : public Event
     {
-        enum
-        {
-            Idle,
-            MovingLeft,
-            MovingRight,
-            Jumping
-        };
-
-        State now_state = PlayerState::Idle;
-        bool is_jumping = false;
-
-        PlayerState() = default;
-
-        PlayerState(State state) : now_state(state)
+        PlayerCollided() : Event(EventType::CollisionHit)
         {
 
         }

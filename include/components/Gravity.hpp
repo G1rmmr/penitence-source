@@ -1,4 +1,4 @@
-// Created on Sun Nov 24 2024
+// Created on Sat Nov 30 2024
 // © 2024 BLACKHAND Studio. All rights reserved.
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,32 +15,21 @@
 
 #pragma once
 
-#include <cstdint>
-
 #include "Component.hpp"
 
 namespace MIR
 {
-    using State = std::uint8_t;
+    const float GRAV_ACCEL = 9.8f;
 
-    struct PlayerState final : public Component
+    struct Gravity final : public Component
     {
-        enum
+        float weight = 1.f;
+        bool in_air = false;
+
+        Gravity(float weight, bool in_air)
+            : weight(weight), in_air(in_air)
         {
-            Idle,
-            MovingLeft,
-            MovingRight,
-            Jumping
-        };
-
-        State now_state = PlayerState::Idle;
-        bool is_jumping = false;
-
-        PlayerState() = default;
-
-        PlayerState(State state) : now_state(state)
-        {
-
+            
         }
     };
 }

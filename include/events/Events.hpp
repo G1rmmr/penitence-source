@@ -17,3 +17,4 @@
 
 #include "Event.hpp"
 #include "Keyboard.hpp"
+#include "PlayerCollided.hpp"

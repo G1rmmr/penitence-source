@@ -25,7 +25,8 @@ namespace MIR
     class Game
     {
     public:
-        Game() = default;
+        Game();
+        ~Game();
 
         void Init();
         void HandleEvent();
@@ -53,20 +54,5 @@ namespace MIR
         std::unique_ptr<World> world;
         std::unique_ptr<ECSManager> manager;
         std::unique_ptr<Storage> storage;
-
-        std::unique_ptr<Announcer> announcer;
-        std::unique_ptr<Dispatcher> dispatcher;
-
-        void SetManagers()
-        {
-            window = std::make_unique<sf::RenderWindow>();
-            event = std::make_unique<sf::Event>();
-            music = std::make_unique<sf::Music>();
-            world = std::make_unique<World>();
-            manager = std::make_unique<ECSManager>();
-            storage = std::make_unique<Storage>(SAVE_PATH);
-            announcer = std::make_unique<Announcer>();
-            dispatcher = std::make_unique<Dispatcher>();
-        }
     };
 }

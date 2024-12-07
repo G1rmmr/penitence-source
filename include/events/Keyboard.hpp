@@ -33,7 +33,9 @@ namespace MIR
         Key code;
         bool is_pressed = false;
 
-        Keyboard(Key code, bool pressed) : code(code), is_pressed(pressed)
+        Keyboard(Key code, bool pressed)
+            : Event(EventType::KeyInput)
+            , code(code), is_pressed(pressed)
         {
 
         }

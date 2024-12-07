@@ -31,13 +31,33 @@ void Animating::Update(ECSManager& manager, const float dt)
         {
             PlayerState* state = manager.GetComponent<PlayerState>(id);
             anim->frames.clear();
+
+            std::uint8_t index = -1;
+            std::size_t frame_size = -1;
+
+            switch(state->now_state)
+            {
+            case PlayerState::Idle:
+                index = 0;
+                frame_size = 4;
+                break;
+
+            case PlayerState::Jumping:
+                index = 2;
+                frame_size = 6;
+                break;
+                
+            default:
+                index = 1;
+                frame_size = 6;
+                break;
+            }
             
-            std::size_t frame_size = 4 + (state->now_state * 2);
 
             for(std::size_t i = 0; i < frame_size; ++i)
                 anim->frames.emplace_back(sf::IntRect{
                     static_cast<int>(i * spr->width),
-                    static_cast<int>(state->now_state * spr->height),
+                    static_cast<int>(index * spr->height),
                     static_cast<int>(spr->width),
                     static_cast<int>(spr->height)});
         }

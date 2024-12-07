@@ -24,7 +24,7 @@
 
 namespace MIR
 {
-    class Animating : public System
+    class Animating final : public System
     {
     public:
         void Update(ECSManager& manager, const float dt) override final;

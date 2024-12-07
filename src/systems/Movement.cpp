@@ -20,6 +20,10 @@
 
 using namespace MIR;
 
+const float JUMP_SPEED = 500.f;
+const float GRAVITY = 980.f;
+const float LEVEL = 500.f;
+
 void Movement::Update(ECSManager& manager, const float dt)
 {
     std::vector<Entity::ID> entities = manager.Query<Position, Velocity, PlayerState, Sprite>();
@@ -30,14 +34,16 @@ void Movement::Update(ECSManager& manager, const float dt)
         Velocity* vel = manager.GetComponent<Velocity>(id);
         PlayerState* state = manager.GetComponent<PlayerState>(id);
         Sprite* spr = manager.GetComponent<Sprite>(id);
+        
+        if(state->now_state == PlayerState::Jumping
+            && !state->is_jumping && pos->y >= LEVEL)
+        {
+            vel->y = -JUMP_SPEED;
+            state->is_jumping = true;
+        }
 
         switch(state->now_state)
         {
-        case PlayerState::Idle:
-            vel->x = 0.f;
-            vel->y = 0.f;
-            break;
-        
         case PlayerState::MovingLeft:
             vel->x = -200.f;
             spr->sprite.setScale(-0.5f, 0.5f);
@@ -49,9 +55,25 @@ void Movement::Update(ECSManager& manager, const float dt)
             break;
 
         case PlayerState::Jumping:
+            printf("JUMP\n");
             break;
 
-        default: break;
+        default:
+            vel->x = 0.f;
+            break;
+        }
+
+        if(pos->y < LEVEL)
+            vel->y += GRAVITY * dt;
+
+        if(pos->y + vel->y * dt >= LEVEL)
+        {
+            pos->y = LEVEL;
+            vel->y = 0.f;
+            state->is_jumping = false;
+
+            if(state->now_state == PlayerState::Jumping)
+                state->now_state = PlayerState::Idle;
         }
 
         pos->x += vel->x * dt;

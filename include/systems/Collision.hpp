@@ -21,7 +21,7 @@
 
 namespace MIR
 {
-    class Collision : public System
+    class Collision final : public System
     {
     public:
         void Update(ECSManager& manager, const float dt) override final;

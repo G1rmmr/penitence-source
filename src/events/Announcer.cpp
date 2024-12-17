@@ -14,12 +14,11 @@
 // limitations under the License.
 
 #include <cstdio>
-
 #include "events/Announcer.hpp"
 
 using namespace MIR;
 
-void Announcer::PublishEvent(const std::shared_ptr<Event>& event) // DONE
+void Announcer::PublishEvent(const std::shared_ptr<Event>& event)
 {
     events.push(event);
 }

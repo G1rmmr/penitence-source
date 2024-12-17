@@ -1,0 +1,326 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ko">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.12.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>MIR Engine: MIR::ServiceLocator 클래스 참조</title>
+<link rel="icon" href="MIR.png" type="image/x-icon" />
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="MIR.png"/></td>
+  <td id="projectalign">
+   <div id="projectname">MIR Engine
+   </div>
+   <div id="projectbrief">미래 지향 설계에 초점을 맞춘 자체 제작 게임 엔진</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 다음에 의해 생성됨 :  Doxygen 1.12.0 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() { codefold.init(0); });
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','검색',true);
+  $(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function(){initNavTree('class_m_i_r_1_1_service_locator.html',''); initResizable(true); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">로딩중...</div>
+<div class="SRStatus" id="Searching">검색중...</div>
+<div class="SRStatus" id="NoMatches">일치하는것 없음</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public 멤버 함수</a> &#124;
+<a href="#pub-static-methods">정적 Public 멤버 함수</a>  </div>
+  <div class="headertitle"><div class="title">MIR::ServiceLocator 클래스 참조</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>다양한 서비스(인터페이스 구현체)를 등록하고 조회하는 Service Locator 클래스  
+ <a href="#details">더 자세히 ...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_service_locater_8hpp_source.html">ServiceLocater.hpp</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public 멤버 함수</h2></td></tr>
+<tr class="memitem:ac03202bf9e36bc8fa66e7c8e0a2a9fe6" id="r_ac03202bf9e36bc8fa66e7c8e0a2a9fe6"><td class="memTemplParams" colspan="2">template&lt;typename ServiceType &gt; </td></tr>
+<tr class="memitem:ac03202bf9e36bc8fa66e7c8e0a2a9fe6"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#ac03202bf9e36bc8fa66e7c8e0a2a9fe6">RegisterService</a> (std::shared_ptr&lt; ServiceType &gt; service)</td></tr>
+<tr class="memdesc:ac03202bf9e36bc8fa66e7c8e0a2a9fe6"><td class="mdescLeft">&#160;</td><td class="mdescRight">특정 타입의 서비스를 등록하는 템플릿 메서드  <br /></td></tr>
+<tr class="separator:ac03202bf9e36bc8fa66e7c8e0a2a9fe6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab6d296188dbf504ff07fc9cf232d060a" id="r_ab6d296188dbf504ff07fc9cf232d060a"><td class="memTemplParams" colspan="2">template&lt;typename ServiceType &gt; </td></tr>
+<tr class="memitem:ab6d296188dbf504ff07fc9cf232d060a"><td class="memTemplItemLeft" align="right" valign="top">std::shared_ptr&lt; ServiceType &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#ab6d296188dbf504ff07fc9cf232d060a">GetService</a> ()</td></tr>
+<tr class="memdesc:ab6d296188dbf504ff07fc9cf232d060a"><td class="mdescLeft">&#160;</td><td class="mdescRight">특정 타입의 서비스를 조회하는 템플릿 메서드  <br /></td></tr>
+<tr class="separator:ab6d296188dbf504ff07fc9cf232d060a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a310a32a77b8b5c26fdcfc8d1af8834c6" id="r_a310a32a77b8b5c26fdcfc8d1af8834c6"><td class="memTemplParams" colspan="2">template&lt;typename ServiceType &gt; </td></tr>
+<tr class="memitem:a310a32a77b8b5c26fdcfc8d1af8834c6"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#a310a32a77b8b5c26fdcfc8d1af8834c6">HasService</a> () const</td></tr>
+<tr class="memdesc:a310a32a77b8b5c26fdcfc8d1af8834c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">특정 타입의 서비스 등록 여부를 확인하는 템플릿 메서드  <br /></td></tr>
+<tr class="separator:a310a32a77b8b5c26fdcfc8d1af8834c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
+정적 Public 멤버 함수</h2></td></tr>
+<tr class="memitem:a5ed6993c18e3897d54c3a4f9ff2c6759" id="r_a5ed6993c18e3897d54c3a4f9ff2c6759"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_m_i_r_1_1_service_locator.html">ServiceLocator</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5ed6993c18e3897d54c3a4f9ff2c6759">Instance</a> ()</td></tr>
+<tr class="memdesc:a5ed6993c18e3897d54c3a4f9ff2c6759"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_m_i_r_1_1_service_locator.html" title="다양한 서비스(인터페이스 구현체)를 등록하고 조회하는 Service Locator 클래스">ServiceLocator</a> 인스턴스를 전역적으로 접근하기 위한 정적 메서드  <br /></td></tr>
+<tr class="separator:a5ed6993c18e3897d54c3a4f9ff2c6759"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">상세한 설명</h2>
+<div class="textblock"><p>다양한 서비스(인터페이스 구현체)를 등록하고 조회하는 Service Locator 클래스 </p>
+<p>ServiceLocator는 싱글턴 패턴으로 생성, 필요에 따라 여러 타입의 서비스를 동적으로 등록하고, 다른 곳에서 쉽게 조회할 수 있도록 함.</p>
+<p>이 클래스를 통해 서비스 의존성을 간단히 해결할 수 있으나, 의존성 역전 원리나 의존성 주입 방식에 비해 의존 관계가 명확히 드러나지 않을 수 있으므로 주의. </p>
+</div><h2 class="groupheader">멤버 함수 문서화</h2>
+<a id="ab6d296188dbf504ff07fc9cf232d060a" name="ab6d296188dbf504ff07fc9cf232d060a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab6d296188dbf504ff07fc9cf232d060a">&#9670;&#160;</a></span>GetService()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ServiceType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::shared_ptr&lt; ServiceType &gt; MIR::ServiceLocator::GetService </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>특정 타입의 서비스를 조회하는 템플릿 메서드 </p>
+<dl class="tparams"><dt>템플릿 파라메터</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">ServiceType</td><td>조회할 서비스 타입 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>반환값</dt><dd>std::shared_ptr&lt;ServiceType&gt; 요청한 서비스에 대한 공유 포인터 </dd></dl>
+<dl class="exception"><dt>예외</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::runtime_error</td><td>서비스가 등록되어 있지 않을 경우 예외 발생</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>서비스 존재시 정적 캐스팅하여 반환, 없으면 예외 던짐. </p>
+<div class="fragment"><div class="line"><span class="lineno">   83</span>        {</div>
+<div class="line"><span class="lineno">   84</span>            <span class="keyword">auto</span> it = services.find(<span class="keyword">typeid</span>(ServiceType));</div>
+<div class="line"><span class="lineno">   85</span> </div>
+<div class="line"><span class="lineno">   86</span>            <span class="keywordflow">if</span> (it != services.end())</div>
+<div class="line"><span class="lineno">   87</span>                <span class="keywordflow">return</span> std::static_pointer_cast&lt;ServiceType&gt;(it-&gt;second);</div>
+<div class="line"><span class="lineno">   88</span>            <span class="keywordflow">else</span></div>
+<div class="line"><span class="lineno">   89</span>                <span class="keywordflow">throw</span> std::runtime_error(<span class="stringliteral">&quot;Service not found!&quot;</span>);</div>
+<div class="line"><span class="lineno">   90</span>        }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a310a32a77b8b5c26fdcfc8d1af8834c6" name="a310a32a77b8b5c26fdcfc8d1af8834c6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a310a32a77b8b5c26fdcfc8d1af8834c6">&#9670;&#160;</a></span>HasService()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ServiceType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool MIR::ServiceLocator::HasService </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>특정 타입의 서비스 등록 여부를 확인하는 템플릿 메서드 </p>
+<dl class="tparams"><dt>템플릿 파라메터</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">ServiceType</td><td>확인할 서비스 타입 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>반환값</dt><dd>true 서비스가 등록되어 있음 </dd>
+<dd>
+false 서비스가 등록되어 있지 않음</dd></dl>
+<p>services 맵을 조회하여 ServiceType 키가 존재하는지 확인. </p>
+<div class="fragment"><div class="line"><span class="lineno">  103</span>        {</div>
+<div class="line"><span class="lineno">  104</span>            <span class="keywordflow">return</span> services.find(<span class="keyword">typeid</span>(ServiceType)) != services.end();</div>
+<div class="line"><span class="lineno">  105</span>        }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a5ed6993c18e3897d54c3a4f9ff2c6759" name="a5ed6993c18e3897d54c3a4f9ff2c6759"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5ed6993c18e3897d54c3a4f9ff2c6759">&#9670;&#160;</a></span>Instance()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="class_m_i_r_1_1_service_locator.html">ServiceLocator</a> &amp; MIR::ServiceLocator::Instance </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p><a class="el" href="class_m_i_r_1_1_service_locator.html" title="다양한 서비스(인터페이스 구현체)를 등록하고 조회하는 Service Locator 클래스">ServiceLocator</a> 인스턴스를 전역적으로 접근하기 위한 정적 메서드 </p>
+<p>싱글턴 패턴을 사용하여 전역에 유일한 <a class="el" href="class_m_i_r_1_1_service_locator.html" title="다양한 서비스(인터페이스 구현체)를 등록하고 조회하는 Service Locator 클래스">ServiceLocator</a> 인스턴스 제공.</p>
+<dl class="section return"><dt>반환값</dt><dd><a class="el" href="class_m_i_r_1_1_service_locator.html" title="다양한 서비스(인터페이스 구현체)를 등록하고 조회하는 Service Locator 클래스">ServiceLocator</a>&amp; 전역적으로 접근 가능한 <a class="el" href="class_m_i_r_1_1_service_locator.html" title="다양한 서비스(인터페이스 구현체)를 등록하고 조회하는 Service Locator 클래스">ServiceLocator</a> 참조 </dd></dl>
+<div class="fragment"><div class="line"><span class="lineno">   52</span>        {</div>
+<div class="line"><span class="lineno">   53</span>            <span class="keyword">static</span> ServiceLocator instance;</div>
+<div class="line"><span class="lineno">   54</span>            <span class="keywordflow">return</span> instance;</div>
+<div class="line"><span class="lineno">   55</span>        }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ac03202bf9e36bc8fa66e7c8e0a2a9fe6" name="ac03202bf9e36bc8fa66e7c8e0a2a9fe6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac03202bf9e36bc8fa66e7c8e0a2a9fe6">&#9670;&#160;</a></span>RegisterService()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ServiceType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MIR::ServiceLocator::RegisterService </td>
+          <td>(</td>
+          <td class="paramtype">std::shared_ptr&lt; ServiceType &gt;</td>          <td class="paramname"><span class="paramname"><em>service</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>특정 타입의 서비스를 등록하는 템플릿 메서드 </p>
+<dl class="tparams"><dt>템플릿 파라메터</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">ServiceType</td><td>등록할 서비스 타입 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>매개변수</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">service</td><td>공유 포인터 형태로 제공되는 서비스 구현체</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>typeid(ServiceType)를 키로 하는 맵에 service 저장. 이후 다른 곳에서 <a class="el" href="#ab6d296188dbf504ff07fc9cf232d060a" title="특정 타입의 서비스를 조회하는 템플릿 메서드">GetService&lt;ServiceType&gt;()</a>를 통해 서비스 조회 가능. </p>
+<div class="fragment"><div class="line"><span class="lineno">   68</span>        {</div>
+<div class="line"><span class="lineno">   69</span>            services[<span class="keyword">typeid</span>(ServiceType)] = service;</div>
+<div class="line"><span class="lineno">   70</span>        }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<hr/>이 클래스에 대한 문서화 페이지는 다음의 파일로부터 생성되었습니다.:<ul>
+<li><a class="el" href="_service_locater_8hpp_source.html">ServiceLocater.hpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>MIR</b></li><li class="navelem"><a class="el" href="class_m_i_r_1_1_service_locator.html">ServiceLocator</a></li>
+    <li class="footer">다음에 의해 생성됨 :  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.12.0 </li>
+  </ul>
+</div>
+</body>
+</html>

@@ -19,8 +19,9 @@
 #include "events/Announcer.hpp"
 
 using namespace MIR;
+using namespace ECS;
 
-void Collision::Update(ECSManager& manager, const float dt)
+void Collision::Update(Manager& manager, const float dt)
 {
     auto entities = manager.Query<Position, Collider>();
     auto announcer = ServiceLocator::Instance().GetService<Announcer>();

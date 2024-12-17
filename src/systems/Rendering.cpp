@@ -14,14 +14,13 @@
 // limitations under the License.
 
 #include <SFML/Graphics.hpp>
-
 #include "systems/Rendering.hpp"
-
 #include "components/Components.hpp"
 
 using namespace MIR;
+using namespace ECS;
 
-void Rendering::Update(ECSManager& manager, const float dt)
+void Rendering::Update(Manager& manager, const float dt)
 {
     std::vector<Entity::ID> entities = manager.Query<Position, Sprite>();
 
@@ -33,7 +32,7 @@ void Rendering::Update(ECSManager& manager, const float dt)
     }
 }
 
-void Rendering::Render(ECSManager& manager, sf::RenderWindow& window)
+void Rendering::Render(Manager& manager, sf::RenderWindow& window)
 {
     std::vector<Entity::ID> entities = manager.Query<Sprite>();
 

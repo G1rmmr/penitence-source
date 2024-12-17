@@ -1,0 +1,60 @@
+<map id="Component.hpp" name="Component.hpp">
+<area shape="rect" id="Node000001" title="컴포넌트 베이스" alt="" coords="422,5,536,31"/>
+<area shape="rect" id="Node000002" href="$_animation_8hpp.html" title="애니메이션 컴포넌트" alt="" coords="5,79,110,105"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="408,34,122,82,111,84,110,78,121,76,407,29"/>
+<area shape="rect" id="Node000009" href="$_collider_8hpp.html" title="충돌 컴포넌트" alt="" coords="492,79,581,105"/>
+<area shape="poly" id="edge11_Node000001_Node000009" title=" " alt="" coords="500,41,529,77,524,80,496,45"/>
+<area shape="rect" id="Node000012" href="$_e_c_s_manager_8hpp.html" title="ECS 매니저의 중추 설계 헤더" alt="" coords="722,79,846,105"/>
+<area shape="poly" id="edge17_Node000001_Node000012" title=" " alt="" coords="546,32,733,76,732,81,545,38"/>
+<area shape="rect" id="Node000017" href="$_gravity_8hpp.html" title="중력 컴포넌트" alt="" coords="870,79,957,105"/>
+<area shape="poly" id="edge28_Node000001_Node000017" title=" " alt="" coords="552,27,858,76,871,79,870,84,857,82,551,32"/>
+<area shape="rect" id="Node000018" href="$_player_state_8hpp.html" title="플레이어 상태 컴포넌트 헤더" alt="" coords="134,79,248,105"/>
+<area shape="poly" id="edge29_Node000001_Node000018" title=" " alt="" coords="416,38,241,81,239,76,415,33"/>
+<area shape="rect" id="Node000019" href="$_position_8hpp.html" title="위치 컴포넌트" alt="" coords="606,79,699,105"/>
+<area shape="poly" id="edge31_Node000001_Node000019" title=" " alt="" coords="523,35,624,76,622,81,521,40"/>
+<area shape="rect" id="Node000020" href="$_sprite_8hpp.html" title="스프라이트 컴포넌트" alt="" coords="272,79,352,105"/>
+<area shape="poly" id="edge34_Node000001_Node000020" title=" " alt="" coords="438,40,342,81,340,76,436,35"/>
+<area shape="rect" id="Node000021" href="$_velocity_8hpp.html" title="속도 컴포넌트" alt="" coords="376,79,467,105"/>
+<area shape="poly" id="edge36_Node000001_Node000021" title=" " alt="" coords="462,45,433,80,429,77,458,41"/>
+<area shape="rect" id="Node000003" href="$_components_8hpp.html" title="ECS 아키텍처에서 사용되는 주요 컴포넌트를 한데 모아 포함하는 헤더" alt="" coords="329,153,450,178"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="126,105,333,149,332,155,124,110"/>
+<area shape="rect" id="Node000004" href="$_core_8hpp.html" title="모든 해더를 포함하는 헤더" alt="" coords="472,447,547,473"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="363,190,347,207,335,227,332,239,335,251,349,284,367,315,412,371,458,415,494,445,491,449,454,419,408,374,363,318,344,286,330,253,327,239,330,225,342,204,359,187"/>
+<area shape="rect" id="Node000007" href="$_storage_8hpp.html" title="게임 상태 저장 클래스 헤더" alt="" coords="344,226,435,252"/>
+<area shape="poly" id="edge7_Node000003_Node000007" title=" " alt="" coords="392,194,392,226,387,226,387,194"/>
+<area shape="rect" id="Node000008" href="$_world_8hpp.html" title="시스템을 관리하는 클래스 헤더" alt="" coords="478,374,557,399"/>
+<area shape="poly" id="edge9_Node000003_Node000008" title=" " alt="" coords="417,187,449,225,473,265,492,307,516,372,511,374,487,309,468,268,445,228,413,191"/>
+<area shape="rect" id="Node000005" href="$_game_8hpp.html" title="Game 세팅, 실제 게임이 구현되는 워크 스페이스" alt="" coords="469,595,550,620"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="500,488,492,516,491,546,506,593,501,595,486,547,486,515,495,486"/>
+<area shape="rect" id="Node000006" href="$_protagonist_8hpp_source.html" title=" " alt="" coords="500,521,612,547"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="528,484,551,519,546,522,523,487"/>
+<area shape="poly" id="edge6_Node000006_Node000005" title=" " alt="" coords="542,561,520,596,515,593,538,558"/>
+<area shape="poly" id="edge8_Node000007_Node000004" title=" " alt="" coords="403,265,430,327,468,398,502,445,498,449,463,401,425,329,398,268"/>
+<area shape="poly" id="edge10_Node000008_Node000004" title=" " alt="" coords="517,415,513,447,508,447,512,414"/>
+<area shape="poly" id="edge16_Node000009_Node000003" title=" " alt="" coords="499,114,416,154,413,150,496,109"/>
+<area shape="rect" id="Node000010" href="$_collision_8hpp.html" title="충돌 시스템 헤더" alt="" coords="509,226,606,252"/>
+<area shape="poly" id="edge12_Node000009_Node000010" title=" " alt="" coords="543,119,558,225,553,226,537,120"/>
+<area shape="rect" id="Node000011" href="$_systems_8hpp.html" title="게임 내 주요 시스템들을 한데 모아 포함하는 헤더 파일" alt="" coords="606,300,704,326"/>
+<area shape="poly" id="edge13_Node000010_Node000011" title=" " alt="" coords="588,259,640,297,637,302,585,264"/>
+<area shape="poly" id="edge14_Node000011_Node000004" title=" " alt="" coords="634,339,571,401,523,449,520,445,568,397,630,335"/>
+<area shape="poly" id="edge15_Node000011_Node000008" title=" " alt="" coords="619,336,542,375,540,371,617,331"/>
+<area shape="poly" id="edge18_Node000012_Node000007" title=" " alt="" coords="738,113,424,228,422,223,736,108"/>
+<area shape="poly" id="edge27_Node000012_Node000008" title=" " alt="" coords="848,107,915,130,979,162,1003,182,1018,204,1021,228,1009,254,977,280,929,303,869,324,802,341,665,368,558,383,557,378,665,362,801,336,868,318,927,298,975,276,1005,250,1016,227,1013,206,999,186,976,167,913,135,846,112"/>
+<area shape="rect" id="Node000013" href="$_system_8hpp.html" title="시스템 베이스 클래스" alt="" coords="738,153,830,178"/>
+<area shape="poly" id="edge19_Node000012_Node000013" title=" " alt="" coords="787,120,787,152,782,152,782,120"/>
+<area shape="poly" id="edge22_Node000013_Node000010" title=" " alt="" coords="732,186,597,228,595,223,730,181"/>
+<area shape="rect" id="Node000014" href="$_animating_8hpp.html" title="애니메이션 시스템 헤더" alt="" coords="629,226,734,252"/>
+<area shape="poly" id="edge20_Node000013_Node000014" title=" " alt="" coords="756,189,701,228,697,224,753,185"/>
+<area shape="rect" id="Node000015" href="$_movement_8hpp.html" title="이동 시스템 헤더" alt="" coords="757,226,864,252"/>
+<area shape="poly" id="edge23_Node000013_Node000015" title=" " alt="" coords="796,192,809,225,804,227,791,194"/>
+<area shape="rect" id="Node000016" href="$_rendering_8hpp.html" title="렌더링 시스템 헤더" alt="" coords="889,226,994,252"/>
+<area shape="poly" id="edge25_Node000013_Node000016" title=" " alt="" coords="826,183,916,223,914,228,824,188"/>
+<area shape="poly" id="edge21_Node000014_Node000011" title=" " alt="" coords="674,267,662,300,657,299,669,265"/>
+<area shape="poly" id="edge24_Node000015_Node000011" title=" " alt="" coords="772,261,683,302,680,297,769,256"/>
+<area shape="poly" id="edge26_Node000016_Node000011" title=" " alt="" coords="879,259,704,302,703,297,878,254"/>
+<area shape="poly" id="edge30_Node000018_Node000003" title=" " alt="" coords="240,108,357,150,355,155,238,113"/>
+<area shape="poly" id="edge33_Node000019_Node000003" title=" " alt="" coords="594,112,435,155,434,149,593,106"/>
+<area shape="poly" id="edge32_Node000019_Node000010" title=" " alt="" coords="638,119,568,227,563,224,634,116"/>
+<area shape="poly" id="edge35_Node000020_Node000003" title=" " alt="" coords="338,114,378,150,375,154,335,117"/>
+<area shape="poly" id="edge37_Node000021_Node000003" title=" " alt="" coords="412,120,397,153,392,151,408,118"/>
+</map>

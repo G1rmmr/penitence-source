@@ -1,0 +1,32 @@
+<map id="Announcer.hpp" name="Announcer.hpp">
+<area shape="rect" id="Node000001" title="이벤트 아나운서 헤더" alt="" coords="120,5,228,31"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,79,74,105"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="153,34,77,74,74,69,150,29"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="98,79,154,105"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="168,33,145,67,141,64,164,30"/>
+<area shape="rect" id="Node000004" href="$_events_8hpp.html" title="다양한 이벤트 클래스를 한 데 모아 포함하는 헤더 파일" alt="" coords="178,79,266,105"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="184,30,208,64,203,67,180,33"/>
+<area shape="rect" id="Node000011" href="$_dispatcher_8hpp.html" title="이벤트 디스패처 헤더" alt="" coords="392,79,500,105"/>
+<area shape="poly" id="edge12_Node000001_Node000011" title=" " alt="" coords="221,29,386,72,384,77,220,34"/>
+<area shape="rect" id="Node000005" href="$_event_8hpp.html" title="이벤트 베이스 클래스 헤더" alt="" coords="146,226,226,252"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="221,106,206,153,193,212,188,211,201,152,216,104"/>
+<area shape="rect" id="Node000006" href="$_keyboard_8hpp.html" title="키보드 이벤트 헤더" alt="" coords="216,153,317,178"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="232,103,253,138,248,141,227,106"/>
+<area shape="rect" id="Node000008" href="$_player_collided_8hpp.html" title="플레이어 충돌 이벤트" alt="" coords="10,153,141,178"/>
+<area shape="poly" id="edge8_Node000004_Node000008" title=" " alt="" coords="198,108,115,148,113,143,196,103"/>
+<area shape="poly" id="edge7_Node000006_Node000005" title=" " alt="" coords="254,181,212,218,209,214,251,177"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="250,226,381,252"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="277,177,301,212,296,215,272,180"/>
+<area shape="poly" id="edge9_Node000008_Node000005" title=" " alt="" coords="96,177,156,215,153,220,93,181"/>
+<area shape="rect" id="Node000009" href="$_entity_8hpp.html" title="엔티티(ID) 정의를 물리적으로 분리한 헤더" alt="" coords="15,226,122,252"/>
+<area shape="poly" id="edge10_Node000008_Node000009" title=" " alt="" coords="77,179,74,211,69,211,72,178"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="39,300,99,326"/>
+<area shape="poly" id="edge11_Node000009_Node000010" title=" " alt="" coords="72,252,72,284,66,284,66,252"/>
+<area shape="poly" id="edge16_Node000011_Node000005" title=" " alt="" coords="434,107,389,142,330,181,283,204,237,223,235,218,280,199,328,176,386,138,430,103"/>
+<area shape="rect" id="Node000012" title=" " alt="" coords="391,153,501,178"/>
+<area shape="poly" id="edge13_Node000011_Node000012" title=" " alt="" coords="449,105,449,137,444,137,444,105"/>
+<area shape="rect" id="Node000013" title=" " alt="" coords="526,153,583,178"/>
+<area shape="poly" id="edge14_Node000011_Node000013" title=" " alt="" coords="466,103,524,141,521,146,463,107"/>
+<area shape="rect" id="Node000014" title=" " alt="" coords="608,153,685,178"/>
+<area shape="poly" id="edge15_Node000011_Node000014" title=" " alt="" coords="481,103,599,144,597,150,479,108"/>
+</map>

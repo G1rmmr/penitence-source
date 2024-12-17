@@ -15,18 +15,51 @@
 
 #pragma once
 
+/**
+ * @file
+ * @brief 충돌 시스템 헤더
+ */
+
 #include "System.hpp"
 #include "components/Collider.hpp"
 #include "components/Position.hpp"
 
 namespace MIR
 {
+    /**
+     * @brief 엔티티 간 충돌을 감지하고 처리하는 시스템 클래스
+     * 
+     * Collision 시스템은 ECS::Manager를 통해 엔티티들의 Collider, Position 컴포넌트를 조회하고,
+     * 프레임별로 충돌 감지 로직 실행.
+     */
     class Collision final : public System
     {
     public:
-        void Update(ECSManager& manager, const float dt) override final;
+        /**
+         * @brief 충돌 검사를 수행하는 Update 메서드
+         * 
+         * @param manager 엔티티 및 컴포넌트를 관리하는 ECS::Manager
+         * @param dt 델타 타임(초 단위)
+         * 
+         * 이 메서드는 매 프레임 호출되어,
+         * 현재 월드에 존재하는 모든 엔티티 쌍에 대해 충돌 여부 판정 가능.
+         */
+        void Update(ECS::Manager& manager, const float dt) override final;
 
     private:
+        /**
+         * @brief 두 엔티티의 위치 및 콜라이더 정보로 충돌 여부를 판정하는 헬퍼 함수
+         * 
+         * @param left_pos 첫 번째 엔티티의 위치
+         * @param right_pos 두 번째 엔티티의 위치
+         * @param left_box 첫 번째 엔티티의 콜라이더
+         * @param right_box 두 번째 엔티티의 콜라이더
+         * @return true 충돌 발생
+         * @return false 충돌 없음
+         * 
+         * 단순 AABB(축 정렬 바운딩 박스) 충돌 검사 방식을 사용.
+         * 상자 간 좌표 범위가 겹치는지 확인하여 충돌 여부 판단.
+         */
         inline bool IsColliding(
             const Position* left_pos,
             const Position* right_pos,

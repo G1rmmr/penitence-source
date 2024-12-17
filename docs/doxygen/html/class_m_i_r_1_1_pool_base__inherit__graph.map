@@ -1,0 +1,5 @@
+<map id="MIR::PoolBase" name="MIR::PoolBase">
+<area shape="rect" id="Node000001" title="풀(Pool) 인터페이스를 위한 기본 클래스" alt="" coords="40,5,150,31"/>
+<area shape="rect" id="Node000002" href="$class_m_i_r_1_1_component_pool.html" title="특정 타입 T에 대한 컴포넌트 풀 구현" alt="" coords="5,79,185,105"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="98,46,98,79,92,79,92,46"/>
+</map>

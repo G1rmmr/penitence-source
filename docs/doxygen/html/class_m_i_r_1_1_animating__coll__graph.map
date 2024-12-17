@@ -1,0 +1,5 @@
+<map id="MIR::Animating" name="MIR::Animating">
+<area shape="rect" id="Node000001" title="엔티티 애니메이션 상태를 업데이트하는 시스템 클래스" alt="" coords="5,79,118,105"/>
+<area shape="rect" id="Node000002" href="$class_m_i_r_1_1_system.html" title="ECS 아키텍처에서 시스템을 나타내는 추상 클래스" alt="" coords="12,5,111,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="64,46,64,79,59,79,59,46"/>
+</map>

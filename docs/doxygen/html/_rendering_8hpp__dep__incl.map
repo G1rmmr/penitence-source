@@ -1,0 +1,15 @@
+<map id="Rendering.hpp" name="Rendering.hpp">
+<area shape="rect" id="Node000001" title="렌더링 시스템 헤더" alt="" coords="5,5,111,31"/>
+<area shape="rect" id="Node000002" href="$_systems_8hpp.html" title="게임 내 주요 시스템들을 한데 모아 포함하는 헤더 파일" alt="" coords="9,79,107,105"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="61,46,61,79,55,79,55,46"/>
+<area shape="rect" id="Node000003" href="$_core_8hpp.html" title="모든 해더를 포함하는 헤더" alt="" coords="21,226,95,252"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="53,120,48,148,47,178,57,226,52,227,42,179,42,148,47,119"/>
+<area shape="rect" id="Node000006" href="$_world_8hpp.html" title="시스템을 관리하는 클래스 헤더" alt="" coords="57,153,136,178"/>
+<area shape="poly" id="edge6_Node000002_Node000006" title=" " alt="" coords="74,117,92,151,88,153,69,120"/>
+<area shape="rect" id="Node000004" href="$_game_8hpp.html" title="Game 세팅, 실제 게임이 구현되는 워크 스페이스" alt="" coords="17,374,99,399"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="48,267,40,295,39,325,55,372,50,374,34,326,35,294,43,265"/>
+<area shape="rect" id="Node000005" href="$_protagonist_8hpp_source.html" title=" " alt="" coords="48,300,161,326"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="76,263,99,298,95,301,72,266"/>
+<area shape="poly" id="edge5_Node000005_Node000004" title=" " alt="" coords="91,340,68,375,64,372,86,337"/>
+<area shape="poly" id="edge7_Node000006_Node000003" title=" " alt="" coords="85,193,67,227,62,225,81,191"/>
+</map>

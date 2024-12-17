@@ -16,9 +16,10 @@
 #include "core/Storage.hpp"
 
 using namespace MIR;
+using namespace ECS;
 using namespace nlohmann;
 
-void Storage::Save(ECSManager& manager)
+void Storage::Save(Manager& manager)
 {
     json state_json;
     json entities_json = json::array();
@@ -54,7 +55,7 @@ void Storage::Save(ECSManager& manager)
     output.close();
 }
 
-void Storage::Load(ECSManager& manager)
+void Storage::Load(Manager& manager)
 {
     std::ifstream input(save_path);
     assert(input.is_open() && "Failed to open file for saving game state.");

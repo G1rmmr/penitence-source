@@ -16,15 +16,16 @@
 #include "core/ECSManager.hpp"
 
 using namespace MIR;
+using namespace ECS;
 
-ECSManager::~ECSManager()
+Manager::~Manager()
 {
     components.clear();
     masks.clear();
     pools.clear();
 }
 
-Entity::ID ECSManager::CreateEntity()
+Entity::ID Manager::CreateEntity()
 {
     Entity::ID id = -1;
     
@@ -44,7 +45,7 @@ Entity::ID ECSManager::CreateEntity()
     return id;
 }
 
-void ECSManager::DestoryEntity(Entity::ID id)
+void Manager::DestoryEntity(Entity::ID id)
 {
     if (masks.find(id) == masks.end())
         return;

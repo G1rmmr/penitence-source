@@ -1,0 +1,7 @@
+<map id="MIR::Event" name="MIR::Event">
+<area shape="rect" id="Node000001" title="모든 이벤트의 기본 구조체" alt="" coords="89,5,178,31"/>
+<area shape="rect" id="Node000002" href="$struct_m_i_r_1_1_keyboard.html" title="키보드 입력 이벤트를 나타내는 구조체" alt="" coords="5,79,115,105"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="112,44,74,80,71,77,108,40"/>
+<area shape="rect" id="Node000003" href="$struct_m_i_r_1_1_player_collided.html" title="플레이어 충돌 발생 시점을 나타내는 이벤트 구조체" alt="" coords="139,79,277,105"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="159,40,197,77,194,81,155,44"/>
+</map>

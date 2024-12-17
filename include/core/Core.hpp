@@ -15,6 +15,14 @@
 
 #pragma once
 
+/**
+ * @file
+ * @brief 모든 해더를 포함하는 헤더
+ * 
+ * 이 파일은 SFML(그래픽, 오디오), 표준 라이브러리(C++17 이상 가정), 
+ * 그리고 엔티티, 컴포넌트, 시스템, 이벤트 관련 커스텀 헤더를 한 곳에서 포함.
+ */
+
 // SFML header
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>

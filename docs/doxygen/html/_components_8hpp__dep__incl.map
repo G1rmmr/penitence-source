@@ -1,0 +1,16 @@
+<map id="Components.hpp" name="Components.hpp">
+<area shape="rect" id="Node000001" title="ECS 아키텍처에서 사용되는 주요 컴포넌트를 한데 모아 포함하는 헤더" alt="" coords="6,5,126,31"/>
+<area shape="rect" id="Node000002" href="$_core_8hpp.html" title="모든 해더를 포함하는 헤더" alt="" coords="29,153,103,178"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="39,43,23,60,11,80,9,100,18,119,33,136,50,150,46,154,30,140,14,122,4,101,6,78,19,57,35,39"/>
+<area shape="rect" id="Node000005" href="$_storage_8hpp.html" title="게임 상태 저장 클래스 헤더" alt="" coords="20,79,111,105"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="68,46,68,79,63,79,63,46"/>
+<area shape="rect" id="Node000006" href="$_world_8hpp.html" title="시스템을 관리하는 클래스 헤더" alt="" coords="135,79,215,105"/>
+<area shape="poly" id="edge7_Node000001_Node000006" title=" " alt="" coords="98,37,158,76,155,81,95,42"/>
+<area shape="rect" id="Node000003" href="$_game_8hpp.html" title="Game 세팅, 실제 게임이 구현되는 워크 스페이스" alt="" coords="25,300,106,326"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="56,193,48,221,47,252,63,299,58,300,42,252,43,221,51,192"/>
+<area shape="rect" id="Node000004" href="$_protagonist_8hpp_source.html" title=" " alt="" coords="56,226,169,252"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="84,190,107,224,102,227,80,193"/>
+<area shape="poly" id="edge4_Node000004_Node000003" title=" " alt="" coords="99,266,76,301,71,298,94,263"/>
+<area shape="poly" id="edge6_Node000005_Node000002" title=" " alt="" coords="68,120,68,152,63,152,63,120"/>
+<area shape="poly" id="edge8_Node000006_Node000002" title=" " alt="" coords="146,115,86,154,83,150,143,111"/>
+</map>

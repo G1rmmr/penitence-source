@@ -16,14 +16,15 @@
 #include "core/World.hpp"
 
 using namespace MIR;
+using namespace ECS;
 
-void World::Update(ECSManager& manager, const float dt)
+void World::Update(Manager& manager, const float dt)
 {
     for(auto& sys : systems)
         sys->Update(manager, dt);
 }
 
-void World::Render(ECSManager& manager, sf::RenderWindow& window)
+void World::Render(Manager& manager, sf::RenderWindow& window)
 {
     Rendering* sys = GetSystem<Rendering>();
     sys->Render(manager, window);

@@ -4,6 +4,8 @@
 /Debug/
 /Release/
 /build/
+/html/
+/latex/
 
 *.o
 *.obj
@@ -34,3 +36,5 @@ CMakeLists.txt.user
 
 Makefile
 Makefile.in
+
+Doxyfile

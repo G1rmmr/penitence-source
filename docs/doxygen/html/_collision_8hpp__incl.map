@@ -1,0 +1,41 @@
+<map id="Collision.hpp" name="Collision.hpp">
+<area shape="rect" id="Node000001" title="충돌 시스템 헤더" alt="" coords="815,5,912,31"/>
+<area shape="rect" id="Node000002" href="$_system_8hpp.html" title="시스템 베이스 클래스" alt="" coords="671,79,762,105"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="840,34,757,74,754,69,837,29"/>
+<area shape="rect" id="Node000017" href="$_collider_8hpp.html" title="충돌 컴포넌트" alt="" coords="901,79,1066,105"/>
+<area shape="poly" id="edge18_Node000001_Node000017" title=" " alt="" coords="885,29,951,68,949,73,882,34"/>
+<area shape="rect" id="Node000018" href="$_position_8hpp.html" title="위치 컴포넌트" alt="" coords="779,153,948,178"/>
+<area shape="poly" id="edge20_Node000001_Node000018" title=" " alt="" coords="866,31,866,137,861,137,861,31"/>
+<area shape="rect" id="Node000003" href="$_e_c_s_manager_8hpp.html" title="ECS 매니저의 중추 설계 헤더" alt="" coords="522,153,674,178"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="698,107,633,147,630,142,695,103"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="596,226,707,252"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="609,177,635,212,631,215,605,180"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="731,226,788,252"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="627,176,719,217,717,222,624,181"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="813,226,866,252"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="640,176,799,223,797,228,639,182"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="5,300,74,326"/>
+<area shape="poly" id="edge6_Node000003_Node000007" title=" " alt="" coords="522,173,254,193,132,209,89,219,66,228,56,240,49,254,43,285,37,284,44,253,52,237,63,224,88,213,131,204,254,188,522,168"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="417,226,491,252"/>
+<area shape="poly" id="edge7_Node000003_Node000008" title=" " alt="" coords="575,181,493,221,491,217,573,176"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="515,226,572,252"/>
+<area shape="poly" id="edge8_Node000003_Node000009" title=" " alt="" coords="591,180,564,216,560,212,587,177"/>
+<area shape="rect" id="Node000010" href="$_entity_8hpp.html" title="엔티티(ID) 정의를 물리적으로 분리한 헤더" alt="" coords="76,226,155,252"/>
+<area shape="poly" id="edge9_Node000003_Node000010" title=" " alt="" coords="522,178,364,198,170,229,170,223,363,193,521,173"/>
+<area shape="rect" id="Node000012" href="$_component_8hpp.html" title="컴포넌트 베이스" alt="" coords="891,226,1079,252"/>
+<area shape="poly" id="edge11_Node000003_Node000012" title=" " alt="" coords="665,176,905,220,904,226,664,182"/>
+<area shape="rect" id="Node000013" href="$_component_pool_8hpp.html" title="풀(Pool) 기반 메모리 관리 인터페이스 및 컴포넌트 전용 풀 구현" alt="" coords="179,226,393,252"/>
+<area shape="poly" id="edge12_Node000003_Node000013" title=" " alt="" coords="545,182,355,225,353,220,544,176"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="97,300,158,326"/>
+<area shape="poly" id="edge10_Node000010_Node000011" title=" " alt="" coords="120,252,126,284,120,285,115,253"/>
+<area shape="poly" id="edge14_Node000013_Node000007" title=" " alt="" coords="245,255,89,300,88,295,244,250"/>
+<area shape="poly" id="edge13_Node000013_Node000011" title=" " alt="" coords="260,255,169,296,167,291,258,250"/>
+<area shape="rect" id="Node000014" title=" " alt="" coords="182,300,236,326"/>
+<area shape="poly" id="edge15_Node000013_Node000014" title=" " alt="" coords="275,255,235,291,231,287,271,251"/>
+<area shape="rect" id="Node000015" title=" " alt="" coords="260,300,337,326"/>
+<area shape="poly" id="edge16_Node000013_Node000015" title=" " alt="" coords="291,252,296,284,291,285,286,253"/>
+<area shape="rect" id="Node000016" title=" " alt="" coords="360,300,439,326"/>
+<area shape="poly" id="edge17_Node000013_Node000016" title=" " alt="" coords="307,250,369,289,366,294,304,255"/>
+<area shape="poly" id="edge19_Node000017_Node000012" title=" " alt="" coords="986,105,987,211,982,211,981,105"/>
+<area shape="poly" id="edge21_Node000018_Node000012" title=" " alt="" coords="885,177,952,216,950,220,883,181"/>
+</map>

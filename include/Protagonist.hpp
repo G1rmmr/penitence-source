@@ -17,33 +17,30 @@
 
 #include "core/Core.hpp"
 
-namespace MIR
+class Protagonist
 {
-    class Protagonist
-    {
-    public:
-        Protagonist() = default;
+public:
+    Protagonist() = default;
 
-        void Init(ECSManager& manager, Storage& storage);
+    void Init(MIR::ECS::Manager& manager, MIR::Storage& storage);
         
-        inline Entity::ID GetID() const
-        {
-            return id;
-        }
+    inline MIR::ECS::Entity::ID GetID() const
+    {
+        return id;
+    }
 
-    private:
-        const std::string IMG_PATH = "../assets/images/player_anim.png";
+private:
+    const std::string IMG_PATH = "../assets/images/player_anim.png";
 
-        const std::uint16_t INIT_WIDTH = 400;
-        const std::uint16_t INIT_HEIGHT = 300;
-        const std::uint16_t PROTAGONIST_WIDTH = 128;
-        const std::uint16_t PROTAGONIST_HEIGHT = 128;
+    const std::uint16_t INIT_WIDTH = 400;
+    const std::uint16_t INIT_HEIGHT = 300;
+    const std::uint16_t PROTAGONIST_WIDTH = 128;
+    const std::uint16_t PROTAGONIST_HEIGHT = 128;
 
-        const std::uint8_t MAX_ANIMATION = 3;
+    const std::uint8_t MAX_ANIMATION = 3;
 
-        const bool USING_SAVE_FILE = false;
+    const bool USING_SAVE_FILE = false;
 
-        std::unordered_map<State, std::vector<sf::IntRect>> anim_set;
-        Entity::ID id;
-    };
-}
+    std::unordered_map<MIR::State, std::vector<sf::IntRect>> anim_set;
+    MIR::ECS::Entity::ID id;
+};

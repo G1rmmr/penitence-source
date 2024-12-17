@@ -19,3 +19,10 @@
 #include "systems/Rendering.hpp"
 #include "systems/Animating.hpp"
 #include "systems/Collision.hpp"
+
+/**
+ * @file
+ * @brief 게임 내 주요 시스템들을 한데 모아 포함하는 헤더 파일
+ * 
+ * 이 파일을 포함함으로써 시스템 클래스를 한 번에 참조 가능.
+ */

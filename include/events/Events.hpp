@@ -18,3 +18,15 @@
 #include "Event.hpp"
 #include "Keyboard.hpp"
 #include "PlayerCollided.hpp"
+
+/**
+ * @file
+ * @brief 다양한 이벤트 클래스를 한 데 모아 포함하는 헤더 파일
+ *
+ * 이 파일은 기본 Event 클래스( Event.hpp )를 비롯하여,
+ * 키보드 입력 이벤트( Keyboard.hpp ), 플레이어 충돌 이벤트( PlayerCollided.hpp ) 등
+ * 게임 내 발생 가능한 다양한 이벤트를 한 번에 참조할 수 있도록 합니다.
+ * 
+ * 이를 통해 다른 소스 파일에서 이 파일을 포함하면 
+ * 다양한 이벤트 타입을 쉽게 접근하고 처리할 수 있습니다.
+ */

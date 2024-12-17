@@ -17,10 +17,32 @@
 
 #include <cstdint>
 
+/**
+ * @file
+ * @brief 엔티티(ID) 정의를 물리적으로 분리한 헤더
+ * 
+ * Entity ID에 대한 정보 포함.
+ */
+
 namespace MIR
 {
-    struct Entity
+    namespace ECS
     {
-        using ID = uint16_t;
-    };
+        /**
+         * @brief ECS(Entity-Component-System) 아키텍처에서 엔티티를 식별하기 위한 구조체
+         *
+         * Entity는 게임 세계를 구성하는 기본 객체의 식별자를 제공하는 단순 구조체.
+         * 엔티티는 컴포넌트를 부착하여 다양한 특성과 행동을 가질 수 있음.
+         */
+        struct Entity
+        {
+            /**
+             * @brief 엔티티를 식별하기 위한 정수형 타입 별칭
+             *
+             * 엔티티마다 고유 ID를 부여하여, 엔티티 관리.
+             * uint16_t를 사용하여 최대 65,535개의 엔티티 식별 가능(상황에 따라 조정 가능).
+             */
+            using ID = uint16_t;
+        };
+    }
 }

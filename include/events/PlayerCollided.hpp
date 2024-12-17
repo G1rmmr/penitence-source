@@ -15,14 +15,30 @@
 
 #pragma once
 
-#include "Event.hpp"
+/**
+ * @file
+ * @brief 플레이어 충돌 이벤트
+ * 
+ */
 
+#include "Event.hpp"
 #include "core/Entity.hpp"
 
 namespace MIR
 {
+    /**
+     * @brief 플레이어 충돌 발생 시점을 나타내는 이벤트 구조체
+     *
+     * PlayerCollided 이벤트는 플레이어가 어떤 대상과 충돌했을 때 발생하는 이벤트 타입.
+     * 이를 이용해 충돌 처리에 대한 다양한 로직 구현 가능.
+     */
     struct PlayerCollided : public Event
     {
+        /**
+         * @brief PlayerCollided 이벤트 생성자
+         * 
+         * 이벤트 타입을 CollisionHit으로 설정하여 플레이어 충돌 이벤트임을 명시.
+         */
         PlayerCollided() : Event(EventType::CollisionHit)
         {
 

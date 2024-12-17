@@ -1,0 +1,15 @@
+<map id="Collision.hpp" name="Collision.hpp">
+<area shape="rect" id="Node000001" title="충돌 시스템 헤더" alt="" coords="6,5,103,31"/>
+<area shape="rect" id="Node000002" href="$_systems_8hpp.html" title="게임 내 주요 시스템들을 한데 모아 포함하는 헤더 파일" alt="" coords="5,79,104,105"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="57,46,57,79,52,79,52,46"/>
+<area shape="rect" id="Node000003" href="$_core_8hpp.html" title="모든 해더를 포함하는 헤더" alt="" coords="17,226,92,252"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="49,120,44,148,44,178,54,226,48,227,39,179,39,148,44,119"/>
+<area shape="rect" id="Node000006" href="$_world_8hpp.html" title="시스템을 관리하는 클래스 헤더" alt="" coords="54,153,133,178"/>
+<area shape="poly" id="edge6_Node000002_Node000006" title=" " alt="" coords="70,117,89,151,84,153,66,120"/>
+<area shape="rect" id="Node000004" href="$_game_8hpp.html" title="Game 세팅, 실제 게임이 구현되는 워크 스페이스" alt="" coords="14,374,95,399"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="45,267,37,295,36,325,51,372,46,374,31,326,31,294,40,265"/>
+<area shape="rect" id="Node000005" href="$_protagonist_8hpp_source.html" title=" " alt="" coords="45,300,157,326"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="73,263,96,298,91,301,68,266"/>
+<area shape="poly" id="edge5_Node000005_Node000004" title=" " alt="" coords="87,340,65,375,60,372,83,337"/>
+<area shape="poly" id="edge7_Node000006_Node000003" title=" " alt="" coords="82,193,63,227,59,225,77,191"/>
+</map>

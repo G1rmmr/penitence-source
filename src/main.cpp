@@ -13,16 +13,16 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "Game.hpp"
+#include "core/Game.hpp"
 
 int main()
 {
     MIR::Game game;
-    game.Init();
+    game.Init();        ///< 게임 초기화: 리소스 로딩, ECS 세팅, 윈도우 생성 등
 
-    while(game.IsRunning())
-        game.Run();
-        
-    game.Shutdown();
+    while(game.IsRunning())  
+        game.Run();     ///< 게임 루프 실행: 입력 처리, 업데이트, 렌더링
+
+    game.Shutdown();    ///< 게임 종료 처리: 자원 해제, 파일 저장, 로그 출력 등
     return 0;
 }

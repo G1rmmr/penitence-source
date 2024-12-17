@@ -1,0 +1,37 @@
+<map id="Animating.hpp" name="Animating.hpp">
+<area shape="rect" id="Node000001" title="애니메이션 시스템 헤더" alt="" coords="496,5,601,31"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,226,116,252"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="523,34,102,222,100,217,520,29"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="518,300,579,326"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="601,21,761,41,856,59,947,82,1025,112,1055,130,1079,151,1093,173,1098,198,1090,225,1070,254,1045,267,999,278,865,295,715,306,594,312,594,307,715,301,865,289,998,272,1043,262,1067,250,1086,223,1092,198,1088,175,1075,154,1052,135,1022,117,946,87,855,64,760,46,601,26"/>
+<area shape="rect" id="Node000004" href="$_system_8hpp.html" title="시스템 베이스 클래스" alt="" coords="503,79,594,105"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="551,31,551,63,546,63,546,31"/>
+<area shape="rect" id="Node000005" href="$_e_c_s_manager_8hpp.html" title="ECS 매니저의 중추 설계 헤더" alt="" coords="472,153,625,178"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="551,105,551,137,546,137,546,105"/>
+<area shape="poly" id="edge5_Node000005_Node000002" title=" " alt="" coords="472,180,134,229,132,229,131,224,133,224,472,175"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="428,226,485,252"/>
+<area shape="poly" id="edge6_Node000005_Node000006" title=" " alt="" coords="535,181,485,219,482,215,531,177"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="1003,226,1056,252"/>
+<area shape="poly" id="edge7_Node000005_Node000007" title=" " alt="" coords="625,171,789,190,887,204,988,223,987,229,886,210,788,195,625,176"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="118,300,187,326"/>
+<area shape="poly" id="edge8_Node000005_Node000008" title=" " alt="" coords="472,172,392,178,305,189,229,205,200,216,180,228,170,240,163,255,156,285,151,284,158,253,165,237,176,224,198,211,228,200,305,183,391,173,472,167"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="611,226,686,252"/>
+<area shape="poly" id="edge9_Node000005_Node000009" title=" " alt="" coords="567,177,621,215,618,219,564,181"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="710,226,766,252"/>
+<area shape="poly" id="edge10_Node000005_Node000010" title=" " alt="" coords="582,176,696,219,694,224,580,181"/>
+<area shape="rect" id="Node000011" href="$_entity_8hpp.html" title="엔티티(ID) 정의를 물리적으로 분리한 헤더" alt="" coords="509,226,588,252"/>
+<area shape="poly" id="edge11_Node000005_Node000011" title=" " alt="" coords="551,179,551,211,546,211,546,179"/>
+<area shape="rect" id="Node000012" href="$_component_8hpp.html" title="컴포넌트 베이스" alt="" coords="790,226,979,252"/>
+<area shape="poly" id="edge13_Node000005_Node000012" title=" " alt="" coords="606,176,813,220,812,225,605,182"/>
+<area shape="rect" id="Node000013" href="$_component_pool_8hpp.html" title="풀(Pool) 기반 메모리 관리 인터페이스 및 컴포넌트 전용 풀 구현" alt="" coords="189,226,404,252"/>
+<area shape="poly" id="edge14_Node000005_Node000013" title=" " alt="" coords="506,181,355,224,353,219,505,176"/>
+<area shape="poly" id="edge12_Node000011_Node000003" title=" " alt="" coords="551,252,551,284,546,284,546,252"/>
+<area shape="poly" id="edge15_Node000013_Node000003" title=" " alt="" coords="340,250,504,296,502,301,339,255"/>
+<area shape="poly" id="edge16_Node000013_Node000008" title=" " alt="" coords="273,255,192,295,189,290,271,250"/>
+<area shape="rect" id="Node000014" title=" " alt="" coords="211,300,264,326"/>
+<area shape="poly" id="edge17_Node000013_Node000014" title=" " alt="" coords="289,254,259,290,255,286,285,251"/>
+<area shape="rect" id="Node000015" title=" " alt="" coords="288,300,366,326"/>
+<area shape="poly" id="edge18_Node000013_Node000015" title=" " alt="" coords="304,251,318,285,314,287,299,253"/>
+<area shape="rect" id="Node000016" title=" " alt="" coords="389,300,468,326"/>
+<area shape="poly" id="edge19_Node000013_Node000016" title=" " alt="" coords="320,250,394,290,392,295,318,255"/>
+</map>

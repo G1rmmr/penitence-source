@@ -1,0 +1,481 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ko">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.12.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>MIR Engine: MIR::ECS::Manager 클래스 참조</title>
+<link rel="icon" href="MIR.png" type="image/x-icon" />
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="MIR.png"/></td>
+  <td id="projectalign">
+   <div id="projectname">MIR Engine
+   </div>
+   <div id="projectbrief">미래 지향 설계에 초점을 맞춘 자체 제작 게임 엔진</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 다음에 의해 생성됨 :  Doxygen 1.12.0 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() { codefold.init(0); });
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','검색',true);
+  $(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function(){initNavTree('class_m_i_r_1_1_e_c_s_1_1_manager.html',''); initResizable(true); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">로딩중...</div>
+<div class="SRStatus" id="Searching">검색중...</div>
+<div class="SRStatus" id="NoMatches">일치하는것 없음</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public 멤버 함수</a>  </div>
+  <div class="headertitle"><div class="title">MIR::ECS::Manager 클래스 참조</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>ECS(Entity-Component-System) 아키텍처에서 엔티티와 컴포넌트를 관리하는 클래스  
+ <a href="#details">더 자세히 ...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_e_c_s_manager_8hpp_source.html">ECSManager.hpp</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public 멤버 함수</h2></td></tr>
+<tr class="memitem:ab3338a660cdd161af0044d839a423368" id="r_ab3338a660cdd161af0044d839a423368"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab3338a660cdd161af0044d839a423368">Manager</a> ()=default</td></tr>
+<tr class="memdesc:ab3338a660cdd161af0044d839a423368"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_m_i_r_1_1_e_c_s_1_1_manager.html" title="ECS(Entity-Component-System) 아키텍처에서 엔티티와 컴포넌트를 관리하는 클래스">Manager</a> 기본 생성자  <br /></td></tr>
+<tr class="separator:ab3338a660cdd161af0044d839a423368"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a22ccd66ed701aa78f0e30589bc3564c8" id="r_a22ccd66ed701aa78f0e30589bc3564c8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a22ccd66ed701aa78f0e30589bc3564c8">~Manager</a> ()</td></tr>
+<tr class="memdesc:a22ccd66ed701aa78f0e30589bc3564c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">소멸자  <br /></td></tr>
+<tr class="separator:a22ccd66ed701aa78f0e30589bc3564c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a36f8e3a10ebe6a1e8ff9d9385342b93f" id="r_a36f8e3a10ebe6a1e8ff9d9385342b93f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_m_i_r_1_1_e_c_s_1_1_entity.html#a5d9347247063793917a21fb07994a40f">Entity::ID</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a36f8e3a10ebe6a1e8ff9d9385342b93f">CreateEntity</a> ()</td></tr>
+<tr class="memdesc:a36f8e3a10ebe6a1e8ff9d9385342b93f"><td class="mdescLeft">&#160;</td><td class="mdescRight">새로운 엔티티를 생성하고 ID를 반환  <br /></td></tr>
+<tr class="separator:a36f8e3a10ebe6a1e8ff9d9385342b93f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af1cc6867dc6d935c2f644af521d1551c" id="r_af1cc6867dc6d935c2f644af521d1551c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af1cc6867dc6d935c2f644af521d1551c">DestoryEntity</a> (<a class="el" href="struct_m_i_r_1_1_e_c_s_1_1_entity.html#a5d9347247063793917a21fb07994a40f">Entity::ID</a> id)</td></tr>
+<tr class="memdesc:af1cc6867dc6d935c2f644af521d1551c"><td class="mdescLeft">&#160;</td><td class="mdescRight">특정 엔티티를 소멸  <br /></td></tr>
+<tr class="separator:af1cc6867dc6d935c2f644af521d1551c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9b5e8f4880b0920b04e5fd0433e31b76" id="r_a9b5e8f4880b0920b04e5fd0433e31b76"><td class="memTemplParams" colspan="2">template&lt;typename T , typename... Args&gt; <br />
+requires std::constructible_from&lt;T, Args...&gt;</td></tr>
+<tr class="memitem:a9b5e8f4880b0920b04e5fd0433e31b76"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#a9b5e8f4880b0920b04e5fd0433e31b76">AddComponent</a> (<a class="el" href="struct_m_i_r_1_1_e_c_s_1_1_entity.html#a5d9347247063793917a21fb07994a40f">Entity::ID</a> id, Args &amp;&amp;... args)</td></tr>
+<tr class="memdesc:a9b5e8f4880b0920b04e5fd0433e31b76"><td class="mdescLeft">&#160;</td><td class="mdescRight">엔티티에 새로운 컴포넌트를 추가하는 템플릿 메서드  <br /></td></tr>
+<tr class="separator:a9b5e8f4880b0920b04e5fd0433e31b76"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a62503af289106cb6dc9f8a0471c7a121" id="r_a62503af289106cb6dc9f8a0471c7a121"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a62503af289106cb6dc9f8a0471c7a121"><td class="memTemplItemLeft" align="right" valign="top">T *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#a62503af289106cb6dc9f8a0471c7a121">GetComponent</a> (<a class="el" href="struct_m_i_r_1_1_e_c_s_1_1_entity.html#a5d9347247063793917a21fb07994a40f">Entity::ID</a> id)</td></tr>
+<tr class="memdesc:a62503af289106cb6dc9f8a0471c7a121"><td class="mdescLeft">&#160;</td><td class="mdescRight">엔티티로부터 특정 타입 T의 컴포넌트를 가져오는 메서드  <br /></td></tr>
+<tr class="separator:a62503af289106cb6dc9f8a0471c7a121"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8830a71501b4fa97a2fb051150b58c37" id="r_a8830a71501b4fa97a2fb051150b58c37"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a8830a71501b4fa97a2fb051150b58c37"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#a8830a71501b4fa97a2fb051150b58c37">HasComponent</a> (<a class="el" href="struct_m_i_r_1_1_e_c_s_1_1_entity.html#a5d9347247063793917a21fb07994a40f">Entity::ID</a> id)</td></tr>
+<tr class="memdesc:a8830a71501b4fa97a2fb051150b58c37"><td class="mdescLeft">&#160;</td><td class="mdescRight">엔티티가 특정 타입 T의 컴포넌트를 보유하는지 확인  <br /></td></tr>
+<tr class="separator:a8830a71501b4fa97a2fb051150b58c37"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a501d1f31cf72f67be237ab23f08e4c12" id="r_a501d1f31cf72f67be237ab23f08e4c12"><td class="memTemplParams" colspan="2">template&lt;typename... Components&gt; </td></tr>
+<tr class="memitem:a501d1f31cf72f67be237ab23f08e4c12"><td class="memTemplItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="struct_m_i_r_1_1_e_c_s_1_1_entity.html#a5d9347247063793917a21fb07994a40f">Entity::ID</a> &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#a501d1f31cf72f67be237ab23f08e4c12">Query</a> () const</td></tr>
+<tr class="memdesc:a501d1f31cf72f67be237ab23f08e4c12"><td class="mdescLeft">&#160;</td><td class="mdescRight">특정 컴포넌트 집합을 모두 가진 엔티티 목록을 조회  <br /></td></tr>
+<tr class="separator:a501d1f31cf72f67be237ab23f08e4c12"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">상세한 설명</h2>
+<div class="textblock"><p>ECS(Entity-Component-System) 아키텍처에서 엔티티와 컴포넌트를 관리하는 클래스 </p>
+<p>Manager는 엔티티 생성/소멸, 컴포넌트 추가/조회, 특정 컴포넌트 집합을 보유한 엔티티 조회 가능. 내부적으로 마스크와 풀을 이용해 효율적인 컴포넌트 관리와 조회 성능을 제공. </p>
+</div><h2 class="groupheader">생성자 &amp; 소멸자 문서화</h2>
+<a id="ab3338a660cdd161af0044d839a423368" name="ab3338a660cdd161af0044d839a423368"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab3338a660cdd161af0044d839a423368">&#9670;&#160;</a></span>Manager()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">MIR::ECS::Manager::Manager </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p><a class="el" href="class_m_i_r_1_1_e_c_s_1_1_manager.html" title="ECS(Entity-Component-System) 아키텍처에서 엔티티와 컴포넌트를 관리하는 클래스">Manager</a> 기본 생성자 </p>
+<p>초기 상태에서는 엔티티나 컴포넌트가 없는 상태. </p>
+
+</div>
+</div>
+<a id="a22ccd66ed701aa78f0e30589bc3564c8" name="a22ccd66ed701aa78f0e30589bc3564c8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a22ccd66ed701aa78f0e30589bc3564c8">&#9670;&#160;</a></span>~Manager()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">MIR::ECS::Manager::~Manager </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>소멸자 </p>
+<p>Manager가 소멸될 때 모든 엔티티와 컴포넌트, 풀 등이 자동 해제. </p>
+
+</div>
+</div>
+<h2 class="groupheader">멤버 함수 문서화</h2>
+<a id="a9b5e8f4880b0920b04e5fd0433e31b76" name="a9b5e8f4880b0920b04e5fd0433e31b76"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9b5e8f4880b0920b04e5fd0433e31b76">&#9670;&#160;</a></span>AddComponent()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename... Args&gt; <br />
+requires std::constructible_from&lt;T, Args...&gt;</div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MIR::ECS::Manager::AddComponent </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_m_i_r_1_1_e_c_s_1_1_entity.html#a5d9347247063793917a21fb07994a40f">Entity::ID</a></td>          <td class="paramname"><span class="paramname"><em>id</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Args &amp;&amp;...</td>          <td class="paramname"><span class="paramname"><em>args</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>엔티티에 새로운 컴포넌트를 추가하는 템플릿 메서드 </p>
+<p>주어진 타입 T의 컴포넌트를 엔티티에 추가. Args...는 컴포넌트 생성자에 전달되는 파라미터 팩이며, 풀을 통해 컴포넌트를 재할당하거나 새로 생성.</p>
+<dl class="tparams"><dt>템플릿 파라메터</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>추가할 컴포넌트 타입 </td></tr>
+    <tr><td class="paramname">Args</td><td>T 생성자에 전달할 파라미터 타입 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>매개변수</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">id</td><td>컴포넌트를 추가할 엔티티의 ID </td></tr>
+    <tr><td class="paramname">args</td><td>컴포넌트 생성자에 전달할 인자 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>예외</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::runtime_error</td><td>유효하지 않은 엔티티이거나, 이미 해당 컴포넌트를 보유한 경우 </td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="fragment"><div class="line"><span class="lineno">  120</span>            {</div>
+<div class="line"><span class="lineno">  121</span>                <span class="keywordflow">if</span> (masks.find(<span class="keywordtype">id</span>) == masks.end())</div>
+<div class="line"><span class="lineno">  122</span>                    <span class="keywordflow">throw</span> std::runtime_error(<span class="stringliteral">&quot;Invalid Entity ID&quot;</span>);</div>
+<div class="line"><span class="lineno">  123</span> </div>
+<div class="line"><span class="lineno">  124</span>                <a class="code hl_typedef" href="struct_m_i_r_1_1_component.html#aafe1302f8850d7a0f5248c754fdef28f">Component::Tag</a> tag = GetTag&lt;T&gt;();</div>
+<div class="line"><span class="lineno">  125</span>                <span class="keywordflow">if</span> (masks[<span class="keywordtype">id</span>][tag])</div>
+<div class="line"><span class="lineno">  126</span>                    <span class="keywordflow">throw</span> std::runtime_error(<span class="stringliteral">&quot;Component already exists for this Entity&quot;</span>);</div>
+<div class="line"><span class="lineno">  127</span>                </div>
+<div class="line"><span class="lineno">  128</span>                masks[id].set(tag);</div>
+<div class="line"><span class="lineno">  129</span> </div>
+<div class="line"><span class="lineno">  130</span>                <span class="keywordflow">if</span>(pools.find(tag) == pools.end())</div>
+<div class="line"><span class="lineno">  131</span>                    pools[tag] = std::make_shared&lt;ComponentPool&lt;T&gt;&gt;();</div>
+<div class="line"><span class="lineno">  132</span> </div>
+<div class="line"><span class="lineno">  133</span>                <span class="keyword">auto</span> pool = std::static_pointer_cast&lt;ComponentPool&lt;T&gt;&gt;(pools[tag]);</div>
+<div class="line"><span class="lineno">  134</span>                <span class="keyword">auto</span> component = pool-&gt;Acquire(std::forward&lt;Args&gt;(args)...);</div>
+<div class="line"><span class="lineno">  135</span>                components[id][tag] = std::move(component);</div>
+<div class="line"><span class="lineno">  136</span>            }</div>
+<div class="ttc" id="astruct_m_i_r_1_1_component_html_aafe1302f8850d7a0f5248c754fdef28f"><div class="ttname"><a href="struct_m_i_r_1_1_component.html#aafe1302f8850d7a0f5248c754fdef28f">MIR::Component::Tag</a></div><div class="ttdeci">std::uint32_t Tag</div><div class="ttdoc">컴포넌트를 식별하기 위한 태그 타입 정의</div><div class="ttdef"><b>Definition</b> Component.hpp:51</div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a36f8e3a10ebe6a1e8ff9d9385342b93f" name="a36f8e3a10ebe6a1e8ff9d9385342b93f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a36f8e3a10ebe6a1e8ff9d9385342b93f">&#9670;&#160;</a></span>CreateEntity()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_m_i_r_1_1_e_c_s_1_1_entity.html#a5d9347247063793917a21fb07994a40f">Entity::ID</a> MIR::ECS::Manager::CreateEntity </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>새로운 엔티티를 생성하고 ID를 반환 </p>
+<p>새로운 엔티티 ID를 발급하고 마스크, 컴포넌트 맵을 초기화. </p><dl class="section return"><dt>반환값</dt><dd>생성된 엔티티의 ID </dd></dl>
+
+</div>
+</div>
+<a id="af1cc6867dc6d935c2f644af521d1551c" name="af1cc6867dc6d935c2f644af521d1551c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af1cc6867dc6d935c2f644af521d1551c">&#9670;&#160;</a></span>DestoryEntity()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MIR::ECS::Manager::DestoryEntity </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_m_i_r_1_1_e_c_s_1_1_entity.html#a5d9347247063793917a21fb07994a40f">Entity::ID</a></td>          <td class="paramname"><span class="paramname"><em>id</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>특정 엔티티를 소멸 </p>
+<p>해당 엔티티가 가진 모든 컴포넌트 해제, 엔티티 ID를 재사용 가능하도록 처리. </p><dl class="params"><dt>매개변수</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">id</td><td>소멸할 엔티티의 ID </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a62503af289106cb6dc9f8a0471c7a121" name="a62503af289106cb6dc9f8a0471c7a121"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a62503af289106cb6dc9f8a0471c7a121">&#9670;&#160;</a></span>GetComponent()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">T * MIR::ECS::Manager::GetComponent </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_m_i_r_1_1_e_c_s_1_1_entity.html#a5d9347247063793917a21fb07994a40f">Entity::ID</a></td>          <td class="paramname"><span class="paramname"><em>id</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>엔티티로부터 특정 타입 T의 컴포넌트를 가져오는 메서드 </p>
+<p>해당 엔티티가 T 타입의 컴포넌트를 가지고 있다면 포인터 반환, 없다면 nullptr 반환.</p>
+<dl class="tparams"><dt>템플릿 파라메터</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>가져올 컴포넌트 타입 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>매개변수</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">id</td><td>엔티티 ID </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>반환값</dt><dd>T* 컴포넌트 포인터, 없으면 nullptr </dd></dl>
+<div class="fragment"><div class="line"><span class="lineno">  149</span>            {</div>
+<div class="line"><span class="lineno">  150</span>                <a class="code hl_typedef" href="struct_m_i_r_1_1_component.html#aafe1302f8850d7a0f5248c754fdef28f">Component::Tag</a> tag = GetTag&lt;T&gt;();</div>
+<div class="line"><span class="lineno">  151</span>                <span class="keywordflow">if</span>(!masks[<span class="keywordtype">id</span>][tag])</div>
+<div class="line"><span class="lineno">  152</span>                    <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
+<div class="line"><span class="lineno">  153</span> </div>
+<div class="line"><span class="lineno">  154</span>                <span class="keyword">auto</span> it = components.find(<span class="keywordtype">id</span>);</div>
+<div class="line"><span class="lineno">  155</span> </div>
+<div class="line"><span class="lineno">  156</span>                <span class="keywordflow">if</span>(it != components.end() &amp;&amp; it-&gt;second.find(tag) != it-&gt;second.end())</div>
+<div class="line"><span class="lineno">  157</span>                    <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span>T*<span class="keyword">&gt;</span>(it-&gt;second[tag].get());</div>
+<div class="line"><span class="lineno">  158</span> </div>
+<div class="line"><span class="lineno">  159</span>                <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
+<div class="line"><span class="lineno">  160</span>            }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a8830a71501b4fa97a2fb051150b58c37" name="a8830a71501b4fa97a2fb051150b58c37"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8830a71501b4fa97a2fb051150b58c37">&#9670;&#160;</a></span>HasComponent()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool MIR::ECS::Manager::HasComponent </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_m_i_r_1_1_e_c_s_1_1_entity.html#a5d9347247063793917a21fb07994a40f">Entity::ID</a></td>          <td class="paramname"><span class="paramname"><em>id</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>엔티티가 특정 타입 T의 컴포넌트를 보유하는지 확인 </p>
+<p>마스크를 통해 해당 컴포넌트 태그 비트가 설정되어 있는지 확인.</p>
+<dl class="tparams"><dt>템플릿 파라메터</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>확인할 컴포넌트 타입 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>매개변수</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">id</td><td>엔티티 ID </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>반환값</dt><dd>true 엔티티가 T 타입의 컴포넌트를 가지고 있음 </dd>
+<dd>
+false 없음 </dd></dl>
+<div class="fragment"><div class="line"><span class="lineno">  174</span>            {</div>
+<div class="line"><span class="lineno">  175</span>                <a class="code hl_typedef" href="struct_m_i_r_1_1_component.html#aafe1302f8850d7a0f5248c754fdef28f">Component::Tag</a> tag = GetTag&lt;T&gt;();</div>
+<div class="line"><span class="lineno">  176</span>                <span class="keywordflow">return</span> masks[id][tag];</div>
+<div class="line"><span class="lineno">  177</span>            }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a501d1f31cf72f67be237ab23f08e4c12" name="a501d1f31cf72f67be237ab23f08e4c12"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a501d1f31cf72f67be237ab23f08e4c12">&#9670;&#160;</a></span>Query()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename... Components&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; <a class="el" href="struct_m_i_r_1_1_e_c_s_1_1_entity.html#a5d9347247063793917a21fb07994a40f">Entity::ID</a> &gt; MIR::ECS::Manager::Query </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>특정 컴포넌트 집합을 모두 가진 엔티티 목록을 조회 </p>
+<p>가변 템플릿 파라미터 팩(Components...)으로 전달된 모든 컴포넌트를 보유한 엔티티들 반환. 마스크를 사용해 해당 컴포넌트 비트가 모두 설정된 엔티티를 필터링.</p>
+<dl class="tparams"><dt>템플릿 파라메터</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Components</td><td>요구되는 컴포넌트 타입들 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>반환값</dt><dd>std::vector&lt;Entity::ID&gt; 해당 컴포넌트를 전부 가진 엔티티 ID 목록 </dd></dl>
+<div class="fragment"><div class="line"><span class="lineno">  190</span>            {</div>
+<div class="line"><span class="lineno">  191</span>                std::vector&lt;Entity::ID&gt; result;</div>
+<div class="line"><span class="lineno">  192</span> </div>
+<div class="line"><span class="lineno">  193</span>                <span class="keywordflow">for</span>(<span class="keyword">const</span> <span class="keyword">auto</span>&amp; [<span class="keywordtype">id</span>, mask] : masks)</div>
+<div class="line"><span class="lineno">  194</span>                    <span class="keywordflow">if</span>((mask.test(GetTag&lt;Components&gt;()) &amp;&amp; ...))</div>
+<div class="line"><span class="lineno">  195</span>                        result.emplace_back(<span class="keywordtype">id</span>);</div>
+<div class="line"><span class="lineno">  196</span> </div>
+<div class="line"><span class="lineno">  197</span>                <span class="keywordflow">return</span> result;</div>
+<div class="line"><span class="lineno">  198</span>            }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<hr/>이 클래스에 대한 문서화 페이지는 다음의 파일로부터 생성되었습니다.:<ul>
+<li><a class="el" href="_e_c_s_manager_8hpp_source.html">ECSManager.hpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>MIR</b></li><li class="navelem"><b>ECS</b></li><li class="navelem"><a class="el" href="class_m_i_r_1_1_e_c_s_1_1_manager.html">Manager</a></li>
+    <li class="footer">다음에 의해 생성됨 :  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.12.0 </li>
+  </ul>
+</div>
+</body>
+</html>

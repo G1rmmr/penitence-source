@@ -1,0 +1,274 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ko">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.12.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>MIR Engine: ECSManager.hpp 소스 파일</title>
+<link rel="icon" href="MIR.png" type="image/x-icon" />
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="MIR.png"/></td>
+  <td id="projectalign">
+   <div id="projectname">MIR Engine
+   </div>
+   <div id="projectbrief">미래 지향 설계에 초점을 맞춘 자체 제작 게임 엔진</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 다음에 의해 생성됨 :  Doxygen 1.12.0 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() { codefold.init(0); });
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','검색',true);
+  $(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function(){initNavTree('_e_c_s_manager_8hpp_source.html',''); initResizable(true); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">로딩중...</div>
+<div class="SRStatus" id="Searching">검색중...</div>
+<div class="SRStatus" id="NoMatches">일치하는것 없음</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">ECSManager.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="_e_c_s_manager_8hpp.html">이 파일의 문서화 페이지로 가기</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">// Created on Fri Nov 08 2024</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">// © 2024 BLACKHAND Studio. All rights reserved.</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">// </span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment">// Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment">// you may not use this file except in compliance with the License.</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="comment">// You may obtain a copy of the License at</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment">// </span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="comment">//      http://www.apache.org/licenses/LICENSE-2.0</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="comment">// </span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment">// Unless required by applicable law or agreed to in writing, software</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="comment">// distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="comment">// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="comment">// See the License for the specific language governing permissions and</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment">// limitations under the License.</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#pragma once</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="preprocessor">#include &lt;unordered_map&gt;</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="preprocessor">#include &lt;bitset&gt;</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="preprocessor">#include &lt;memory&gt;</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="preprocessor">#include &lt;concepts&gt;</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="preprocessor">#include &lt;queue&gt;</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="preprocessor">#include &quot;<a class="code" href="_entity_8hpp.html">Entity.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="preprocessor">#include &quot;<a class="code" href="_component_8hpp.html">components/Component.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="preprocessor">#include &quot;<a class="code" href="_component_pool_8hpp.html">components/ComponentPool.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="keyword">namespace </span>MIR</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>{</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    <span class="keyword">namespace </span>ECS</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    {</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno"><a class="line" href="_e_c_s_manager_8hpp.html#a3a5fa651c8c8d6639176b82f80d6d656">   46</a></span>        <span class="keyword">using </span><a class="code hl_typedef" href="_e_c_s_manager_8hpp.html#a3a5fa651c8c8d6639176b82f80d6d656">Mask</a> = std::bitset&lt;MAX_COMPONENTS&gt;;</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno"><a class="line" href="_e_c_s_manager_8hpp.html#ad04044e0565141b6e97891a31482d81e">   55</a></span>        <span class="keyword">using </span><a class="code hl_typedef" href="_e_c_s_manager_8hpp.html#ad04044e0565141b6e97891a31482d81e">Data</a> = std::unordered_map&lt;<a class="code hl_typedef" href="struct_m_i_r_1_1_component.html#aafe1302f8850d7a0f5248c754fdef28f">Component::Tag</a>,</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>            std::unique_ptr&lt;<a class="code hl_struct" href="struct_m_i_r_1_1_component.html">Component</a>, std::function&lt;void(<a class="code hl_struct" href="struct_m_i_r_1_1_component.html">Component</a>*)&gt;&gt;&gt;;</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno"><a class="line" href="_e_c_s_manager_8hpp.html#abdc89df5eaa612a13dd3c4975b53af7f">   63</a></span>        <span class="keyword">using </span><a class="code hl_typedef" href="_e_c_s_manager_8hpp.html#abdc89df5eaa612a13dd3c4975b53af7f">Pool</a> = std::shared_ptr&lt;PoolBase&gt;;</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
+<div class="foldopen" id="foldopen00071" data-start="{" data-end="};">
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno"><a class="line" href="class_m_i_r_1_1_e_c_s_1_1_manager.html">   71</a></span>        <span class="keyword">class </span><a class="code hl_class" href="class_m_i_r_1_1_e_c_s_1_1_manager.html">Manager</a></div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>        {</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>        <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno"><a class="line" href="class_m_i_r_1_1_e_c_s_1_1_manager.html#ab3338a660cdd161af0044d839a423368">   79</a></span>            <a class="code hl_function" href="class_m_i_r_1_1_e_c_s_1_1_manager.html#ab3338a660cdd161af0044d839a423368">Manager</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span> </div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno"><a class="line" href="class_m_i_r_1_1_e_c_s_1_1_manager.html#a22ccd66ed701aa78f0e30589bc3564c8">   86</a></span>            <a class="code hl_function" href="class_m_i_r_1_1_e_c_s_1_1_manager.html#a22ccd66ed701aa78f0e30589bc3564c8">~Manager</a>();</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span> </div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno"><a class="line" href="class_m_i_r_1_1_e_c_s_1_1_manager.html#a36f8e3a10ebe6a1e8ff9d9385342b93f">   94</a></span>            <a class="code hl_typedef" href="struct_m_i_r_1_1_e_c_s_1_1_entity.html#a5d9347247063793917a21fb07994a40f">Entity::ID</a> <a class="code hl_function" href="class_m_i_r_1_1_e_c_s_1_1_manager.html#a36f8e3a10ebe6a1e8ff9d9385342b93f">CreateEntity</a>();</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span> </div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno"><a class="line" href="class_m_i_r_1_1_e_c_s_1_1_manager.html#af1cc6867dc6d935c2f644af521d1551c">  102</a></span>            <span class="keywordtype">void</span> <a class="code hl_function" href="class_m_i_r_1_1_e_c_s_1_1_manager.html#af1cc6867dc6d935c2f644af521d1551c">DestoryEntity</a>(<a class="code hl_typedef" href="struct_m_i_r_1_1_e_c_s_1_1_entity.html#a5d9347247063793917a21fb07994a40f">Entity::ID</a> <span class="keywordtype">id</span>);</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span> </div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>            <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span>... Args&gt;</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>            <span class="keyword">requires</span> std::constructible_from&lt;T, Args...&gt;</div>
+<div class="foldopen" id="foldopen00119" data-start="{" data-end="}">
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno"><a class="line" href="class_m_i_r_1_1_e_c_s_1_1_manager.html#a9b5e8f4880b0920b04e5fd0433e31b76">  119</a></span>            <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="class_m_i_r_1_1_e_c_s_1_1_manager.html#a9b5e8f4880b0920b04e5fd0433e31b76">AddComponent</a>(<a class="code hl_typedef" href="struct_m_i_r_1_1_e_c_s_1_1_entity.html#a5d9347247063793917a21fb07994a40f">Entity::ID</a> <span class="keywordtype">id</span>, Args&amp;&amp;... args)</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>            {</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>                <span class="keywordflow">if</span> (masks.find(<span class="keywordtype">id</span>) == masks.end())</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>                    <span class="keywordflow">throw</span> std::runtime_error(<span class="stringliteral">&quot;Invalid Entity ID&quot;</span>);</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span> </div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>                <a class="code hl_typedef" href="struct_m_i_r_1_1_component.html#aafe1302f8850d7a0f5248c754fdef28f">Component::Tag</a> tag = GetTag&lt;T&gt;();</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>                <span class="keywordflow">if</span> (masks[<span class="keywordtype">id</span>][tag])</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>                    <span class="keywordflow">throw</span> std::runtime_error(<span class="stringliteral">&quot;Component already exists for this Entity&quot;</span>);</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>                </div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>                masks[id].set(tag);</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span> </div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>                <span class="keywordflow">if</span>(pools.find(tag) == pools.end())</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>                    pools[tag] = std::make_shared&lt;ComponentPool&lt;T&gt;&gt;();</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span> </div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>                <span class="keyword">auto</span> pool = std::static_pointer_cast&lt;ComponentPool&lt;T&gt;&gt;(pools[tag]);</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>                <span class="keyword">auto</span> component = pool-&gt;Acquire(std::forward&lt;Args&gt;(args)...);</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>                components[id][tag] = std::move(component);</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>            }</div>
+</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span> </div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>            <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="foldopen" id="foldopen00148" data-start="{" data-end="}">
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno"><a class="line" href="class_m_i_r_1_1_e_c_s_1_1_manager.html#a62503af289106cb6dc9f8a0471c7a121">  148</a></span>            <span class="keyword">inline</span> T* <a class="code hl_function" href="class_m_i_r_1_1_e_c_s_1_1_manager.html#a62503af289106cb6dc9f8a0471c7a121">GetComponent</a>(<a class="code hl_typedef" href="struct_m_i_r_1_1_e_c_s_1_1_entity.html#a5d9347247063793917a21fb07994a40f">Entity::ID</a> <span class="keywordtype">id</span>)</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>            {</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>                <a class="code hl_typedef" href="struct_m_i_r_1_1_component.html#aafe1302f8850d7a0f5248c754fdef28f">Component::Tag</a> tag = GetTag&lt;T&gt;();</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>                <span class="keywordflow">if</span>(!masks[<span class="keywordtype">id</span>][tag])</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>                    <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span> </div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>                <span class="keyword">auto</span> it = components.find(<span class="keywordtype">id</span>);</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span> </div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>                <span class="keywordflow">if</span>(it != components.end() &amp;&amp; it-&gt;second.find(tag) != it-&gt;second.end())</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>                    <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span>T*<span class="keyword">&gt;</span>(it-&gt;second[tag].get());</div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span> </div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>                <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>            }</div>
+</div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span> </div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>            <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="foldopen" id="foldopen00173" data-start="{" data-end="}">
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno"><a class="line" href="class_m_i_r_1_1_e_c_s_1_1_manager.html#a8830a71501b4fa97a2fb051150b58c37">  173</a></span>            <span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="class_m_i_r_1_1_e_c_s_1_1_manager.html#a8830a71501b4fa97a2fb051150b58c37">HasComponent</a>(<a class="code hl_typedef" href="struct_m_i_r_1_1_e_c_s_1_1_entity.html#a5d9347247063793917a21fb07994a40f">Entity::ID</a> <span class="keywordtype">id</span>)</div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>            {</div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>                <a class="code hl_typedef" href="struct_m_i_r_1_1_component.html#aafe1302f8850d7a0f5248c754fdef28f">Component::Tag</a> tag = GetTag&lt;T&gt;();</div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>                <span class="keywordflow">return</span> masks[id][tag];</div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>            }</div>
+</div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span> </div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>            <span class="keyword">template</span> &lt;<span class="keyword">typename</span>... Components&gt;</div>
+<div class="foldopen" id="foldopen00189" data-start="{" data-end="}">
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno"><a class="line" href="class_m_i_r_1_1_e_c_s_1_1_manager.html#a501d1f31cf72f67be237ab23f08e4c12">  189</a></span>            <span class="keyword">inline</span> std::vector&lt;Entity::ID&gt; <a class="code hl_function" href="class_m_i_r_1_1_e_c_s_1_1_manager.html#a501d1f31cf72f67be237ab23f08e4c12">Query</a>()<span class="keyword"> const</span></div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span><span class="keyword">            </span>{</div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>                std::vector&lt;Entity::ID&gt; result;</div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span> </div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>                <span class="keywordflow">for</span>(<span class="keyword">const</span> <span class="keyword">auto</span>&amp; [<span class="keywordtype">id</span>, mask] : masks)</div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>                    <span class="keywordflow">if</span>((mask.test(GetTag&lt;Components&gt;()) &amp;&amp; ...))</div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>                        result.emplace_back(<span class="keywordtype">id</span>);</div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span> </div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>                <span class="keywordflow">return</span> result;</div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>            }</div>
+</div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span> </div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>        <span class="keyword">private</span>:</div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>            std::unordered_map&lt;Entity::ID, Data&gt; components;</div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>            std::unordered_map&lt;Entity::ID, Mask&gt; masks;</div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>            std::unordered_map&lt;Component::Tag, Pool&gt; pools;</div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span> </div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>            std::queue&lt;Entity::ID&gt; id_queue;</div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>            </div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>            <span class="keyword">inline</span> <span class="keyword">static</span> <a class="code hl_typedef" href="struct_m_i_r_1_1_e_c_s_1_1_entity.html#a5d9347247063793917a21fb07994a40f">Entity::ID</a> next_id = 0;</div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>            <span class="keyword">inline</span> <span class="keyword">static</span> <a class="code hl_typedef" href="struct_m_i_r_1_1_component.html#aafe1302f8850d7a0f5248c754fdef28f">Component::Tag</a> next_tag;</div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span> </div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>            <span class="keyword">inline</span> <a class="code hl_typedef" href="struct_m_i_r_1_1_e_c_s_1_1_entity.html#a5d9347247063793917a21fb07994a40f">Entity::ID</a> GetID()</div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>            {</div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>                <span class="keywordflow">return</span> next_id++;</div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>            }</div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>            </div>
+<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>            <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>            <span class="keyword">inline</span> <span class="keyword">static</span> <a class="code hl_typedef" href="struct_m_i_r_1_1_component.html#aafe1302f8850d7a0f5248c754fdef28f">Component::Tag</a> GetTag()</div>
+<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>            {</div>
+<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>                <span class="keyword">static</span> <a class="code hl_typedef" href="struct_m_i_r_1_1_component.html#aafe1302f8850d7a0f5248c754fdef28f">Component::Tag</a> tag = next_tag++;</div>
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>                <span class="keywordflow">return</span> tag;</div>
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>            }</div>
+<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>        };</div>
+</div>
+<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>    }</div>
+<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span>}</div>
+<div class="ttc" id="a_component_8hpp_html"><div class="ttname"><a href="_component_8hpp.html">Component.hpp</a></div><div class="ttdoc">컴포넌트 베이스</div></div>
+<div class="ttc" id="a_component_pool_8hpp_html"><div class="ttname"><a href="_component_pool_8hpp.html">ComponentPool.hpp</a></div><div class="ttdoc">풀(Pool) 기반 메모리 관리 인터페이스 및 컴포넌트 전용 풀 구현</div></div>
+<div class="ttc" id="a_e_c_s_manager_8hpp_html_a3a5fa651c8c8d6639176b82f80d6d656"><div class="ttname"><a href="_e_c_s_manager_8hpp.html#a3a5fa651c8c8d6639176b82f80d6d656">MIR::ECS::Mask</a></div><div class="ttdeci">std::bitset&lt; MAX_COMPONENTS &gt; Mask</div><div class="ttdoc">엔티티의 컴포넌트 보유 상태를 나타내는 비트 마스크 타입</div><div class="ttdef"><b>Definition</b> ECSManager.hpp:46</div></div>
+<div class="ttc" id="a_e_c_s_manager_8hpp_html_abdc89df5eaa612a13dd3c4975b53af7f"><div class="ttname"><a href="_e_c_s_manager_8hpp.html#abdc89df5eaa612a13dd3c4975b53af7f">MIR::ECS::Pool</a></div><div class="ttdeci">std::shared_ptr&lt; PoolBase &gt; Pool</div><div class="ttdoc">컴포넌트 풀(Pool)을 가리키는 스마트 포인터 타입</div><div class="ttdef"><b>Definition</b> ECSManager.hpp:63</div></div>
+<div class="ttc" id="a_e_c_s_manager_8hpp_html_ad04044e0565141b6e97891a31482d81e"><div class="ttname"><a href="_e_c_s_manager_8hpp.html#ad04044e0565141b6e97891a31482d81e">MIR::ECS::Data</a></div><div class="ttdeci">std::unordered_map&lt; Component::Tag, std::unique_ptr&lt; Component, std::function&lt; void(Component *)&gt; &gt; &gt; Data</div><div class="ttdoc">엔티티가 보유한 컴포넌트들을 관리하는 컨테이너 타입</div><div class="ttdef"><b>Definition</b> ECSManager.hpp:55</div></div>
+<div class="ttc" id="a_entity_8hpp_html"><div class="ttname"><a href="_entity_8hpp.html">Entity.hpp</a></div><div class="ttdoc">엔티티(ID) 정의를 물리적으로 분리한 헤더</div></div>
+<div class="ttc" id="aclass_m_i_r_1_1_e_c_s_1_1_manager_html"><div class="ttname"><a href="class_m_i_r_1_1_e_c_s_1_1_manager.html">MIR::ECS::Manager</a></div><div class="ttdoc">ECS(Entity-Component-System) 아키텍처에서 엔티티와 컴포넌트를 관리하는 클래스</div><div class="ttdef"><b>Definition</b> ECSManager.hpp:72</div></div>
+<div class="ttc" id="aclass_m_i_r_1_1_e_c_s_1_1_manager_html_a22ccd66ed701aa78f0e30589bc3564c8"><div class="ttname"><a href="class_m_i_r_1_1_e_c_s_1_1_manager.html#a22ccd66ed701aa78f0e30589bc3564c8">MIR::ECS::Manager::~Manager</a></div><div class="ttdeci">~Manager()</div><div class="ttdoc">소멸자</div></div>
+<div class="ttc" id="aclass_m_i_r_1_1_e_c_s_1_1_manager_html_a36f8e3a10ebe6a1e8ff9d9385342b93f"><div class="ttname"><a href="class_m_i_r_1_1_e_c_s_1_1_manager.html#a36f8e3a10ebe6a1e8ff9d9385342b93f">MIR::ECS::Manager::CreateEntity</a></div><div class="ttdeci">Entity::ID CreateEntity()</div><div class="ttdoc">새로운 엔티티를 생성하고 ID를 반환</div></div>
+<div class="ttc" id="aclass_m_i_r_1_1_e_c_s_1_1_manager_html_a501d1f31cf72f67be237ab23f08e4c12"><div class="ttname"><a href="class_m_i_r_1_1_e_c_s_1_1_manager.html#a501d1f31cf72f67be237ab23f08e4c12">MIR::ECS::Manager::Query</a></div><div class="ttdeci">std::vector&lt; Entity::ID &gt; Query() const</div><div class="ttdoc">특정 컴포넌트 집합을 모두 가진 엔티티 목록을 조회</div><div class="ttdef"><b>Definition</b> ECSManager.hpp:189</div></div>
+<div class="ttc" id="aclass_m_i_r_1_1_e_c_s_1_1_manager_html_a62503af289106cb6dc9f8a0471c7a121"><div class="ttname"><a href="class_m_i_r_1_1_e_c_s_1_1_manager.html#a62503af289106cb6dc9f8a0471c7a121">MIR::ECS::Manager::GetComponent</a></div><div class="ttdeci">T * GetComponent(Entity::ID id)</div><div class="ttdoc">엔티티로부터 특정 타입 T의 컴포넌트를 가져오는 메서드</div><div class="ttdef"><b>Definition</b> ECSManager.hpp:148</div></div>
+<div class="ttc" id="aclass_m_i_r_1_1_e_c_s_1_1_manager_html_a8830a71501b4fa97a2fb051150b58c37"><div class="ttname"><a href="class_m_i_r_1_1_e_c_s_1_1_manager.html#a8830a71501b4fa97a2fb051150b58c37">MIR::ECS::Manager::HasComponent</a></div><div class="ttdeci">bool HasComponent(Entity::ID id)</div><div class="ttdoc">엔티티가 특정 타입 T의 컴포넌트를 보유하는지 확인</div><div class="ttdef"><b>Definition</b> ECSManager.hpp:173</div></div>
+<div class="ttc" id="aclass_m_i_r_1_1_e_c_s_1_1_manager_html_a9b5e8f4880b0920b04e5fd0433e31b76"><div class="ttname"><a href="class_m_i_r_1_1_e_c_s_1_1_manager.html#a9b5e8f4880b0920b04e5fd0433e31b76">MIR::ECS::Manager::AddComponent</a></div><div class="ttdeci">void AddComponent(Entity::ID id, Args &amp;&amp;... args)</div><div class="ttdoc">엔티티에 새로운 컴포넌트를 추가하는 템플릿 메서드</div><div class="ttdef"><b>Definition</b> ECSManager.hpp:119</div></div>
+<div class="ttc" id="aclass_m_i_r_1_1_e_c_s_1_1_manager_html_ab3338a660cdd161af0044d839a423368"><div class="ttname"><a href="class_m_i_r_1_1_e_c_s_1_1_manager.html#ab3338a660cdd161af0044d839a423368">MIR::ECS::Manager::Manager</a></div><div class="ttdeci">Manager()=default</div><div class="ttdoc">Manager 기본 생성자</div></div>
+<div class="ttc" id="aclass_m_i_r_1_1_e_c_s_1_1_manager_html_af1cc6867dc6d935c2f644af521d1551c"><div class="ttname"><a href="class_m_i_r_1_1_e_c_s_1_1_manager.html#af1cc6867dc6d935c2f644af521d1551c">MIR::ECS::Manager::DestoryEntity</a></div><div class="ttdeci">void DestoryEntity(Entity::ID id)</div><div class="ttdoc">특정 엔티티를 소멸</div></div>
+<div class="ttc" id="astruct_m_i_r_1_1_component_html"><div class="ttname"><a href="struct_m_i_r_1_1_component.html">MIR::Component</a></div><div class="ttdoc">모든 컴포넌트의 기본 클래스</div><div class="ttdef"><b>Definition</b> Component.hpp:43</div></div>
+<div class="ttc" id="astruct_m_i_r_1_1_component_html_aafe1302f8850d7a0f5248c754fdef28f"><div class="ttname"><a href="struct_m_i_r_1_1_component.html#aafe1302f8850d7a0f5248c754fdef28f">MIR::Component::Tag</a></div><div class="ttdeci">std::uint32_t Tag</div><div class="ttdoc">컴포넌트를 식별하기 위한 태그 타입 정의</div><div class="ttdef"><b>Definition</b> Component.hpp:51</div></div>
+<div class="ttc" id="astruct_m_i_r_1_1_e_c_s_1_1_entity_html_a5d9347247063793917a21fb07994a40f"><div class="ttname"><a href="struct_m_i_r_1_1_e_c_s_1_1_entity.html#a5d9347247063793917a21fb07994a40f">MIR::ECS::Entity::ID</a></div><div class="ttdeci">uint16_t ID</div><div class="ttdoc">엔티티를 식별하기 위한 정수형 타입 별칭</div><div class="ttdef"><b>Definition</b> Entity.hpp:45</div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_3d69f64eaf81436fe2b22361382717e5.html">core</a></li><li class="navelem"><a class="el" href="_e_c_s_manager_8hpp.html">ECSManager.hpp</a></li>
+    <li class="footer">다음에 의해 생성됨 :  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.12.0 </li>
+  </ul>
+</div>
+</body>
+</html>

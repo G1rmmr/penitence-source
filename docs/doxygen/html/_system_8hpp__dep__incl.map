@@ -1,0 +1,26 @@
+<map id="System.hpp" name="System.hpp">
+<area shape="rect" id="Node000001" title="시스템 베이스 클래스" alt="" coords="198,5,290,31"/>
+<area shape="rect" id="Node000002" href="$_animating_8hpp.html" title="애니메이션 시스템 헤더" alt="" coords="5,79,110,105"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="199,39,90,81,88,76,197,34"/>
+<area shape="rect" id="Node000008" href="$_collision_8hpp.html" title="충돌 시스템 헤더" alt="" coords="133,79,230,105"/>
+<area shape="poly" id="edge9_Node000001_Node000008" title=" " alt="" coords="226,44,194,80,190,77,222,41"/>
+<area shape="rect" id="Node000009" href="$_movement_8hpp.html" title="이동 시스템 헤더" alt="" coords="253,79,360,105"/>
+<area shape="poly" id="edge11_Node000001_Node000009" title=" " alt="" coords="267,41,298,77,294,80,263,44"/>
+<area shape="rect" id="Node000010" href="$_rendering_8hpp.html" title="렌더링 시스템 헤더" alt="" coords="385,79,490,105"/>
+<area shape="poly" id="edge13_Node000001_Node000010" title=" " alt="" coords="292,34,405,76,404,81,290,39"/>
+<area shape="rect" id="Node000003" href="$_systems_8hpp.html" title="게임 내 주요 시스템들을 한데 모아 포함하는 헤더 파일" alt="" coords="195,153,293,178"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="104,108,213,150,211,155,102,113"/>
+<area shape="rect" id="Node000004" href="$_core_8hpp.html" title="모든 해더를 포함하는 헤더" alt="" coords="207,300,281,326"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="239,194,234,222,233,252,243,299,238,300,228,252,229,221,234,193"/>
+<area shape="rect" id="Node000007" href="$_world_8hpp.html" title="시스템을 관리하는 클래스 헤더" alt="" coords="243,226,322,252"/>
+<area shape="poly" id="edge7_Node000003_Node000007" title=" " alt="" coords="260,191,279,225,274,227,255,193"/>
+<area shape="rect" id="Node000005" href="$_game_8hpp.html" title="Game 세팅, 실제 게임이 구현되는 워크 스페이스" alt="" coords="204,447,285,473"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="235,341,226,369,225,399,241,446,236,448,220,400,221,368,229,339"/>
+<area shape="rect" id="Node000006" href="$_protagonist_8hpp_source.html" title=" " alt="" coords="235,374,347,399"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="262,337,285,372,281,375,258,340"/>
+<area shape="poly" id="edge6_Node000006_Node000005" title=" " alt="" coords="277,414,254,448,250,445,273,411"/>
+<area shape="poly" id="edge8_Node000007_Node000004" title=" " alt="" coords="272,267,253,301,248,298,267,264"/>
+<area shape="poly" id="edge10_Node000008_Node000003" title=" " alt="" coords="204,115,236,150,232,154,200,118"/>
+<area shape="poly" id="edge12_Node000009_Node000003" title=" " alt="" coords="288,118,257,154,253,150,284,115"/>
+<area shape="poly" id="edge14_Node000010_Node000003" title=" " alt="" coords="391,113,278,155,276,150,390,108"/>
+</map>

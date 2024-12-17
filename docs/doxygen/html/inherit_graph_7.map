@@ -1,0 +1,5 @@
+<map id="그래픽컬한 클래스 계통도" name="그래픽컬한 클래스 계통도">
+<area shape="rect" id="Node000000" href="$class_m_i_r_1_1_pool_base.html" title="풀(Pool) 인터페이스를 위한 기본 클래스" alt="" coords="5,5,116,31"/>
+<area shape="rect" id="Node000001" href="$class_m_i_r_1_1_component_pool.html" title="특정 타입 T에 대한 컴포넌트 풀 구현" alt="" coords="164,5,343,31"/>
+<area shape="poly" id="edge10_Node000000_Node000001" title=" " alt="" coords="132,16,163,16,163,21,132,21"/>
+</map>

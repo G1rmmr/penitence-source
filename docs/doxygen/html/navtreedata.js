@@ -27,7 +27,6 @@ var NAVTREE =
   [ "MIR Engine", "index.html", [
     [ "데이터 구조", "annotated.html", [
       [ "특징", "index.html#autotoc_md1", null ],
-      [ "링크", "index.html#autotoc_md2", null ],
       [ "데이터 구조", "annotated.html", "annotated_dup" ],
       [ "데이터 구조 색인", "classes.html", null ],
       [ "클래스 계통도", "hierarchy.html", "hierarchy" ],
